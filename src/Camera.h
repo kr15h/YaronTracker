@@ -10,7 +10,10 @@ public:
 	
 	void update();
 	void draw();
-	ofTexture & getTexture();
+	ofPixels & getPixels();
+	bool isFrameNew();
+	int getWidth();
+	int getHeight();
 	
 private:
 	Camera();

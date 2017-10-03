@@ -35,8 +35,20 @@ void Camera::draw(){
 	_videoGrabber.draw(0, 0);
 }
 
-ofTexture & Camera::getTexture(){
-	return _videoGrabber.getTexture();
+ofPixels & Camera::getPixels(){
+	return _videoGrabber.getPixels();
+}
+
+bool Camera::isFrameNew(){
+	return _videoGrabber.isFrameNew();
+}
+
+int Camera::getWidth(){
+	return _dimensions.width;
+}
+
+int Camera::getHeight(){
+	return _dimensions.height;
 }
 
 } // namespace ytr
