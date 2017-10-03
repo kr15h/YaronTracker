@@ -2,13 +2,13 @@
 
 void ofApp::setup(){
 	ofSetVerticalSync(true);
-	_application = ytr::YaronTracker::create();
+	app = ytr::Application::create();
 }
 
 void ofApp::update(){
-	_application->update();
+	app->update();
 }
 
 void ofApp::draw(){
-	_application->draw();
+	app->draw();
 }

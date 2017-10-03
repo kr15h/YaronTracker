@@ -6,15 +6,15 @@
 
 namespace ytr{
 
-class YaronTracker{
+class Application{
 public:
-	static shared_ptr<YaronTracker> create();
+	static shared_ptr<Application> create();
 	
 	void update();
 	void draw();
 
 private:
-	YaronTracker();
+	Application();
 	
 	shared_ptr<Camera> _camera;
 	shared_ptr<Tracker> _tracker;

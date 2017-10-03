@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "YaronTracker.h"
+#include "Application.h"
 
 class ofApp : public ofBaseApp{
 public:
@@ -9,5 +9,5 @@ public:
 	void update();
 	void draw();
 	
-	shared_ptr<ytr::YaronTracker> _application;
+	shared_ptr<ytr::Application> app;
 };
