@@ -6,7 +6,7 @@ namespace ytr{
 
 class Camera{
 public:
-	static shared_ptr<Camera> instance();
+	static shared_ptr<Camera> create();
 	
 	void update();
 	void draw();
@@ -14,7 +14,6 @@ public:
 	
 private:
 	Camera();
-	static shared_ptr<Camera> _instance;
 	
 	ofVideoGrabber _videoGrabber;
 	

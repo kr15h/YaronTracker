@@ -2,19 +2,22 @@
 
 #include "ofMain.h"
 #include "Camera.h"
+#include "Tracker.h"
 
 namespace ytr{
 
 class YaronTracker{
 public:
-	static shared_ptr<YaronTracker> instance();
+	static shared_ptr<YaronTracker> create();
 	
 	void update();
 	void draw();
 
 private:
-	static shared_ptr<YaronTracker> _instance;
 	YaronTracker();
+	
+	shared_ptr<Camera> _camera;
+	shared_ptr<Tracker> _tracker;
 
 };
 

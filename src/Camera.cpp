@@ -2,13 +2,8 @@
 
 namespace ytr{
 
-shared_ptr<Camera> Camera::_instance = 0;
-
-shared_ptr<Camera> Camera::instance(){
-	if(_instance == 0){
-		_instance = shared_ptr<Camera>(new Camera());
-	}
-	return _instance;
+shared_ptr<Camera> Camera::create(){
+	return shared_ptr<Camera>(new Camera());
 }
 
 Camera::Camera(){

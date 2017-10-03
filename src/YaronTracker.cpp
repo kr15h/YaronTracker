@@ -2,25 +2,23 @@
 
 namespace ytr{
 
-shared_ptr<YaronTracker> YaronTracker::_instance = 0;
-
-shared_ptr<YaronTracker> YaronTracker::instance(){
-	if(_instance == 0){
-		_instance = shared_ptr<YaronTracker>(new YaronTracker());
-	}
-	return _instance;
+shared_ptr<YaronTracker> YaronTracker::create(){
+	return shared_ptr<YaronTracker>(new YaronTracker());
 }
 
 YaronTracker::YaronTracker(){
-	cout << "YaronTracker Init" << endl;
+	_camera = Camera::create();
+	_tracker = Tracker::create();
 }
 
 void YaronTracker::update(){
-    Camera::instance()->update();
+	_camera->update();
+	_tracker->update();
 }
 
 void YaronTracker::draw(){
-	Camera::instance()->draw();
+	_camera->draw();
+	_tracker->update();
 }
 
 } // namespace ytr
