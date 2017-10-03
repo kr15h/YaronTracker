@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01C6A3EA1F83DE050096C7E4 /* YaronTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C6A3E81F83DE040096C7E4 /* YaronTracker.cpp */; };
 		01C6A3EE1F83E60C0096C7E4 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C6A3ED1F83E60C0096C7E4 /* Camera.cpp */; };
+		01C6A3F11F83EADE0096C7E4 /* Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C6A3EF1F83EADE0096C7E4 /* Tracker.cpp */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
 		1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C76DE5C29BDBD2CAA1DD0021 /* ofxCvContourFinder.cpp */; };
 		250A95BA26587BE85DB0A353 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9C7160245B19131DAE6128 /* ofxCvColorImage.cpp */; };
@@ -57,6 +58,8 @@
 		01C6A3E91F83DE050096C7E4 /* YaronTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YaronTracker.h; sourceTree = "<group>"; };
 		01C6A3EC1F83E60C0096C7E4 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		01C6A3ED1F83E60C0096C7E4 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		01C6A3EF1F83EADE0096C7E4 /* Tracker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tracker.cpp; sourceTree = "<group>"; };
+		01C6A3F01F83EADE0096C7E4 /* Tracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
 		01DAE5C2E3E0A74207B2BE49 /* saving.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = saving.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/saving.h; sourceTree = SOURCE_ROOT; };
 		0339099A1F7B84040D88AD3C /* warp_shuffle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = warp_shuffle.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/gpu/device/warp_shuffle.hpp; sourceTree = SOURCE_ROOT; };
 		057122A817D12571F8C0C7A4 /* ofxCvGrayscaleImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxCvGrayscaleImage.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvGrayscaleImage.cpp; sourceTree = SOURCE_ROOT; };
@@ -680,6 +683,8 @@
 				01C6A3E91F83DE050096C7E4 /* YaronTracker.h */,
 				01C6A3ED1F83E60C0096C7E4 /* Camera.cpp */,
 				01C6A3EC1F83E60C0096C7E4 /* Camera.h */,
+				01C6A3EF1F83EADE0096C7E4 /* Tracker.cpp */,
+				01C6A3F01F83EADE0096C7E4 /* Tracker.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -806,6 +811,7 @@
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
+				01C6A3F11F83EADE0096C7E4 /* Tracker.cpp in Sources */,
 				63020F16C7E8DED980111241 /* ofxCvImage.cpp in Sources */,
 				01C6A3EA1F83DE050096C7E4 /* YaronTracker.cpp in Sources */,
 				D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */,
