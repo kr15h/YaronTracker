@@ -2,7 +2,6 @@
 
 void ofApp::setup(){
 	ofSetVerticalSync(true);
-	YaronTracker::instance()->setup();
 }
 
 void ofApp::update(){
