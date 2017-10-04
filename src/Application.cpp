@@ -52,8 +52,4 @@ void Application::setMode(Mode::Name $name){
 	}
 }
 
-void Application::setTrackArea(vector<ofVec2f> $corners){
-	cout << "Setting track area" << endl;
-}
-
 } // namespace ytr

@@ -8,6 +8,21 @@ shared_ptr<Tracker> Tracker::create(shared_ptr<Camera> $camera){
 
 Tracker::Tracker(shared_ptr<Camera> $camera){
 	_camera = $camera;
+	
+	// TODO: load saved corners from file, create default otherwise
+	for(auto i = 0; i < 4; ++i){
+		ofVec2f corner;
+		_corners.push_back(corner);
+	}
+	
+	_corners[0].x = 0;
+	_corners[0].y = 0;
+	_corners[1].x = _camera->getWidth();
+	_corners[1].y = 0;
+	_corners[2].x = _camera->getWidth();
+	_corners[2].y = _camera->getHeight();
+	_corners[3].x = 0;
+	_corners[3].y = _camera->getHeight();
 }
 
 void Tracker::update(){
@@ -17,7 +32,9 @@ void Tracker::update(){
 	
 	if(frameIsNew){
 		_colorImg.setFromPixels(_camera->getPixels());
+		
 		_grayImage = _colorImg;
+		_grayImage.warpPerspective(_corners[0], _corners[1], _corners[2], _corners[3]);
 		_threshImage = _grayImage;
 		
 		// Consider areas that are brighter than N in the range from 0 (black) and 255 (white)
@@ -45,6 +62,10 @@ void Tracker::draw(){
 	_grayImage.draw(0, 0);
 	_threshImage.draw(_grayImage.width, 0);
 	_contourFinder.draw();
+}
+
+void Tracker::setTrackArea(vector<ofPoint> & $corners){
+	_corners = $corners;
 }
 
 ofVec2f Tracker::getPosition(){

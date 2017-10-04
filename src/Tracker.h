@@ -15,6 +15,8 @@ public:
 	void drawContours();
 	void draw();
 	
+	void setTrackArea(vector<ofPoint> & $corners);
+	
 	ofVec2f getPosition();
 
 private:
@@ -27,6 +29,8 @@ private:
 	ofxCvGrayscaleImage _threshImage;
 	
 	ofVec2f _position;
+	
+	vector<ofPoint> _corners;
 };
 
 } // namespace ytr

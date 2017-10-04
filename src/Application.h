@@ -22,7 +22,6 @@ public:
 	void mousePressed(int x, int y, int button);
 	
 	void setMode(Mode::Name $name);
-	void setTrackArea(vector<ofVec2f> $corners);
 	
 	shared_ptr<Camera> camera;
 	shared_ptr<Tracker> tracker;

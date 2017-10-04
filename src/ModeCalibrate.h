@@ -19,7 +19,7 @@ private:
 	static shared_ptr<Mode> _instance;
 	ModeCalibrate();
 	
-	vector<ofVec2f> _corners;
+	vector<ofPoint> _corners;
 };
 
 } // namespace ytr

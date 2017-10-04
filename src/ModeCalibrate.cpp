@@ -44,14 +44,14 @@ void ModeCalibrate::keyPressed(int key){
 
 void ModeCalibrate::mousePressed(int x, int y, int button){
 	if(button == OF_MOUSE_BUTTON_1){
-		ofVec2f corner;
+		ofPoint corner;
 		corner.x = x;
 		corner.y = y;
 		_corners.push_back(corner);
 	}
 	
 	if(_corners.size() == 4){
-		Application::instance()->setTrackArea(_corners);
+		Application::instance()->tracker->setTrackArea(_corners);
 		_corners.clear();
 		Application::instance()->setMode(Mode::DEFAULT);
 	}
