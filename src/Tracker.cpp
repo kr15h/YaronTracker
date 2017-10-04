@@ -11,23 +11,19 @@ Tracker::Tracker(shared_ptr<Camera> $camera){
 	
 	// Set initial width and height of the surface being tracked.
 	// Later we replace this with the perspective-corrected width and height.
-	_width = _camera->getWidth();
-	_height = _camera->getHeight();
+	_width = ofToInt(Settings::instance()->xml.getValue("tracker/width"));
+	_height = ofToInt(Settings::instance()->xml.getValue("tracker/height"));
+	_updateDimensions = false;
 	
-	// TODO: load saved corners from file, create default otherwise
-	for(auto i = 0; i < 4; ++i){
-		ofVec2f corner;
-		_corners.push_back(corner);
-	}
-	
-	_corners[0].x = 0;
-	_corners[0].y = 0;
-	_corners[1].x = _camera->getWidth();
-	_corners[1].y = 0;
-	_corners[2].x = _camera->getWidth();
-	_corners[2].y = _camera->getHeight();
-	_corners[3].x = 0;
-	_corners[3].y = _camera->getHeight();
+	_corners.resize(4);
+	_corners[0].x = ofToFloat(Settings::instance()->xml.getValue("projection/tl/x"));
+	_corners[0].y = ofToFloat(Settings::instance()->xml.getValue("projection/tl/y"));
+	_corners[1].x = ofToFloat(Settings::instance()->xml.getValue("projection/tr/x"));
+	_corners[1].y = ofToFloat(Settings::instance()->xml.getValue("projection/tr/y"));
+	_corners[2].x = ofToFloat(Settings::instance()->xml.getValue("projection/br/x"));
+	_corners[2].y = ofToFloat(Settings::instance()->xml.getValue("projection/br/y"));
+	_corners[3].x = ofToFloat(Settings::instance()->xml.getValue("projection/bl/x"));
+	_corners[3].y = ofToFloat(Settings::instance()->xml.getValue("projection/bl/y"));
 }
 
 void Tracker::update(){
@@ -44,6 +40,12 @@ void Tracker::update(){
 		// Here we adjust the tracker width and height to be able to get normalized value.
 		_width = _grayImage.getWidth();
 		_height = _grayImage.getHeight();
+		
+		if(_updateDimensions){
+			Settings::instance()->xml.setValue("tracker/width", ofToString(_width, 0));
+			Settings::instance()->xml.setValue("tracker/height", ofToString(_height, 0));
+			_updateDimensions = false;
+		}
 		
 		_threshImage = _grayImage;
 		
@@ -76,6 +78,17 @@ void Tracker::draw(){
 
 void Tracker::setTrackArea(vector<ofPoint> & $corners){
 	_corners = $corners;
+	
+	Settings::instance()->xml.setValue("projection/tl/x", ofToString(_corners[0].x, 0));
+	Settings::instance()->xml.setValue("projection/tl/y", ofToString(_corners[0].y, 0));
+	Settings::instance()->xml.setValue("projection/tr/x", ofToString(_corners[1].x, 0));
+	Settings::instance()->xml.setValue("projection/tr/y", ofToString(_corners[1].y, 0));
+	Settings::instance()->xml.setValue("projection/br/x", ofToString(_corners[2].x, 0));
+	Settings::instance()->xml.setValue("projection/br/y", ofToString(_corners[2].y, 0));
+	Settings::instance()->xml.setValue("projection/bl/x", ofToString(_corners[3].x, 0));
+	Settings::instance()->xml.setValue("projection/bl/y", ofToString(_corners[3].y, 0));
+	
+	_updateDimensions = true;
 }
 
 ofVec2f Tracker::getPosition(){

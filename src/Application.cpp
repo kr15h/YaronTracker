@@ -40,6 +40,10 @@ void Application::draw(){
 	ofPopStyle();
 }
 
+void Application::exit(){
+	Settings::instance()->save();
+}
+
 void Application::keyPressed(int key){
 	_mode->keyPressed(key);
 }

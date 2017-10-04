@@ -10,6 +10,8 @@
 #include "Tracker.h"
 #include "Projection.h"
 
+#include "Settings.h"
+
 namespace ytr{
 
 class Application{
@@ -18,6 +20,7 @@ public:
 	
 	void update();
 	void draw();
+	void exit();
 	
 	void keyPressed(int key);
 	void mousePressed(int x, int y, int button);

@@ -1,0 +1,24 @@
+<settings>
+	<projection>
+		<tl>
+			<x>28</x>
+			<y>29</y>
+		</tl>
+		<tr>
+			<x>541</x>
+			<y>68</y>
+		</tr>
+		<br>
+			<x>557</x>
+			<y>433</y>
+		</br>
+		<bl>
+			<x>77</x>
+			<y>423</y>
+		</bl>
+	</projection>
+	<tracker>
+		<width>640</width>
+		<height>480</height>
+	</tracker>
+</settings>

@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Camera.h"
 #include "ofxOpenCv.h"
+#include "Settings.h"
 
 namespace ytr {
 
@@ -24,6 +25,8 @@ public:
 private:
 	Tracker(shared_ptr<Camera> $camera);
 	shared_ptr<Camera> _camera;
+	
+	bool _updateDimensions;
 	
 	int _width;
 	int _height;
