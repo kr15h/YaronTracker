@@ -24,6 +24,7 @@ private:
 	ofxCvContourFinder _contourFinder;
 	ofxCvColorImage _colorImg;
 	ofxCvGrayscaleImage _grayImage;
+	ofxCvGrayscaleImage _threshImage;
 	
 	ofVec2f _position;
 };

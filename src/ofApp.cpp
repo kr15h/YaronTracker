@@ -2,13 +2,21 @@
 
 void ofApp::setup(){
 	ofSetVerticalSync(true);
-	app = ytr::Application::create();
+	ofSetEscapeQuitsApp(false);
 }
 
 void ofApp::update(){
-	app->update();
+	Application::instance()->update();
 }
 
 void ofApp::draw(){
-	app->draw();
+	Application::instance()->draw();
+}
+
+void ofApp::keyPressed(int key){
+	Application::instance()->keyPressed(key);
+}
+
+void ofApp::mousePressed(int x, int y, int button){
+	Application::instance()->mousePressed(x, y, button);
 }

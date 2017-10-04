@@ -3,11 +3,14 @@
 #include "ofMain.h"
 #include "Application.h"
 
+using namespace ytr;
+
 class ofApp : public ofBaseApp{
 public:
 	void setup();
 	void update();
 	void draw();
 	
-	shared_ptr<ytr::Application> app;
+	void keyPressed(int key);
+	void mousePressed(int x, int y, int button);
 };

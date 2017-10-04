@@ -2,31 +2,58 @@
 
 namespace ytr{
 
-shared_ptr<Application> Application::create(){
-	return shared_ptr<Application>(new Application());
+shared_ptr<Application> Application::_instance = 0;
+
+shared_ptr<Application> Application::instance(){
+	if(_instance == 0){
+		_instance = shared_ptr<Application>(new Application);
+	}
+	return _instance;
 }
 
 Application::Application(){
-	_camera = Camera::create();
-	_tracker = Tracker::create(_camera);
+
+	// Set default mode
+	_mode = ModeDefault::instance();
+
+	// Create components
+	camera = Camera::create();
+	tracker = Tracker::create(camera);
 }
 
 void Application::update(){
-	_camera->update();
-	_tracker->update();
+	_mode->update();
 }
 
 void Application::draw(){
-	//_camera->draw();
-	_tracker->drawGrayImage();
-	_tracker->drawContours();
-	//_tracker->draw();
+	_mode->draw();
 	
+	// Draw position
 	ofPushStyle();
 	ofSetColor(0, 255, 255);
-	ofDrawLine(0, _tracker->getPosition().y, ofGetWidth(), _tracker->getPosition().y);
-	ofDrawLine(_tracker->getPosition().x, 0, _tracker->getPosition().x, ofGetHeight());
+	ofDrawLine(0, tracker->getPosition().y, ofGetWidth(), tracker->getPosition().y);
+	ofDrawLine(tracker->getPosition().x, 0, tracker->getPosition().x, ofGetHeight());
 	ofPopStyle();
+}
+
+void Application::keyPressed(int key){
+	_mode->keyPressed(key);
+}
+
+void Application::mousePressed(int x, int y, int button){
+	_mode->mousePressed(x, y, button);
+}
+
+void Application::setMode(Mode::Name $name){
+	if($name == Mode::DEFAULT){
+		_mode = ModeDefault::instance();
+	}else if($name == Mode::CALIBRATE){
+		_mode = ModeCalibrate::instance();
+	}
+}
+
+void Application::setTrackArea(vector<ofVec2f> $corners){
+	cout << "Setting track area" << endl;
 }
 
 } // namespace ytr
