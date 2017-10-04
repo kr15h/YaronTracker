@@ -20,6 +20,7 @@ private:
 	ModeCalibrate();
 	
 	vector<ofPoint> _corners;
+	ofColor _color;
 };
 
 } // namespace ytr
