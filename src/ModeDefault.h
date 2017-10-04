@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Mode.h"
 #include "Application.h"
+#include "Projection.h"
 
 namespace ytr {
 

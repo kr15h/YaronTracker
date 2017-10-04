@@ -22,6 +22,7 @@ void ModeDefault::update(){
 
 void ModeDefault::draw(){
 	Application::instance()->tracker->draw();
+	Application::instance()->projection->draw();
 	ofDrawBitmapString("Default mode", 10, 20);
 }
 

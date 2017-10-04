@@ -8,6 +8,7 @@
 
 #include "Camera.h"
 #include "Tracker.h"
+#include "Projection.h"
 
 namespace ytr{
 
@@ -25,6 +26,7 @@ public:
 	
 	shared_ptr<Camera> camera;
 	shared_ptr<Tracker> tracker;
+	shared_ptr<Projection> projection;
 
 private:
 	static shared_ptr<Application> _instance;

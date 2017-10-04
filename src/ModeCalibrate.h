@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Mode.h"
 #include "Application.h"
+#include "Projection.h"
 
 namespace ytr {
 
@@ -18,6 +19,8 @@ public:
 private:
 	static shared_ptr<Mode> _instance;
 	ModeCalibrate();
+	
+	void highlightCorner();
 	
 	vector<ofPoint> _corners;
 	ofColor _color;

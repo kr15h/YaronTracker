@@ -48,6 +48,9 @@ void ModeCalibrate::draw(){
 		ofDrawCircle(_corners[i].x, _corners[i].y, 5);
 	}
 	ofPopStyle();
+	
+	// Draw projection so we can see the corners to select
+	Application::instance()->projection->draw();
 
 	string textToDraw = "Calibrate mode";
 	
@@ -84,6 +87,7 @@ void ModeCalibrate::keyPressed(int key){
 	}else if(key == OF_KEY_BACKSPACE){
 		// Clear last point
 		_corners.pop_back();
+		highlightCorner();
 	}else if(key == OF_KEY_RETURN){
 		// Confirm selection if all points are set
 		if(_corners.size() == 4){
@@ -100,6 +104,27 @@ void ModeCalibrate::mousePressed(int x, int y, int button){
 		corner.x = x;
 		corner.y = y;
 		_corners.push_back(corner);
+		highlightCorner();
+	}
+}
+
+void ModeCalibrate::highlightCorner(){
+	switch(_corners.size()){
+		case 0:
+			Application::instance()->projection->highlightCorner(Projection::TOP_LEFT);
+			break;
+		case 1:
+			Application::instance()->projection->highlightCorner(Projection::TOP_RIGHT);
+			break;
+		case 2:
+			Application::instance()->projection->highlightCorner(Projection::BOTTOM_RIGHT);
+			break;
+		case 3:
+			Application::instance()->projection->highlightCorner(Projection::BOTTOM_LEFT);
+			break;
+		default:
+			Application::instance()->projection->highlightCorner(Projection::NONE);
+			break;
 	}
 }
 
