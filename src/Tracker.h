@@ -18,10 +18,15 @@ public:
 	void setTrackArea(vector<ofPoint> & $corners);
 	
 	ofVec2f getPosition();
+	int getWidth();
+	int getHeight();
 
 private:
 	Tracker(shared_ptr<Camera> $camera);
 	shared_ptr<Camera> _camera;
+	
+	int _width;
+	int _height;
 	
 	ofxCvContourFinder _contourFinder;
 	ofxCvColorImage _colorImg;

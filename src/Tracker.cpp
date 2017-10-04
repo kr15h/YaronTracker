@@ -9,6 +9,11 @@ shared_ptr<Tracker> Tracker::create(shared_ptr<Camera> $camera){
 Tracker::Tracker(shared_ptr<Camera> $camera){
 	_camera = $camera;
 	
+	// Set initial width and height of the surface being tracked.
+	// Later we replace this with the perspective-corrected width and height.
+	_width = _camera->getWidth();
+	_height = _camera->getHeight();
+	
 	// TODO: load saved corners from file, create default otherwise
 	for(auto i = 0; i < 4; ++i){
 		ofVec2f corner;
@@ -35,6 +40,11 @@ void Tracker::update(){
 		
 		_grayImage = _colorImg;
 		_grayImage.warpPerspective(_corners[0], _corners[1], _corners[2], _corners[3]);
+		
+		// Here we adjust the tracker width and height to be able to get normalized value.
+		_width = _grayImage.getWidth();
+		_height = _grayImage.getHeight();
+		
 		_threshImage = _grayImage;
 		
 		// Consider areas that are brighter than N in the range from 0 (black) and 255 (white)
@@ -70,6 +80,14 @@ void Tracker::setTrackArea(vector<ofPoint> & $corners){
 
 ofVec2f Tracker::getPosition(){
 	return _position;
+}
+
+int Tracker::getWidth(){
+	return _width;
+}
+
+int Tracker::getHeight(){
+	return _height;
 }
 
 } // namespace ytr

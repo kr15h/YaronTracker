@@ -29,11 +29,14 @@ void Application::update(){
 void Application::draw(){
 	_mode->draw();
 	
+	ofVec2f pos = tracker->getPosition();
+	ofVec2f posNorm = pos / ofVec2f(tracker->getWidth(), tracker->getHeight());
+	
 	// Draw position
 	ofPushStyle();
 	ofSetColor(0, 255, 255);
-	ofDrawLine(0, tracker->getPosition().y, ofGetWidth(), tracker->getPosition().y);
-	ofDrawLine(tracker->getPosition().x, 0, tracker->getPosition().x, ofGetHeight());
+	ofDrawLine(0, posNorm.y * ofGetHeight(), ofGetWidth(), posNorm.y * ofGetHeight());
+	ofDrawLine(posNorm.x * ofGetWidth(), 0, posNorm.x * ofGetWidth(), ofGetHeight());
 	ofPopStyle();
 }
 
