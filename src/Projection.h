@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Library.h"
 
 namespace ytr {
 

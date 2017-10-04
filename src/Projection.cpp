@@ -17,24 +17,32 @@ void Projection::update(){
 void Projection::draw(){
 	// Draw the swarm
 	
+	float rotation;
+	ofImage & image = Library::instance()->images.arrow;
+	
 	// Highlight the corner
 	ofVec2f position;
 	switch (_cornerToHighlight) {
 		case TOP_LEFT:
 			position = ofVec2f(0,0);
+			rotation = 0;
 			break;
 		case TOP_RIGHT:
 			position = ofVec2f(ofGetWidth(), 0);
+			rotation = 90;
 			break;
 		case BOTTOM_RIGHT:
 			position = ofVec2f(ofGetWidth(), ofGetHeight());
+			rotation = 180;
 			break;
 		case BOTTOM_LEFT:
 			position = ofVec2f(0, ofGetHeight());
+			rotation = 270;
 			break;
 		case NONE:
 		default:
 			position = ofVec2f(ofGetWidth() / 2, ofGetHeight() / 2);
+			rotation = 0;
 			break;
 	}
 	
@@ -45,6 +53,12 @@ void Projection::draw(){
 		ofDrawLine(0, position.y, ofGetWidth(), position.y);
 		ofDrawLine(position.x, 0, position.x, ofGetHeight());
 		ofPopStyle();
+		
+		ofPushMatrix();
+		ofTranslate(position.x, position.y);
+		ofRotate(rotation);
+		image.draw(0, 0);
+		ofPopMatrix();
 	}
 }
 
