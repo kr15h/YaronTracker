@@ -86,8 +86,10 @@ void ModeCalibrate::keyPressed(int key){
 		Application::instance()->setMode(Mode::DEFAULT);
 	}else if(key == OF_KEY_BACKSPACE){
 		// Clear last point
-		_corners.pop_back();
-		highlightCorner();
+		if(_corners.size()){
+			_corners.pop_back();
+			highlightCorner();
+		}
 	}else if(key == OF_KEY_RETURN){
 		// Confirm selection if all points are set
 		if(_corners.size() == 4){
