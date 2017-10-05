@@ -12,20 +12,8 @@ public:
 	void update();
 	void draw();
 	
-	enum Corner{
-		NONE,
-		TOP_LEFT,
-		TOP_RIGHT,
-		BOTTOM_RIGHT,
-		BOTTOM_LEFT
-	};
-	
-	void highlightCorner(Corner $corner);
-	
 private:
 	Projection();
-	
-	Corner _cornerToHighlight;
 };
 
 } // namespace ytr

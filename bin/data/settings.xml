@@ -1,20 +1,20 @@
 <settings>
 	<projection>
 		<tl>
-			<x>245</x>
-			<y>207</y>
+			<x>184</x>
+			<y>137</y>
 		</tl>
 		<tr>
-			<x>698</x>
-			<y>207</y>
+			<x>700</x>
+			<y>171</y>
 		</tr>
 		<br>
-			<x>724</x>
-			<y>549</y>
+			<x>663</x>
+			<y>467</y>
 		</br>
 		<bl>
-			<x>104</x>
-			<y>534</y>
+			<x>130</x>
+			<y>493</y>
 		</bl>
 	</projection>
 	<tracker>

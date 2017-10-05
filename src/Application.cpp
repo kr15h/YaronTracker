@@ -20,6 +20,7 @@ Application::Application(){
 	camera = Camera::create();
 	tracker = Tracker::create(camera);
 	projection = Projection::create();
+	overlay = Overlay::create();
 }
 
 void Application::update(){
@@ -56,7 +57,7 @@ void Application::setMode(Mode::Name $name){
 	if($name == Mode::DEFAULT){
 		_mode = ModeDefault::instance();
 	}else if($name == Mode::CALIBRATE){
-		projection->highlightCorner(Projection::TOP_LEFT);
+		overlay->showCorner(Overlay::TOP_LEFT);
 		_mode = ModeCalibrate::instance();
 	}
 }

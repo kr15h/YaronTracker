@@ -20,7 +20,7 @@ private:
 	static shared_ptr<Mode> _instance;
 	ModeCalibrate();
 	
-	void highlightCorner();
+	void showCorner();
 	
 	vector<ofPoint> _corners;
 	ofColor _color;

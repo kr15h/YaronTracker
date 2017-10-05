@@ -26,6 +26,9 @@ void ModeCalibrate::draw(){
 
 	// Draw the camera so we can see the projection from that perspective
 	Application::instance()->camera->draw();
+	
+	// Draw overlay so we can see where the corners are
+	Application::instance()->overlay->draw();
 
 	ofPushStyle();
 	ofNoFill();
@@ -90,7 +93,7 @@ void ModeCalibrate::keyPressed(int key){
 		// Clear last point
 		if(_corners.size()){
 			_corners.pop_back();
-			highlightCorner();
+			showCorner();
 		}
 	}else if(key == OF_KEY_RETURN){
 		// Confirm selection if all points are set
@@ -108,26 +111,26 @@ void ModeCalibrate::mousePressed(int x, int y, int button){
 		corner.x = x;
 		corner.y = y;
 		_corners.push_back(corner);
-		highlightCorner();
+		showCorner();
 	}
 }
 
-void ModeCalibrate::highlightCorner(){
+void ModeCalibrate::showCorner(){
 	switch(_corners.size()){
 		case 0:
-			Application::instance()->projection->highlightCorner(Projection::TOP_LEFT);
+			Application::instance()->overlay->showCorner(Overlay::TOP_LEFT);
 			break;
 		case 1:
-			Application::instance()->projection->highlightCorner(Projection::TOP_RIGHT);
+			Application::instance()->overlay->showCorner(Overlay::TOP_RIGHT);
 			break;
 		case 2:
-			Application::instance()->projection->highlightCorner(Projection::BOTTOM_RIGHT);
+			Application::instance()->overlay->showCorner(Overlay::BOTTOM_RIGHT);
 			break;
 		case 3:
-			Application::instance()->projection->highlightCorner(Projection::BOTTOM_LEFT);
+			Application::instance()->overlay->showCorner(Overlay::BOTTOM_LEFT);
 			break;
 		default:
-			Application::instance()->projection->highlightCorner(Projection::NONE);
+			Application::instance()->overlay->showCorner(Overlay::NONE);
 			break;
 	}
 }
