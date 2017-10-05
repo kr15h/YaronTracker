@@ -15,7 +15,15 @@ void Projection::update(){
 }
 
 void Projection::draw(){
-	// Draw the swarm
+	if(_cornerToHighlight == NONE){
+		// Draw the swarm
+	}else{
+		// Draw white background
+		ofPushStyle();
+		ofSetColor(255);
+		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+		ofPopStyle();
+	}
 	
 	float rotation;
 	ofImage & image = Library::instance()->images.arrow;

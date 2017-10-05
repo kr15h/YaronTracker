@@ -1,24 +1,24 @@
 <settings>
 	<projection>
 		<tl>
-			<x>117</x>
-			<y>177</y>
+			<x>245</x>
+			<y>207</y>
 		</tl>
 		<tr>
-			<x>451</x>
-			<y>204</y>
+			<x>698</x>
+			<y>207</y>
 		</tr>
 		<br>
-			<x>466</x>
-			<y>357</y>
+			<x>724</x>
+			<y>549</y>
 		</br>
 		<bl>
-			<x>142</x>
-			<y>346</y>
+			<x>104</x>
+			<y>534</y>
 		</bl>
 	</projection>
 	<tracker>
-		<width>640</width>
-		<height>480</height>
+		<width>800</width>
+		<height>600</height>
 	</tracker>
 </settings>

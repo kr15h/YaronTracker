@@ -20,6 +20,11 @@ void ModeCalibrate::update(){
 }
 
 void ModeCalibrate::draw(){
+
+	// Draw projection so we can see the corners to select
+	Application::instance()->projection->draw();
+
+	// Draw the camera so we can see the projection from that perspective
 	Application::instance()->camera->draw();
 
 	ofPushStyle();
@@ -49,9 +54,6 @@ void ModeCalibrate::draw(){
 	}
 	ofPopStyle();
 	
-	// Draw projection so we can see the corners to select
-	Application::instance()->projection->draw();
-
 	string textToDraw = "Calibrate mode";
 	
 	if(_corners.size() < 4){
