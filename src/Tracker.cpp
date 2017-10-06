@@ -66,8 +66,14 @@ void Tracker::update(){
 	#endif
 
 	if(cam.isFrameNew()){
+		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
 		
 		#ifdef TARGET_RASPBERRY_PI
+		if(cam.grab().empty()){
+			return;
+		}
+		cv::Mat mat;
+		ofxCv::warpPerspective(cam.grab(), mat, homography, CV_INTER_LINEAR);
 		_contourFinder.findContours(cam.grab());
 		#else
 		_contourFinder.findContours(cam.getPixels());
