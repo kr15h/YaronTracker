@@ -112,6 +112,10 @@ void ModeCalibrate::mousePressed(int x, int y, int button){
 		corner.y = y;
 		_corners.push_back(corner);
 		showCorner();
+	}else{
+		Application::instance()->tracker->setTrackArea(_corners);
+		_corners.clear();
+		Application::instance()->setMode(Mode::DEFAULT);
 	}
 }
 
