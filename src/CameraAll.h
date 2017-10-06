@@ -11,8 +11,7 @@ class CameraAll : public Camera{
 public:
 	void update();
 	void draw();
-	ofPixels & getPixels();
-	cv::Mat & getFrame();
+	cv::Mat & getFrame(); // Should return grayscale image
 	bool isFrameNew();
 	int getWidth();
 	int getHeight();
@@ -27,6 +26,7 @@ private:
 		int height;
 	} _dimensions;
 	
+	ofPixels _grayPixels;
 	cv::Mat _frame;
 	
 	friend class CameraFactory;

@@ -32,12 +32,9 @@ void CameraAll::draw(){
 	_videoGrabber.draw(0, 0);
 }
 
-ofPixels & CameraAll::getPixels(){
-	return _videoGrabber.getPixels();
-}
-
 cv::Mat & CameraAll::getFrame(){
-	_frame = ofxCv::toCv(_videoGrabber.getPixels());
+	ofxCv::copyGray(_videoGrabber.getPixels(), _grayPixels);
+	_frame = ofxCv::toCv(_grayPixels);
 	return _frame;
 }
 

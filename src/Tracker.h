@@ -38,8 +38,8 @@ private:
 	
 	ofxCv::ContourFinder _contourFinder;
 	
-	ofImage _grayImage;
-	ofImage _trackArea;
+	cv::Mat _grayImage;
+	cv::Mat _trackArea;
 	
 	ofVec2f _position;
 	

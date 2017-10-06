@@ -10,8 +10,13 @@ Tracker::Tracker(shared_ptr<Camera> $camera){
 	_camera = $camera;
 	
 	// TODO: read values from settings, should be the same as for the cam
-	_grayImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
-	_trackArea.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
+	ofImage srcImage;
+	srcImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
+	_grayImage = ofxCv::toCv(srcImage);
+	
+	ofImage dstImage;
+	dstImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
+	_trackArea = ofxCv::toCv(dstImage);
 	
 	// Set the corners for cropping the tracking area.
 	_areaSrcPoints.resize(4);
@@ -28,12 +33,12 @@ Tracker::Tracker(shared_ptr<Camera> $camera){
 	_areaDstPoints.resize(4);
 	_areaDstPoints[0].x = 0;
 	_areaDstPoints[0].y = 0;
-	_areaDstPoints[1].x = _trackArea.getWidth();
+	_areaDstPoints[1].x = _camera->getWidth();
 	_areaDstPoints[1].y = 0;
-	_areaDstPoints[2].x = _trackArea.getWidth();
-	_areaDstPoints[2].y = _trackArea.getHeight();
+	_areaDstPoints[2].x = _camera->getWidth();
+	_areaDstPoints[2].y = _camera->getHeight();
 	_areaDstPoints[3].x = 0;
-	_areaDstPoints[3].y = _trackArea.getHeight();
+	_areaDstPoints[3].y = _camera->getHeight();
 	
 	// Set contour finder settings
 	_contourFinder.setThreshold(225);
@@ -49,13 +54,13 @@ void Tracker::update(){
 		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
 
 		// Convert the incoming image to grayscale as fast as possible.
-		ofxCv::copyGray(_camera->getPixels(), _grayImage);
-		_grayImage.update();
+		//ofxCv::copyGray(_camera->getPixels(), _grayImage);
+		
+		_grayImage = _camera->getFrame();
 		
 		// Crop the area of interest from the grayscale camera image
 		// and put it into the _trackArea variable.
 		ofxCv::warpPerspective(_grayImage, _trackArea, homography, CV_INTER_LINEAR);
-		_trackArea.update();
 		
 		// Find the contours based on settings above.
 		_contourFinder.findContours(_trackArea);
@@ -69,8 +74,8 @@ void Tracker::update(){
 }
 
 void Tracker::draw(){
-	_trackArea.draw(0, 0);
-	_grayImage.draw(_trackArea.getWidth(), 0);
+	ofxCv::drawMat(_trackArea, 0, 0);
+	ofxCv::drawMat(_grayImage, _camera->getWidth(), 0);
 	_contourFinder.draw();
 }
 
@@ -97,11 +102,11 @@ ofVec2f Tracker::getPosition(){
 }
 
 int Tracker::getWidth(){
-	return _trackArea.getWidth();
+	return _camera->getWidth();
 }
 
 int Tracker::getHeight(){
-	return _trackArea.getHeight();
+	return _camera->getHeight();
 }
 
 } // namespace ytr

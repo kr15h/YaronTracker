@@ -15,7 +15,6 @@
 		0165F14A1F8649EE00BD2516 /* Overlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0165F1481F8649ED00BD2516 /* Overlay.cpp */; };
 		01C6A3EA1F83DE050096C7E4 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C6A3E81F83DE040096C7E4 /* Application.cpp */; };
 		01C6A3F11F83EADE0096C7E4 /* Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C6A3EF1F83EADE0096C7E4 /* Tracker.cpp */; };
-		01E1CA451F8775DB008E6D50 /* CameraPi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA401F8775DB008E6D50 /* CameraPi.cpp */; };
 		01E1CA461F8775DB008E6D50 /* CameraFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA421F8775DB008E6D50 /* CameraFactory.cpp */; };
 		01E1CA471F8775DB008E6D50 /* CameraAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA431F8775DB008E6D50 /* CameraAll.cpp */; };
 		01E1CA761F87796F008E6D50 /* Calibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA671F877938008E6D50 /* Calibration.cpp */; };
@@ -132,6 +131,87 @@
 		01E1CA731F877938008E6D50 /* ofxCv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxCv.h; sourceTree = "<group>"; };
 		01E1CA741F877958008E6D50 /* ETF.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ETF.cpp; sourceTree = "<group>"; };
 		01E1CA751F877958008E6D50 /* fdog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fdog.cpp; sourceTree = "<group>"; };
+		01E1CAE21F879E0B008E6D50 /* ofxCvPiCam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxCvPiCam.h; sourceTree = "<group>"; };
+		01E1CAE81F879E57008E6D50 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		01E1CAEA1F879E57008E6D50 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		01E1CAEB1F879E57008E6D50 /* mmal_buffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_buffer.c; sourceTree = "<group>"; };
+		01E1CAEC1F879E57008E6D50 /* mmal_buffer_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_buffer_private.h; sourceTree = "<group>"; };
+		01E1CAED1F879E57008E6D50 /* mmal_clock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_clock.c; sourceTree = "<group>"; };
+		01E1CAEE1F879E57008E6D50 /* mmal_clock_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_clock_private.h; sourceTree = "<group>"; };
+		01E1CAEF1F879E57008E6D50 /* mmal_component.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_component.c; sourceTree = "<group>"; };
+		01E1CAF01F879E57008E6D50 /* mmal_component_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_component_private.h; sourceTree = "<group>"; };
+		01E1CAF11F879E57008E6D50 /* mmal_core_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_core_private.h; sourceTree = "<group>"; };
+		01E1CAF21F879E57008E6D50 /* mmal_events.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_events.c; sourceTree = "<group>"; };
+		01E1CAF31F879E57008E6D50 /* mmal_format.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_format.c; sourceTree = "<group>"; };
+		01E1CAF41F879E57008E6D50 /* mmal_logging.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_logging.c; sourceTree = "<group>"; };
+		01E1CAF51F879E57008E6D50 /* mmal_pool.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_pool.c; sourceTree = "<group>"; };
+		01E1CAF61F879E57008E6D50 /* mmal_port.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_port.c; sourceTree = "<group>"; };
+		01E1CAF71F879E57008E6D50 /* mmal_port_clock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_port_clock.c; sourceTree = "<group>"; };
+		01E1CAF81F879E57008E6D50 /* mmal_port_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_port_private.h; sourceTree = "<group>"; };
+		01E1CAF91F879E57008E6D50 /* mmal_queue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_queue.c; sourceTree = "<group>"; };
+		01E1CAFA1F879E57008E6D50 /* mmal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal.h; sourceTree = "<group>"; };
+		01E1CAFB1F879E57008E6D50 /* mmal_buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_buffer.h; sourceTree = "<group>"; };
+		01E1CAFC1F879E57008E6D50 /* mmal_clock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_clock.h; sourceTree = "<group>"; };
+		01E1CAFD1F879E57008E6D50 /* mmal_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_common.h; sourceTree = "<group>"; };
+		01E1CAFE1F879E57008E6D50 /* mmal_component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_component.h; sourceTree = "<group>"; };
+		01E1CAFF1F879E57008E6D50 /* mmal_encodings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_encodings.h; sourceTree = "<group>"; };
+		01E1CB001F879E57008E6D50 /* mmal_events.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_events.h; sourceTree = "<group>"; };
+		01E1CB011F879E57008E6D50 /* mmal_format.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_format.h; sourceTree = "<group>"; };
+		01E1CB021F879E57008E6D50 /* mmal_logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_logging.h; sourceTree = "<group>"; };
+		01E1CB031F879E57008E6D50 /* mmal_metadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_metadata.h; sourceTree = "<group>"; };
+		01E1CB041F879E57008E6D50 /* mmal_parameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_parameters.h; sourceTree = "<group>"; };
+		01E1CB051F879E57008E6D50 /* mmal_parameters_audio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_parameters_audio.h; sourceTree = "<group>"; };
+		01E1CB061F879E57008E6D50 /* mmal_parameters_camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_parameters_camera.h; sourceTree = "<group>"; };
+		01E1CB071F879E57008E6D50 /* mmal_parameters_clock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_parameters_clock.h; sourceTree = "<group>"; };
+		01E1CB081F879E57008E6D50 /* mmal_parameters_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_parameters_common.h; sourceTree = "<group>"; };
+		01E1CB091F879E57008E6D50 /* mmal_parameters_video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_parameters_video.h; sourceTree = "<group>"; };
+		01E1CB0A1F879E57008E6D50 /* mmal_pool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_pool.h; sourceTree = "<group>"; };
+		01E1CB0B1F879E57008E6D50 /* mmal_port.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_port.h; sourceTree = "<group>"; };
+		01E1CB0C1F879E57008E6D50 /* mmal_queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_queue.h; sourceTree = "<group>"; };
+		01E1CB0D1F879E57008E6D50 /* mmal_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_types.h; sourceTree = "<group>"; };
+		01E1CB0F1F879E57008E6D50 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		01E1CB101F879E57008E6D50 /* mmal_component_wrapper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_component_wrapper.c; sourceTree = "<group>"; };
+		01E1CB111F879E57008E6D50 /* mmal_component_wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_component_wrapper.h; sourceTree = "<group>"; };
+		01E1CB121F879E57008E6D50 /* mmal_connection.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_connection.c; sourceTree = "<group>"; };
+		01E1CB131F879E57008E6D50 /* mmal_connection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_connection.h; sourceTree = "<group>"; };
+		01E1CB141F879E57008E6D50 /* mmal_default_components.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_default_components.h; sourceTree = "<group>"; };
+		01E1CB151F879E57008E6D50 /* mmal_graph.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_graph.c; sourceTree = "<group>"; };
+		01E1CB161F879E57008E6D50 /* mmal_graph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_graph.h; sourceTree = "<group>"; };
+		01E1CB171F879E57008E6D50 /* mmal_il.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_il.c; sourceTree = "<group>"; };
+		01E1CB181F879E57008E6D50 /* mmal_il.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_il.h; sourceTree = "<group>"; };
+		01E1CB191F879E57008E6D50 /* mmal_list.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_list.c; sourceTree = "<group>"; };
+		01E1CB1A1F879E57008E6D50 /* mmal_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_list.h; sourceTree = "<group>"; };
+		01E1CB1B1F879E57008E6D50 /* mmal_param_convert.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_param_convert.c; sourceTree = "<group>"; };
+		01E1CB1C1F879E57008E6D50 /* mmal_param_convert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_param_convert.h; sourceTree = "<group>"; };
+		01E1CB1D1F879E57008E6D50 /* mmal_util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_util.c; sourceTree = "<group>"; };
+		01E1CB1E1F879E57008E6D50 /* mmal_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_util.h; sourceTree = "<group>"; };
+		01E1CB1F1F879E57008E6D50 /* mmal_util_params.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_util_params.c; sourceTree = "<group>"; };
+		01E1CB201F879E57008E6D50 /* mmal_util_params.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_util_params.h; sourceTree = "<group>"; };
+		01E1CB211F879E57008E6D50 /* mmal_util_rational.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_util_rational.c; sourceTree = "<group>"; };
+		01E1CB221F879E57008E6D50 /* mmal_util_rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_util_rational.h; sourceTree = "<group>"; };
+		01E1CB241F879E57008E6D50 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		01E1CB251F879E57008E6D50 /* mmal_vc_api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_vc_api.c; sourceTree = "<group>"; };
+		01E1CB261F879E57008E6D50 /* mmal_vc_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_vc_api.h; sourceTree = "<group>"; };
+		01E1CB271F879E57008E6D50 /* mmal_vc_api_drm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_vc_api_drm.c; sourceTree = "<group>"; };
+		01E1CB281F879E57008E6D50 /* mmal_vc_api_drm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_vc_api_drm.h; sourceTree = "<group>"; };
+		01E1CB291F879E57008E6D50 /* mmal_vc_client.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_vc_client.c; sourceTree = "<group>"; };
+		01E1CB2A1F879E57008E6D50 /* mmal_vc_client_priv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_vc_client_priv.h; sourceTree = "<group>"; };
+		01E1CB2B1F879E57008E6D50 /* mmal_vc_msgnames.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_vc_msgnames.c; sourceTree = "<group>"; };
+		01E1CB2C1F879E57008E6D50 /* mmal_vc_msgnames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_vc_msgnames.h; sourceTree = "<group>"; };
+		01E1CB2D1F879E57008E6D50 /* mmal_vc_msgs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_vc_msgs.h; sourceTree = "<group>"; };
+		01E1CB2E1F879E57008E6D50 /* mmal_vc_opaque_alloc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_vc_opaque_alloc.c; sourceTree = "<group>"; };
+		01E1CB2F1F879E57008E6D50 /* mmal_vc_opaque_alloc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_vc_opaque_alloc.h; sourceTree = "<group>"; };
+		01E1CB301F879E57008E6D50 /* mmal_vc_shm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mmal_vc_shm.c; sourceTree = "<group>"; };
+		01E1CB311F879E57008E6D50 /* mmal_vc_shm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mmal_vc_shm.h; sourceTree = "<group>"; };
+		01E1CB331F879E57008E6D50 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		01E1CB341F879E57008E6D50 /* vchiq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq.h; sourceTree = "<group>"; };
+		01E1CB351F879E57008E6D50 /* vchiq_cfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq_cfg.h; sourceTree = "<group>"; };
+		01E1CB361F879E57008E6D50 /* vchiq_if.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq_if.h; sourceTree = "<group>"; };
+		01E1CB371F879E57008E6D50 /* vchiq_ioctl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq_ioctl.h; sourceTree = "<group>"; };
+		01E1CB381F879E57008E6D50 /* vchiq_lib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vchiq_lib.c; sourceTree = "<group>"; };
+		01E1CB391F879E57008E6D50 /* vchiq_test_if.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq_test_if.h; sourceTree = "<group>"; };
+		01E1CB3A1F879E57008E6D50 /* vchiq_util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vchiq_util.c; sourceTree = "<group>"; };
+		01E1CB3B1F879E57008E6D50 /* vchiq_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq_util.h; sourceTree = "<group>"; };
 		0339099A1F7B84040D88AD3C /* warp_shuffle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = warp_shuffle.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/gpu/device/warp_shuffle.hpp; sourceTree = SOURCE_ROOT; };
 		057122A817D12571F8C0C7A4 /* ofxCvGrayscaleImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxCvGrayscaleImage.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvGrayscaleImage.cpp; sourceTree = SOURCE_ROOT; };
 		057D8E7580EA21E2254ADDDA /* camera.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = camera.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/stitching/detail/camera.hpp; sourceTree = SOURCE_ROOT; };
@@ -447,6 +527,176 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		01E1CA851F8799BD008E6D50 /* ofxCvPiCam */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAE31F879E57008E6D50 /* libs */,
+				01E1CADF1F8799DD008E6D50 /* src */,
+			);
+			path = ofxCvPiCam;
+			sourceTree = "<group>";
+		};
+		01E1CADF1F8799DD008E6D50 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAE21F879E0B008E6D50 /* ofxCvPiCam.h */,
+			);
+			name = src;
+			path = ../../../../addons/ofxCvPiCam/src;
+			sourceTree = "<group>";
+		};
+		01E1CAE31F879E57008E6D50 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAE41F879E57008E6D50 /* mmal */,
+			);
+			name = libs;
+			path = ../../../../addons/ofxCvPiCam/libs;
+			sourceTree = "<group>";
+		};
+		01E1CAE41F879E57008E6D50 /* mmal */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAE51F879E57008E6D50 /* src */,
+			);
+			path = mmal;
+			sourceTree = "<group>";
+		};
+		01E1CAE51F879E57008E6D50 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAE61F879E57008E6D50 /* interface */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		01E1CAE61F879E57008E6D50 /* interface */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAE71F879E57008E6D50 /* mmal */,
+				01E1CB321F879E57008E6D50 /* vchiq_arm */,
+			);
+			path = interface;
+			sourceTree = "<group>";
+		};
+		01E1CAE71F879E57008E6D50 /* mmal */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAE81F879E57008E6D50 /* CMakeLists.txt */,
+				01E1CAE91F879E57008E6D50 /* core */,
+				01E1CAFA1F879E57008E6D50 /* mmal.h */,
+				01E1CAFB1F879E57008E6D50 /* mmal_buffer.h */,
+				01E1CAFC1F879E57008E6D50 /* mmal_clock.h */,
+				01E1CAFD1F879E57008E6D50 /* mmal_common.h */,
+				01E1CAFE1F879E57008E6D50 /* mmal_component.h */,
+				01E1CAFF1F879E57008E6D50 /* mmal_encodings.h */,
+				01E1CB001F879E57008E6D50 /* mmal_events.h */,
+				01E1CB011F879E57008E6D50 /* mmal_format.h */,
+				01E1CB021F879E57008E6D50 /* mmal_logging.h */,
+				01E1CB031F879E57008E6D50 /* mmal_metadata.h */,
+				01E1CB041F879E57008E6D50 /* mmal_parameters.h */,
+				01E1CB051F879E57008E6D50 /* mmal_parameters_audio.h */,
+				01E1CB061F879E57008E6D50 /* mmal_parameters_camera.h */,
+				01E1CB071F879E57008E6D50 /* mmal_parameters_clock.h */,
+				01E1CB081F879E57008E6D50 /* mmal_parameters_common.h */,
+				01E1CB091F879E57008E6D50 /* mmal_parameters_video.h */,
+				01E1CB0A1F879E57008E6D50 /* mmal_pool.h */,
+				01E1CB0B1F879E57008E6D50 /* mmal_port.h */,
+				01E1CB0C1F879E57008E6D50 /* mmal_queue.h */,
+				01E1CB0D1F879E57008E6D50 /* mmal_types.h */,
+				01E1CB0E1F879E57008E6D50 /* util */,
+				01E1CB231F879E57008E6D50 /* vc */,
+			);
+			path = mmal;
+			sourceTree = "<group>";
+		};
+		01E1CAE91F879E57008E6D50 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CAEA1F879E57008E6D50 /* CMakeLists.txt */,
+				01E1CAEB1F879E57008E6D50 /* mmal_buffer.c */,
+				01E1CAEC1F879E57008E6D50 /* mmal_buffer_private.h */,
+				01E1CAED1F879E57008E6D50 /* mmal_clock.c */,
+				01E1CAEE1F879E57008E6D50 /* mmal_clock_private.h */,
+				01E1CAEF1F879E57008E6D50 /* mmal_component.c */,
+				01E1CAF01F879E57008E6D50 /* mmal_component_private.h */,
+				01E1CAF11F879E57008E6D50 /* mmal_core_private.h */,
+				01E1CAF21F879E57008E6D50 /* mmal_events.c */,
+				01E1CAF31F879E57008E6D50 /* mmal_format.c */,
+				01E1CAF41F879E57008E6D50 /* mmal_logging.c */,
+				01E1CAF51F879E57008E6D50 /* mmal_pool.c */,
+				01E1CAF61F879E57008E6D50 /* mmal_port.c */,
+				01E1CAF71F879E57008E6D50 /* mmal_port_clock.c */,
+				01E1CAF81F879E57008E6D50 /* mmal_port_private.h */,
+				01E1CAF91F879E57008E6D50 /* mmal_queue.c */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		01E1CB0E1F879E57008E6D50 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CB0F1F879E57008E6D50 /* CMakeLists.txt */,
+				01E1CB101F879E57008E6D50 /* mmal_component_wrapper.c */,
+				01E1CB111F879E57008E6D50 /* mmal_component_wrapper.h */,
+				01E1CB121F879E57008E6D50 /* mmal_connection.c */,
+				01E1CB131F879E57008E6D50 /* mmal_connection.h */,
+				01E1CB141F879E57008E6D50 /* mmal_default_components.h */,
+				01E1CB151F879E57008E6D50 /* mmal_graph.c */,
+				01E1CB161F879E57008E6D50 /* mmal_graph.h */,
+				01E1CB171F879E57008E6D50 /* mmal_il.c */,
+				01E1CB181F879E57008E6D50 /* mmal_il.h */,
+				01E1CB191F879E57008E6D50 /* mmal_list.c */,
+				01E1CB1A1F879E57008E6D50 /* mmal_list.h */,
+				01E1CB1B1F879E57008E6D50 /* mmal_param_convert.c */,
+				01E1CB1C1F879E57008E6D50 /* mmal_param_convert.h */,
+				01E1CB1D1F879E57008E6D50 /* mmal_util.c */,
+				01E1CB1E1F879E57008E6D50 /* mmal_util.h */,
+				01E1CB1F1F879E57008E6D50 /* mmal_util_params.c */,
+				01E1CB201F879E57008E6D50 /* mmal_util_params.h */,
+				01E1CB211F879E57008E6D50 /* mmal_util_rational.c */,
+				01E1CB221F879E57008E6D50 /* mmal_util_rational.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		01E1CB231F879E57008E6D50 /* vc */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CB241F879E57008E6D50 /* CMakeLists.txt */,
+				01E1CB251F879E57008E6D50 /* mmal_vc_api.c */,
+				01E1CB261F879E57008E6D50 /* mmal_vc_api.h */,
+				01E1CB271F879E57008E6D50 /* mmal_vc_api_drm.c */,
+				01E1CB281F879E57008E6D50 /* mmal_vc_api_drm.h */,
+				01E1CB291F879E57008E6D50 /* mmal_vc_client.c */,
+				01E1CB2A1F879E57008E6D50 /* mmal_vc_client_priv.h */,
+				01E1CB2B1F879E57008E6D50 /* mmal_vc_msgnames.c */,
+				01E1CB2C1F879E57008E6D50 /* mmal_vc_msgnames.h */,
+				01E1CB2D1F879E57008E6D50 /* mmal_vc_msgs.h */,
+				01E1CB2E1F879E57008E6D50 /* mmal_vc_opaque_alloc.c */,
+				01E1CB2F1F879E57008E6D50 /* mmal_vc_opaque_alloc.h */,
+				01E1CB301F879E57008E6D50 /* mmal_vc_shm.c */,
+				01E1CB311F879E57008E6D50 /* mmal_vc_shm.h */,
+			);
+			path = vc;
+			sourceTree = "<group>";
+		};
+		01E1CB321F879E57008E6D50 /* vchiq_arm */ = {
+			isa = PBXGroup;
+			children = (
+				01E1CB331F879E57008E6D50 /* CMakeLists.txt */,
+				01E1CB341F879E57008E6D50 /* vchiq.h */,
+				01E1CB351F879E57008E6D50 /* vchiq_cfg.h */,
+				01E1CB361F879E57008E6D50 /* vchiq_if.h */,
+				01E1CB371F879E57008E6D50 /* vchiq_ioctl.h */,
+				01E1CB381F879E57008E6D50 /* vchiq_lib.c */,
+				01E1CB391F879E57008E6D50 /* vchiq_test_if.h */,
+				01E1CB3A1F879E57008E6D50 /* vchiq_util.c */,
+				01E1CB3B1F879E57008E6D50 /* vchiq_util.h */,
+			);
+			path = vchiq_arm;
+			sourceTree = "<group>";
+		};
 		0478E60892BF4C0731AE0763 /* ts */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +992,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				01E1CA851F8799BD008E6D50 /* ofxCvPiCam */,
 				01E1C90F1F8774DD008E6D50 /* ofxCv */,
 				A0B90D3B0ADB9C1716816714 /* ofxOpenCv */,
 			);
@@ -1035,7 +1286,6 @@
 				0165F1471F855D3400BD2516 /* Library.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
-				01E1CA451F8775DB008E6D50 /* CameraPi.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
 				0165F1391F84D8F200BD2516 /* ModeDefault.cpp in Sources */,
 				01E1CA471F8775DB008E6D50 /* CameraAll.cpp in Sources */,

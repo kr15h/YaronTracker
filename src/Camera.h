@@ -9,7 +9,6 @@ class Camera{
 public:
 	virtual void update() = 0;
 	virtual void draw() = 0;
-	virtual ofPixels & getPixels() = 0;
 	virtual cv::Mat & getFrame() = 0;
 	virtual bool isFrameNew() = 0;
 	virtual int getWidth() = 0;
