@@ -10,8 +10,8 @@ Tracker::Tracker(){
 	int w = ofToInt(Settings::instance()->xml.getValue("camera/width"));
 	int h = ofToInt(Settings::instance()->xml.getValue("camera/height"));
 	
-	int warpWidth = 640;
-	int warpHeight = 480;
+	int warpWidth = ofToInt(Settings::instance()->xml.getValue("warped/width"));
+	int warpHeight = ofToInt(Settings::instance()->xml.getValue("warped/height"));
 	_warped.allocate(warpWidth, warpHeight, OF_IMAGE_GRAYSCALE);
 	
 	cout << "camera width: " << w << endl;
@@ -123,8 +123,9 @@ void Tracker::draw(){
 	//ofxCv::drawMat(_grayImage, _camera->getWidth(), 0);
 	
 	#ifdef TARGET_RASPBERRY_PI
-	cv::Mat frame = cam.grab();
-	ofxCv::drawMat(frame, 0, 0, cam.width, cam.height);
+	_warped.draw(0, 0);
+	//cv::Mat frame = cam.grab();
+	//ofxCv::drawMat(frame, 0, 0, cam.width, cam.height);
 	#else
 	cam.draw(0, 0, cam.getWidth(), cam.getHeight());
 	#endif
