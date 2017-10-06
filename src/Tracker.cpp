@@ -10,10 +10,16 @@ Tracker::Tracker(){
 	int w = ofToInt(Settings::instance()->xml.getValue("camera/width"));
 	int h = ofToInt(Settings::instance()->xml.getValue("camera/height"));
 	
+	int warpWidth = 640;
+	int warpHeight = 480;
+	ofImage warpImage;
+	warpImage.allocate(warpWidth, warpHeight, OF_IMAGE_GRAYSCALE);
+	_warped = ofxCv::toCv(warpImage);
+	
 	cout << "camera width: " << w << endl;
 	cout << "camera height: " << h << endl;
 	
-#ifdef TARGET_RASPBERRY_PI	
+#ifdef TARGET_RASPBERRY_PI
 	cam.setup(w, h, false);
 #else
 	// TODO: Get device id from settings
@@ -46,12 +52,12 @@ Tracker::Tracker(){
 	_areaDstPoints.resize(4);
 	_areaDstPoints[0].x = 0;
 	_areaDstPoints[0].y = 0;
-	_areaDstPoints[1].x = w;
+	_areaDstPoints[1].x = warpWidth;
 	_areaDstPoints[1].y = 0;
-	_areaDstPoints[2].x = w;
-	_areaDstPoints[2].y = h;
+	_areaDstPoints[2].x = warpWidth;
+	_areaDstPoints[2].y = warpHeight;
 	_areaDstPoints[3].x = 0;
-	_areaDstPoints[3].y = h;
+	_areaDstPoints[3].y = warpHeight;
 	
 	// Set contour finder settings
 	_contourFinder.setThreshold(225);
@@ -73,9 +79,8 @@ void Tracker::update(){
 			return;
 		}
 		cv::Mat frame = cam.grab();
-		
-		ofxCv::warpPerspective(frame, frame, homography, CV_INTER_LINEAR);
-		_contourFinder.findContours(frame);
+		ofxCv::warpPerspective(frame, _warped, homography, CV_INTER_LINEAR);
+		_contourFinder.findContours(_warped);
 		#else
 		_contourFinder.findContours(cam.getPixels());
 		#endif
