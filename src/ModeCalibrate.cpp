@@ -82,7 +82,7 @@ void ModeCalibrate::draw(){
 		textToDraw += "\nHit ENTER to confirm";
 	}
 	
-	ofDrawBitmapString(textToDraw, 10, 20);
+	ofDrawBitmapString(textToDraw, 10, 40);
 }
 
 void ModeCalibrate::keyPressed(int key){

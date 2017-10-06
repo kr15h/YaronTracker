@@ -39,6 +39,9 @@ void Application::draw(){
 	ofDrawLine(0, posNorm.y * ofGetHeight(), ofGetWidth(), posNorm.y * ofGetHeight());
 	ofDrawLine(posNorm.x * ofGetWidth(), 0, posNorm.x * ofGetWidth(), ofGetHeight());
 	ofPopStyle();
+	
+	// Draw debug data
+	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2), 10, 20);
 }
 
 void Application::exit(){
