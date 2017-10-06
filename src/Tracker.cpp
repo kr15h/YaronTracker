@@ -28,14 +28,6 @@ Tracker::Tracker(){
     cam.initGrabber(w, h);
 #endif
 
-	//ofImage srcImage;
-	//srcImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
-	//_grayImage = ofxCv::toCv(srcImage);
-	
-	//ofImage dstImage;
-	//dstImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
-	//_trackArea = ofxCv::toCv(dstImage);
-	
 	// Set the corners for cropping the tracking area.
 	_areaSrcPoints.resize(4);
 	_areaSrcPoints[0].x = ofToFloat(Settings::instance()->xml.getValue("projection/tl/x"));
@@ -66,23 +58,24 @@ Tracker::Tracker(){
 }
 
 void Tracker::update(){
-	#ifndef TARGET_RASPBERRY_PI
+
+#ifndef TARGET_RASPBERRY_PI
 		cam.update();
-	#endif
+#endif
 
 	if(cam.isFrameNew()){
 		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
 		
-		#ifdef TARGET_RASPBERRY_PI
+#ifdef TARGET_RASPBERRY_PI
 		if(cam.grab().empty()){
 			return;
 		}
 		cv::Mat frame = cam.grab();
 		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
-		_contourFinder.findContours(_warped);
-		#else
+		_contourFinder.findContours(_warpedMat);
+#else
 		_contourFinder.findContours(cam.getPixels());
-		#endif
+#endif
 
 		if(_contourFinder.size()){
 			_position.x = _contourFinder.getCenter(0).x;
