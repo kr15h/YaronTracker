@@ -28,11 +28,11 @@ bool CameraPi::isFrameNew(){
 }
 
 int CameraPi::getWidth(){
-	return _cam.getWidth();
+	return _cam.width;
 }
 
 int CameraPi::getHeight(){
-	return _cam.getHeight();
+	return _cam.height;
 }
 
 } // namespace ytr
