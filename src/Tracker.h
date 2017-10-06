@@ -47,9 +47,6 @@ private:
 	
 	ofxCv::ContourFinder _contourFinder;
 	
-	cv::Mat _grayImage;
-	cv::Mat _trackArea;
-	
 	ofVec2f _position;
 	
 	// These define which area should be taken from the incoming

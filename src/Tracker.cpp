@@ -72,9 +72,10 @@ void Tracker::update(){
 		if(cam.grab().empty()){
 			return;
 		}
-		cv::Mat mat;
-		ofxCv::warpPerspective(cam.grab(), mat, homography, CV_INTER_LINEAR);
-		_contourFinder.findContours(cam.grab());
+		cv::Mat frame = cam.grab();
+		
+		ofxCv::warpPerspective(frame, frame, homography, CV_INTER_LINEAR);
+		_contourFinder.findContours(frame);
 		#else
 		_contourFinder.findContours(cam.getPixels());
 		#endif
