@@ -1,12 +1,8 @@
-#include "Camera.h"
+#include "CameraAll.h"
 
 namespace ytr{
 
-shared_ptr<Camera> Camera::create(){
-	return shared_ptr<Camera>(new Camera());
-}
-
-Camera::Camera(){
+CameraAll::CameraAll(){
 	// TODO: get values from settings
 	_dimensions.width = 800;
 	_dimensions.height = 600;
@@ -24,31 +20,37 @@ Camera::Camera(){
 	// TODO: Get device id from settings
 	_videoGrabber.setDeviceID(0);
     _videoGrabber.setDesiredFrameRate(60);
+	_videoGrabber.setPixelFormat(OF_PIXELS_RGB);
     _videoGrabber.initGrabber(_dimensions.width, _dimensions.height);
 }
 
-void Camera::update(){
+void CameraAll::update(){
 	_videoGrabber.update();
 }
 
-void Camera::draw(){
+void CameraAll::draw(){
 	_videoGrabber.draw(0, 0);
 }
 
-ofPixels & Camera::getPixels(){
+ofPixels & CameraAll::getPixels(){
 	return _videoGrabber.getPixels();
 }
 
-bool Camera::isFrameNew(){
+cv::Mat & CameraAll::getFrame(){
+	_frame = ofxCv::toCv(_videoGrabber.getPixels());
+	return _frame;
+}
+
+bool CameraAll::isFrameNew(){
 	return _videoGrabber.isFrameNew();
 }
 
-int Camera::getWidth(){
-	return _dimensions.width;
+int CameraAll::getWidth(){
+	return _videoGrabber.getWidth();
 }
 
-int Camera::getHeight(){
-	return _dimensions.height;
+int CameraAll::getHeight(){
+	return _videoGrabber.getHeight();
 }
 
 } // namespace ytr

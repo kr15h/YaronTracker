@@ -7,6 +7,7 @@
 #include "ModeCalibrate.h"
 
 #include "Camera.h"
+#include "CameraFactory.h"
 #include "Tracker.h"
 #include "Projection.h"
 #include "Overlay.h"

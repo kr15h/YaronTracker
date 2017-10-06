@@ -1,29 +1,19 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxCv.h"
 
 namespace ytr{
 
 class Camera{
 public:
-	static shared_ptr<Camera> create();
-	
-	void update();
-	void draw();
-	ofPixels & getPixels();
-	bool isFrameNew();
-	int getWidth();
-	int getHeight();
-	
-private:
-	Camera();
-	
-	ofVideoGrabber _videoGrabber;
-	
-	struct{
-		int width;
-		int height;
-	} _dimensions;
+	virtual void update() = 0;
+	virtual void draw() = 0;
+	virtual ofPixels & getPixels() = 0;
+	virtual cv::Mat & getFrame() = 0;
+	virtual bool isFrameNew() = 0;
+	virtual int getWidth() = 0;
+	virtual int getHeight() = 0;
 };
 
 } // namespace ytr

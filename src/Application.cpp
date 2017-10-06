@@ -17,7 +17,7 @@ Application::Application(){
 	_mode = ModeDefault::instance();
 
 	// Create components
-	camera = Camera::create();
+	camera = CameraFactory::create();
 	tracker = Tracker::create(camera);
 	projection = Projection::create();
 	overlay = Overlay::create();

@@ -9,86 +9,87 @@ shared_ptr<Tracker> Tracker::create(shared_ptr<Camera> $camera){
 Tracker::Tracker(shared_ptr<Camera> $camera){
 	_camera = $camera;
 	
-	// Set initial width and height of the surface being tracked.
-	// Later we replace this with the perspective-corrected width and height.
-	_width = ofToInt(Settings::instance()->xml.getValue("tracker/width"));
-	_height = ofToInt(Settings::instance()->xml.getValue("tracker/height"));
-	_updateDimensions = false;
+	// TODO: read values from settings, should be the same as for the cam
+	_grayImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
+	_trackArea.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
 	
-	_corners.resize(4);
-	_corners[0].x = ofToFloat(Settings::instance()->xml.getValue("projection/tl/x"));
-	_corners[0].y = ofToFloat(Settings::instance()->xml.getValue("projection/tl/y"));
-	_corners[1].x = ofToFloat(Settings::instance()->xml.getValue("projection/tr/x"));
-	_corners[1].y = ofToFloat(Settings::instance()->xml.getValue("projection/tr/y"));
-	_corners[2].x = ofToFloat(Settings::instance()->xml.getValue("projection/br/x"));
-	_corners[2].y = ofToFloat(Settings::instance()->xml.getValue("projection/br/y"));
-	_corners[3].x = ofToFloat(Settings::instance()->xml.getValue("projection/bl/x"));
-	_corners[3].y = ofToFloat(Settings::instance()->xml.getValue("projection/bl/y"));
+	// Set the corners for cropping the tracking area.
+	_areaSrcPoints.resize(4);
+	_areaSrcPoints[0].x = ofToFloat(Settings::instance()->xml.getValue("projection/tl/x"));
+	_areaSrcPoints[0].y = ofToFloat(Settings::instance()->xml.getValue("projection/tl/y"));
+	_areaSrcPoints[1].x = ofToFloat(Settings::instance()->xml.getValue("projection/tr/x"));
+	_areaSrcPoints[1].y = ofToFloat(Settings::instance()->xml.getValue("projection/tr/y"));
+	_areaSrcPoints[2].x = ofToFloat(Settings::instance()->xml.getValue("projection/br/x"));
+	_areaSrcPoints[2].y = ofToFloat(Settings::instance()->xml.getValue("projection/br/y"));
+	_areaSrcPoints[3].x = ofToFloat(Settings::instance()->xml.getValue("projection/bl/x"));
+	_areaSrcPoints[3].y = ofToFloat(Settings::instance()->xml.getValue("projection/bl/y"));
+	
+	// The destination is always going to be the size of the tracking area.
+	_areaDstPoints.resize(4);
+	_areaDstPoints[0].x = 0;
+	_areaDstPoints[0].y = 0;
+	_areaDstPoints[1].x = _trackArea.getWidth();
+	_areaDstPoints[1].y = 0;
+	_areaDstPoints[2].x = _trackArea.getWidth();
+	_areaDstPoints[2].y = _trackArea.getHeight();
+	_areaDstPoints[3].x = 0;
+	_areaDstPoints[3].y = _trackArea.getHeight();
+	
+	// Set contour finder settings
+	_contourFinder.setThreshold(225);
+	_contourFinder.setMinAreaRadius(10);
+	_contourFinder.setMaxAreaRadius(100);
+	_contourFinder.setSortBySize(true);
 }
 
 void Tracker::update(){
-	// get and track blobs in camera image
-	
-	bool frameIsNew = _camera->isFrameNew();
-	
-	if(frameIsNew){
-		_colorImg.setFromPixels(_camera->getPixels());
+	if(_camera->isFrameNew()){
+
+		// Find homography for perspective transformation below.
+		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
+
+		// Convert the incoming image to grayscale as fast as possible.
+		ofxCv::copyGray(_camera->getPixels(), _grayImage);
+		_grayImage.update();
 		
-		_grayImage = _colorImg;
-		_grayImage.warpPerspective(_corners[0], _corners[1], _corners[2], _corners[3]);
+		// Crop the area of interest from the grayscale camera image
+		// and put it into the _trackArea variable.
+		ofxCv::warpPerspective(_grayImage, _trackArea, homography, CV_INTER_LINEAR);
+		_trackArea.update();
 		
-		// Here we adjust the tracker width and height to be able to get normalized value.
-		_width = _grayImage.getWidth();
-		_height = _grayImage.getHeight();
+		// Find the contours based on settings above.
+		_contourFinder.findContours(_trackArea);
 		
-		if(_updateDimensions){
-			Settings::instance()->xml.setValue("tracker/width", ofToString(_width, 0));
-			Settings::instance()->xml.setValue("tracker/height", ofToString(_height, 0));
-			_updateDimensions = false;
-		}
-		
-		_threshImage = _grayImage;
-		
-		// Consider areas that are brighter than N in the range from 0 (black) and 255 (white)
-		_threshImage.threshold(225);
-		
-		// input, min area, max area, number of blobs, find holes
-		_contourFinder.findContours(_threshImage, 10, (_camera->getWidth()*_camera->getHeight())/3, 1, false);
-		
-		if(_contourFinder.blobs.size()){
-			_position.x = _contourFinder.blobs[0].centroid.x;
-			_position.y = _contourFinder.blobs[0].centroid.y;
+		// If at least one contour found, take it and set the position values from it.
+		if(_contourFinder.size()){
+			_position.x = _contourFinder.getCenter(0).x;
+			_position.y = _contourFinder.getCenter(0).y;
 		}
 	}
 }
 
-void Tracker::drawGrayImage(){
-	_grayImage.draw(0, 0);
-}
-
-void Tracker::drawContours(){
-	_contourFinder.draw();
-}
-
 void Tracker::draw(){
-	_grayImage.draw(0, 0);
-	_threshImage.draw(_grayImage.width, 0);
+	_trackArea.draw(0, 0);
+	_grayImage.draw(_trackArea.getWidth(), 0);
 	_contourFinder.draw();
 }
 
 void Tracker::setTrackArea(vector<ofPoint> & $corners){
-	_corners = $corners;
+	_areaSrcPoints.clear();
+	_areaSrcPoints.resize($corners.size());
+	for(auto i = 0; i < _areaSrcPoints.size(); ++i){
+		_areaSrcPoints[i].x = $corners[i].x;
+		_areaSrcPoints[i].y = $corners[i].y;
+	}
 	
-	Settings::instance()->xml.setValue("projection/tl/x", ofToString(_corners[0].x, 0));
-	Settings::instance()->xml.setValue("projection/tl/y", ofToString(_corners[0].y, 0));
-	Settings::instance()->xml.setValue("projection/tr/x", ofToString(_corners[1].x, 0));
-	Settings::instance()->xml.setValue("projection/tr/y", ofToString(_corners[1].y, 0));
-	Settings::instance()->xml.setValue("projection/br/x", ofToString(_corners[2].x, 0));
-	Settings::instance()->xml.setValue("projection/br/y", ofToString(_corners[2].y, 0));
-	Settings::instance()->xml.setValue("projection/bl/x", ofToString(_corners[3].x, 0));
-	Settings::instance()->xml.setValue("projection/bl/y", ofToString(_corners[3].y, 0));
-	
-	_updateDimensions = true;
+	Settings::instance()->xml.setValue("projection/tl/x", ofToString(_areaSrcPoints[0].x, 0));
+	Settings::instance()->xml.setValue("projection/tl/y", ofToString(_areaSrcPoints[0].y, 0));
+	Settings::instance()->xml.setValue("projection/tr/x", ofToString(_areaSrcPoints[1].x, 0));
+	Settings::instance()->xml.setValue("projection/tr/y", ofToString(_areaSrcPoints[1].y, 0));
+	Settings::instance()->xml.setValue("projection/br/x", ofToString(_areaSrcPoints[2].x, 0));
+	Settings::instance()->xml.setValue("projection/br/y", ofToString(_areaSrcPoints[2].y, 0));
+	Settings::instance()->xml.setValue("projection/bl/x", ofToString(_areaSrcPoints[3].x, 0));
+	Settings::instance()->xml.setValue("projection/bl/y", ofToString(_areaSrcPoints[3].y, 0));
 }
 
 ofVec2f Tracker::getPosition(){
@@ -96,11 +97,11 @@ ofVec2f Tracker::getPosition(){
 }
 
 int Tracker::getWidth(){
-	return _width;
+	return _trackArea.getWidth();
 }
 
 int Tracker::getHeight(){
-	return _height;
+	return _trackArea.getHeight();
 }
 
 } // namespace ytr
