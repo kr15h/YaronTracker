@@ -13,6 +13,7 @@ Tracker::Tracker(){
 	int warpWidth = ofToInt(Settings::instance()->xml.getValue("warped/width"));
 	int warpHeight = ofToInt(Settings::instance()->xml.getValue("warped/height"));
 	_warped.allocate(warpWidth, warpHeight, OF_IMAGE_GRAYSCALE);
+	_warpedMat = ofxCv::toCv(_warped);
 	
 	cout << "camera width: " << w << endl;
 	cout << "camera height: " << h << endl;
@@ -77,8 +78,7 @@ void Tracker::update(){
 			return;
 		}
 		cv::Mat frame = cam.grab();
-		cv::Mat warp = ofxCv::toCv(_warped);
-		ofxCv::warpPerspective(frame, warp, homography, CV_INTER_LINEAR);
+		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
 		_contourFinder.findContours(_warped);
 		#else
 		_contourFinder.findContours(cam.getPixels());
@@ -123,11 +123,9 @@ void Tracker::draw(){
 	//ofxCv::drawMat(_grayImage, _camera->getWidth(), 0);
 	
 	#ifdef TARGET_RASPBERRY_PI
-	if(_warped.isAllocated()){
-		_warped.draw(0, 0);
-	}
-	//cv::Mat frame = cam.grab();
-	//ofxCv::drawMat(frame, 0, 0, cam.width, cam.height);
+	ofxCv::drawMat(_warpedMat, 0, 0, cam.width, cam.height);
+	cv::Mat frame = cam.grab();
+	ofxCv::drawMat(frame, ofxCv::getWidth(_warpedMat), 0, cam.width, cam.height);
 	#else
 	cam.draw(0, 0, cam.getWidth(), cam.getHeight());
 	#endif
