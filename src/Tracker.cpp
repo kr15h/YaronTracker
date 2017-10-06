@@ -123,7 +123,9 @@ void Tracker::draw(){
 	//ofxCv::drawMat(_grayImage, _camera->getWidth(), 0);
 	
 	#ifdef TARGET_RASPBERRY_PI
-	_warped.draw(0, 0);
+	if(_warped.isAllocated()){
+		_warped.draw(0, 0);
+	}
 	//cv::Mat frame = cam.grab();
 	//ofxCv::drawMat(frame, 0, 0, cam.width, cam.height);
 	#else
