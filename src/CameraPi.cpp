@@ -10,7 +10,9 @@ CameraPi::CameraPi(){
 	cout << "camera height: " << h << endl;
 	
 	// Setup camera: width, height, color
+	cout << "Attempting to setup camera" << endl;
     _cam.setup(w, h, false);
+    cout << "Camera setup successful" << endl;
 }
 
 void CameraPi::update(){
