@@ -13,7 +13,7 @@ class CameraPi : public Camera{
 public:
 	void update();
 	void draw();
-	cv::Mat & getFrame();
+	cv::Mat getFrame();
 	bool isFrameNew();
 	int getWidth();
 	int getHeight();

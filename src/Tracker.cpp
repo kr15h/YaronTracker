@@ -57,6 +57,9 @@ void Tracker::update(){
 		//ofxCv::copyGray(_camera->getPixels(), _grayImage);
 		
 		_grayImage = _camera->getFrame();
+		if(_grayImage.empty()){
+			return;
+		}
 		
 		// Crop the area of interest from the grayscale camera image
 		// and put it into the _trackArea variable.

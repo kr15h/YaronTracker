@@ -12,7 +12,7 @@ class CameraAll : public Camera{
 public:
 	void update();
 	void draw();
-	cv::Mat & getFrame(); // Should return grayscale image
+	cv::Mat getFrame(); // Should return grayscale image
 	bool isFrameNew();
 	int getWidth();
 	int getHeight();

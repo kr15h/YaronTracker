@@ -3,12 +3,14 @@
 namespace ytr{
 
 CameraPi::CameraPi(){
+	int w = ofToInt(Settings::instance()->xml.getValue("camera/width"));
+	int h = ofToInt(Settings::instance()->xml.getValue("camera/height"));
+	
+	cout << "camera width: " << w << endl;
+	cout << "camera height: " << h << endl;
+	
 	// Setup camera: width, height, color
-    _cam.setup(
-			   ofToInt(Settings::instance()->xml.getValue("camera/width")),
-			   ofToInt(Settings::instance()->xml.getValue("camera/width")),
-			   false);
-    _pixels.allocate(_cam.width, _cam.height);
+    _cam.setup(w, h, false);
 }
 
 void CameraPi::update(){
@@ -16,10 +18,10 @@ void CameraPi::update(){
 }
 
 void CameraPi::draw(){
-	_cam.draw(0, 0);
+	// ofxCvPiCam does not have draw()
 }
 
-cv::Mat & CameraPi::getFrame(){
+cv::Mat CameraPi::getFrame(){
 	return _cam.grab();
 }
 
