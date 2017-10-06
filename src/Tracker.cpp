@@ -74,7 +74,10 @@ void Tracker::update(){
 		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
 		_contourFinder.findContours(_warpedMat);
 #else
-		_contourFinder.findContours(cam.getPixels());
+		cv::Mat frame;
+		ofxCv::copyGray(cam.getPixels(), frame);
+		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
+		_contourFinder.findContours(_warpedMat);
 #endif
 
 		if(_contourFinder.size()){
@@ -120,7 +123,8 @@ void Tracker::draw(){
 	cv::Mat frame = cam.grab();
 	ofxCv::drawMat(frame, ofxCv::getWidth(_warpedMat), 0, cam.width, cam.height);
 	#else
-	cam.draw(0, 0, cam.getWidth(), cam.getHeight());
+	ofxCv::drawMat(_warpedMat, 0, 0, _warped.getWidth(), _warped.getHeight());
+	cam.draw(_warped.getWidth(), 0, cam.getWidth(), cam.getHeight());
 	#endif
 	
 	_contourFinder.draw();
