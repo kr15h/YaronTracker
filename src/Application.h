@@ -28,6 +28,7 @@ public:
 	void mousePressed(int x, int y, int button);
 	
 	void setMode(Mode::Name $name);
+	void saveCameraSnapshot(string filename);
 	
 	shared_ptr<Camera> camera;
 	shared_ptr<Tracker> tracker;

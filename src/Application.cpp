@@ -50,6 +50,10 @@ void Application::exit(){
 
 void Application::keyPressed(int key){
 	_mode->keyPressed(key);
+	
+	if(ofGetKeyPressed(OF_KEY_COMMAND) && key == 'p'){
+		saveCameraSnapshot("test.jpg");
+	}
 }
 
 void Application::mousePressed(int x, int y, int button){
@@ -63,6 +67,14 @@ void Application::setMode(Mode::Name $name){
 		overlay->showCorner(Overlay::TOP_LEFT);
 		_mode = ModeCalibrate::instance();
 	}
+}
+
+void Application::saveCameraSnapshot(string filename){
+	ofImage snap;
+	ofxCv::toOf(camera->getFrame(), snap);
+	snap.update();
+	snap.save(filename);
+	cout << "Saved image with name " << filename << endl;
 }
 
 } // namespace ytr
