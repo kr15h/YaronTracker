@@ -28,7 +28,8 @@ cv::Mat CameraPi::getFrame(){
 }
 
 bool CameraPi::isFrameNew(){
-	return _cam.isFrameNew();
+	return true;
+	//return _cam.isFrameNew();
 }
 
 int CameraPi::getWidth(){
