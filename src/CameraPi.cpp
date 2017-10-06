@@ -20,7 +20,8 @@ void CameraPi::update(){
 }
 
 void CameraPi::draw(){
-	ofxCv::drawMat(_cam.grab(), 0, 0, _cam.width, _cam.height);
+	cv::Mat frame = _cam.grab();
+	ofxCv::drawMat(frame, 0, 0, _cam.width, _cam.height);
 }
 
 cv::Mat CameraPi::getFrame(){
