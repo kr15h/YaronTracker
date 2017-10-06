@@ -45,7 +45,7 @@ private:
 	int _width;
 	int _height;
 	
-	cv::Mat _warped;
+	ofImage _warped;
 	
 	ofxCv::ContourFinder _contourFinder;
 	

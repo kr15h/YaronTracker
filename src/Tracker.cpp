@@ -12,9 +12,7 @@ Tracker::Tracker(){
 	
 	int warpWidth = 640;
 	int warpHeight = 480;
-	ofImage warpImage;
-	warpImage.allocate(warpWidth, warpHeight, OF_IMAGE_GRAYSCALE);
-	_warped = ofxCv::toCv(warpImage);
+	_warped.allocate(warpWidth, warpHeight, OF_IMAGE_GRAYSCALE);
 	
 	cout << "camera width: " << w << endl;
 	cout << "camera height: " << h << endl;
@@ -79,7 +77,7 @@ void Tracker::update(){
 			return;
 		}
 		cv::Mat frame = cam.grab();
-		ofxCv::warpPerspective(frame, _warped, homography, CV_INTER_LINEAR);
+		ofxCv::warpPerspective(frame, cv::Mat(_warped), homography, CV_INTER_LINEAR);
 		_contourFinder.findContours(_warped);
 		#else
 		_contourFinder.findContours(cam.getPixels());
