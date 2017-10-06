@@ -5,6 +5,7 @@
 #include "CameraFactory.h"
 #include "ofxCv.h"
 #include "ofxCvPiCam.h"
+#include "Settings.h"
 
 namespace ytr{
 
@@ -21,11 +22,6 @@ private:
 	CameraPi();
 	
 	ofxCvPiCam _cam;
-	
-	struct{
-		int width;
-		int height;
-	} _dimensions;
 	
 	friend class CameraFactory;
 };

@@ -3,10 +3,6 @@
 namespace ytr{
 
 CameraAll::CameraAll(){
-	// TODO: get values from settings
-	_dimensions.width = 800;
-	_dimensions.height = 600;
-	
 	vector<ofVideoDevice> devices = _videoGrabber.listDevices();
 
     for(int i = 0; i < devices.size(); i = i + 1){
@@ -21,7 +17,10 @@ CameraAll::CameraAll(){
 	_videoGrabber.setDeviceID(0);
     _videoGrabber.setDesiredFrameRate(60);
 	_videoGrabber.setPixelFormat(OF_PIXELS_RGB);
-    _videoGrabber.initGrabber(_dimensions.width, _dimensions.height);
+    _videoGrabber.initGrabber(
+		ofToInt(Settings::instance()->xml.getValue("camera/width")),
+		ofToInt(Settings::instance()->xml.getValue("camera/height"))
+    );
 }
 
 void CameraAll::update(){

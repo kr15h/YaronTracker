@@ -3,12 +3,11 @@
 namespace ytr{
 
 CameraPi::CameraPi(){
-	// TODO: get values from settings
-	_dimensions.width = 800;
-	_dimensions.height = 600;
-	
 	// Setup camera: width, height, color
-    _cam.setup(_dimensions.width, _dimensions.height, false);
+    _cam.setup(
+			   ofToInt(Settings::instance()->xml.getValue("camera/width")),
+			   ofToInt(Settings::instance()->xml.getValue("camera/width")),
+			   false);
     _pixels.allocate(_cam.width, _cam.height);
 }
 

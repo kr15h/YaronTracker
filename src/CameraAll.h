@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "CameraFactory.h"
 #include "ofxCv.h"
+#include "Settings.h"
 
 namespace ytr{
 
@@ -20,11 +21,6 @@ private:
 	CameraAll();
 	
 	ofVideoGrabber _videoGrabber;
-	
-	struct{
-		int width;
-		int height;
-	} _dimensions;
 	
 	ofPixels _grayPixels;
 	cv::Mat _frame;
