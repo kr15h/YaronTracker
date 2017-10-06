@@ -48,8 +48,10 @@ Tracker::Tracker(shared_ptr<Camera> $camera){
 }
 
 void Tracker::update(){
+	cout << "Tracker::update()" << endl;
 	if(_camera->isFrameNew()){
-
+		cout << "Frame is new" << endl;
+		
 		// Find homography for perspective transformation below.
 		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
 
@@ -60,6 +62,7 @@ void Tracker::update(){
 		if(_grayImage.empty()){
 			return;
 		}
+		cout << "cv::Mat not empty" << endl;
 		
 		// Crop the area of interest from the grayscale camera image
 		// and put it into the _trackArea variable.
