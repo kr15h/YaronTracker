@@ -20,7 +20,7 @@ void CameraPi::update(){
 }
 
 void CameraPi::draw(){
-	// ofxCvPiCam does not have draw()
+	ofxCv::drawMat(_cam.grab(), 0, 0);
 }
 
 cv::Mat CameraPi::getFrame(){
