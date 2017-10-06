@@ -16,7 +16,7 @@ ModeCalibrate::ModeCalibrate(){
 }
 
 void ModeCalibrate::update(){
-	Application::instance()->camera->update();
+	Application::instance()->tracker->update();
 }
 
 void ModeCalibrate::draw(){
@@ -25,7 +25,7 @@ void ModeCalibrate::draw(){
 	Application::instance()->projection->draw();
 
 	// Draw the camera so we can see the projection from that perspective
-	Application::instance()->camera->draw();
+	Application::instance()->tracker->draw();
 	
 	// Draw overlay so we can see where the corners are
 	Application::instance()->overlay->draw();

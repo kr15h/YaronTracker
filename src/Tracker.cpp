@@ -2,21 +2,34 @@
 
 namespace ytr {
 
-shared_ptr<Tracker> Tracker::create(shared_ptr<Camera> $camera){
-	return shared_ptr<Tracker>(new Tracker($camera));
+shared_ptr<Tracker> Tracker::create(){
+	return shared_ptr<Tracker>(new Tracker);
 }
 
-Tracker::Tracker(shared_ptr<Camera> $camera){
-	_camera = $camera;
+Tracker::Tracker(){
+	int w = ofToInt(Settings::instance()->xml.getValue("camera/width"));
+	int h = ofToInt(Settings::instance()->xml.getValue("camera/height"));
 	
-	// TODO: read values from settings, should be the same as for the cam
-	ofImage srcImage;
-	srcImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
-	_grayImage = ofxCv::toCv(srcImage);
+	cout << "camera width: " << w << endl;
+	cout << "camera height: " << h << endl;
 	
-	ofImage dstImage;
-	dstImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
-	_trackArea = ofxCv::toCv(dstImage);
+#ifdef TARGET_RASPBERRY_PI	
+	cam.setup(w, h, false);
+#else
+	// TODO: Get device id from settings
+	cam.setDeviceID(0);
+    cam.setDesiredFrameRate(60);
+	cam.setPixelFormat(OF_PIXELS_RGB);
+    cam.initGrabber(w, h);
+#endif
+
+	//ofImage srcImage;
+	//srcImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
+	//_grayImage = ofxCv::toCv(srcImage);
+	
+	//ofImage dstImage;
+	//dstImage.allocate(_camera->getWidth(), _camera->getHeight(), OF_IMAGE_GRAYSCALE);
+	//_trackArea = ofxCv::toCv(dstImage);
 	
 	// Set the corners for cropping the tracking area.
 	_areaSrcPoints.resize(4);
@@ -33,12 +46,12 @@ Tracker::Tracker(shared_ptr<Camera> $camera){
 	_areaDstPoints.resize(4);
 	_areaDstPoints[0].x = 0;
 	_areaDstPoints[0].y = 0;
-	_areaDstPoints[1].x = _camera->getWidth();
+	_areaDstPoints[1].x = w;
 	_areaDstPoints[1].y = 0;
-	_areaDstPoints[2].x = _camera->getWidth();
-	_areaDstPoints[2].y = _camera->getHeight();
+	_areaDstPoints[2].x = w;
+	_areaDstPoints[2].y = h;
 	_areaDstPoints[3].x = 0;
-	_areaDstPoints[3].y = _camera->getHeight();
+	_areaDstPoints[3].y = h;
 	
 	// Set contour finder settings
 	_contourFinder.setThreshold(225);
@@ -48,9 +61,26 @@ Tracker::Tracker(shared_ptr<Camera> $camera){
 }
 
 void Tracker::update(){
-	cout << "Tracker::update()" << endl;
+	#ifndef TARGET_RASPBERRY_PI
+		cam.update();
+	#endif
+
+	if(cam.isFrameNew()){
+		
+		#ifdef TARGET_RASPBERRY_PI
+		_contourFinder.findContours(cam.grab());
+		#else
+		_contourFinder.findContours(cam.getPixels());
+		#endif
+
+		if(_contourFinder.size()){
+			_position.x = _contourFinder.getCenter(0).x;
+			_position.y = _contourFinder.getCenter(0).y;
+		}
+	}
+
+	/*
 	if(_camera->isFrameNew()){
-		cout << "Frame is new" << endl;
 		
 		// Find homography for perspective transformation below.
 		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
@@ -72,16 +102,22 @@ void Tracker::update(){
 		_contourFinder.findContours(_trackArea);
 		
 		// If at least one contour found, take it and set the position values from it.
-		if(_contourFinder.size()){
-			_position.x = _contourFinder.getCenter(0).x;
-			_position.y = _contourFinder.getCenter(0).y;
-		}
+		
 	}
+	*/
 }
 
 void Tracker::draw(){
-	ofxCv::drawMat(_trackArea, 0, 0);
-	ofxCv::drawMat(_grayImage, _camera->getWidth(), 0);
+	//ofxCv::drawMat(_trackArea, 0, 0);
+	//ofxCv::drawMat(_grayImage, _camera->getWidth(), 0);
+	
+	#ifdef TARGET_RASPBERRY_PI
+	cv::Mat frame = cam.grab();
+	ofxCv::drawMat(frame, 0, 0, cam.width, cam.height);
+	#else
+	cam.draw(0, 0, cam.getWidth(), cam.getHeight());
+	#endif
+	
 	_contourFinder.draw();
 }
 
@@ -108,11 +144,19 @@ ofVec2f Tracker::getPosition(){
 }
 
 int Tracker::getWidth(){
-	return _camera->getWidth();
+	#ifdef TARGET_RASPBERRY_PI
+	return cam.width;
+	#else
+	return cam.getWidth();
+	#endif
 }
 
 int Tracker::getHeight(){
-	return _camera->getHeight();
+	#ifdef TARGET_RASPBERRY_PI
+	return cam.height;
+	#else
+	return cam.getHeight();
+	#endif
 }
 
 } // namespace ytr

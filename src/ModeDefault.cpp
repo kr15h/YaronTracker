@@ -16,7 +16,6 @@ ModeDefault::ModeDefault(){
 }
 
 void ModeDefault::update(){
-	Application::instance()->camera->update();
 	Application::instance()->tracker->update();
 }
 

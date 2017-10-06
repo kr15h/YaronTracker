@@ -17,8 +17,7 @@ Application::Application(){
 	_mode = ModeDefault::instance();
 
 	// Create components
-	camera = CameraFactory::create();
-	tracker = Tracker::create(camera);
+	tracker = Tracker::create();
 	projection = Projection::create();
 	overlay = Overlay::create();
 }
@@ -70,11 +69,13 @@ void Application::setMode(Mode::Name $name){
 }
 
 void Application::saveCameraSnapshot(string filename){
+	/*
 	ofImage snap;
 	ofxCv::toOf(camera->getFrame(), snap);
 	snap.update();
 	snap.save(filename);
 	cout << "Saved image with name " << filename << endl;
+	*/
 }
 
 } // namespace ytr

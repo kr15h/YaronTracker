@@ -5,11 +5,15 @@
 #include "Settings.h"
 #include "ofxCv.h"
 
+#ifdef TARGET_RASPBERRY_PI
+#include "ofxCvPiCam.h"
+#endif
+
 namespace ytr {
 
 class Tracker{
 public:
-	static shared_ptr<Tracker> create(shared_ptr<Camera> $camera);
+	static shared_ptr<Tracker> create();
 	
 	void update();
 	void draw();
@@ -28,10 +32,15 @@ public:
 	// tracking area matches camera dimensions.
 	int getWidth();
 	int getHeight();
+	
+#ifdef TARGET_RASPBERRY_PI
+	ofxCvPiCam cam;
+#else
+	ofVideoGrabber cam;
+#endif
 
 private:
-	Tracker(shared_ptr<Camera> $camera);
-	shared_ptr<Camera> _camera;
+	Tracker();
 	
 	int _width;
 	int _height;

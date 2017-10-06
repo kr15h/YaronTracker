@@ -30,7 +30,6 @@ public:
 	void setMode(Mode::Name $name);
 	void saveCameraSnapshot(string filename);
 	
-	shared_ptr<Camera> camera;
 	shared_ptr<Tracker> tracker;
 	shared_ptr<Projection> projection;
 	shared_ptr<Overlay> overlay;
