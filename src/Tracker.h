@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Camera.h"
 #include "Settings.h"
 #include "ofxCv.h"
 

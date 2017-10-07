@@ -15,8 +15,6 @@
 		0165F14A1F8649EE00BD2516 /* Overlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0165F1481F8649ED00BD2516 /* Overlay.cpp */; };
 		01C6A3EA1F83DE050096C7E4 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C6A3E81F83DE040096C7E4 /* Application.cpp */; };
 		01C6A3F11F83EADE0096C7E4 /* Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C6A3EF1F83EADE0096C7E4 /* Tracker.cpp */; };
-		01E1CA461F8775DB008E6D50 /* CameraFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA421F8775DB008E6D50 /* CameraFactory.cpp */; };
-		01E1CA471F8775DB008E6D50 /* CameraAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA431F8775DB008E6D50 /* CameraAll.cpp */; };
 		01E1CA761F87796F008E6D50 /* Calibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA671F877938008E6D50 /* Calibration.cpp */; };
 		01E1CA771F87796F008E6D50 /* ContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA681F877938008E6D50 /* ContourFinder.cpp */; };
 		01E1CA781F87796F008E6D50 /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA691F877938008E6D50 /* Distance.cpp */; };
@@ -90,16 +88,9 @@
 		0173A3F435DECD5A4DDE0B8E /* logger.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = logger.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/logger.h; sourceTree = SOURCE_ROOT; };
 		01C6A3E81F83DE040096C7E4 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		01C6A3E91F83DE050096C7E4 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
-		01C6A3EC1F83E60C0096C7E4 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		01C6A3EF1F83EADE0096C7E4 /* Tracker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tracker.cpp; sourceTree = "<group>"; };
 		01C6A3F01F83EADE0096C7E4 /* Tracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
 		01DAE5C2E3E0A74207B2BE49 /* saving.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = saving.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/saving.h; sourceTree = SOURCE_ROOT; };
-		01E1CA3F1F8775DB008E6D50 /* CameraFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraFactory.h; sourceTree = "<group>"; };
-		01E1CA401F8775DB008E6D50 /* CameraPi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraPi.cpp; sourceTree = "<group>"; };
-		01E1CA411F8775DB008E6D50 /* CameraPi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPi.h; sourceTree = "<group>"; };
-		01E1CA421F8775DB008E6D50 /* CameraFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraFactory.cpp; sourceTree = "<group>"; };
-		01E1CA431F8775DB008E6D50 /* CameraAll.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraAll.cpp; sourceTree = "<group>"; };
-		01E1CA441F8775DB008E6D50 /* CameraAll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraAll.h; sourceTree = "<group>"; };
 		01E1CA4B1F877938008E6D50 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		01E1CA4D1F877938008E6D50 /* addons.make */ = {isa = PBXFileReference; lastKnownFileType = text; path = addons.make; sourceTree = "<group>"; };
 		01E1CA501F877938008E6D50 /* ETF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETF.h; sourceTree = "<group>"; };
@@ -1129,13 +1120,6 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				01C6A3E81F83DE040096C7E4 /* Application.cpp */,
 				01C6A3E91F83DE050096C7E4 /* Application.h */,
-				01C6A3EC1F83E60C0096C7E4 /* Camera.h */,
-				01E1CA431F8775DB008E6D50 /* CameraAll.cpp */,
-				01E1CA441F8775DB008E6D50 /* CameraAll.h */,
-				01E1CA421F8775DB008E6D50 /* CameraFactory.cpp */,
-				01E1CA3F1F8775DB008E6D50 /* CameraFactory.h */,
-				01E1CA401F8775DB008E6D50 /* CameraPi.cpp */,
-				01E1CA411F8775DB008E6D50 /* CameraPi.h */,
 				01C6A3EF1F83EADE0096C7E4 /* Tracker.cpp */,
 				01C6A3F01F83EADE0096C7E4 /* Tracker.h */,
 				0165F1361F84D7D600BD2516 /* Mode.h */,
@@ -1294,13 +1278,11 @@
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
 				0165F1391F84D8F200BD2516 /* ModeDefault.cpp in Sources */,
-				01E1CA471F8775DB008E6D50 /* CameraAll.cpp in Sources */,
 				01C6A3F11F83EADE0096C7E4 /* Tracker.cpp in Sources */,
 				63020F16C7E8DED980111241 /* ofxCvImage.cpp in Sources */,
 				01C6A3EA1F83DE050096C7E4 /* Application.cpp in Sources */,
 				0165F1441F854C9900BD2516 /* Settings.cpp in Sources */,
 				D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */,
-				01E1CA461F8775DB008E6D50 /* CameraFactory.cpp in Sources */,
 				0165F14A1F8649EE00BD2516 /* Overlay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
