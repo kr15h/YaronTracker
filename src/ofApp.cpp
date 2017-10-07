@@ -3,6 +3,9 @@
 void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofSetEscapeQuitsApp(false);
+	#ifdef TARGET_RASPBERRY_PI
+		ofSetFullscreen(true);
+	#endif
 }
 
 void ofApp::update(){
