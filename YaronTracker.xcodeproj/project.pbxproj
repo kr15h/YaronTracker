@@ -30,6 +30,7 @@
 		01E1CA801F87796F008E6D50 /* Wrappers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA711F877938008E6D50 /* Wrappers.cpp */; };
 		01E1CA811F87797A008E6D50 /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA741F877958008E6D50 /* ETF.cpp */; };
 		01E1CA821F87797A008E6D50 /* fdog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CA751F877958008E6D50 /* fdog.cpp */; };
+		01E1CB431F891CA8008E6D50 /* ofxHomographyHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E1CB411F891CA8008E6D50 /* ofxHomographyHelper.cpp */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
 		1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C76DE5C29BDBD2CAA1DD0021 /* ofxCvContourFinder.cpp */; };
 		250A95BA26587BE85DB0A353 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9C7160245B19131DAE6128 /* ofxCvColorImage.cpp */; };
@@ -212,6 +213,8 @@
 		01E1CB391F879E57008E6D50 /* vchiq_test_if.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq_test_if.h; sourceTree = "<group>"; };
 		01E1CB3A1F879E57008E6D50 /* vchiq_util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vchiq_util.c; sourceTree = "<group>"; };
 		01E1CB3B1F879E57008E6D50 /* vchiq_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vchiq_util.h; sourceTree = "<group>"; };
+		01E1CB411F891CA8008E6D50 /* ofxHomographyHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxHomographyHelper.cpp; sourceTree = "<group>"; };
+		01E1CB421F891CA8008E6D50 /* ofxHomographyHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxHomographyHelper.h; sourceTree = "<group>"; };
 		0339099A1F7B84040D88AD3C /* warp_shuffle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = warp_shuffle.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/gpu/device/warp_shuffle.hpp; sourceTree = SOURCE_ROOT; };
 		057122A817D12571F8C0C7A4 /* ofxCvGrayscaleImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxCvGrayscaleImage.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvGrayscaleImage.cpp; sourceTree = SOURCE_ROOT; };
 		057D8E7580EA21E2254ADDDA /* camera.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = camera.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/stitching/detail/camera.hpp; sourceTree = SOURCE_ROOT; };
@@ -1119,6 +1122,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				01E1CB411F891CA8008E6D50 /* ofxHomographyHelper.cpp */,
+				01E1CB421F891CA8008E6D50 /* ofxHomographyHelper.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
@@ -1276,6 +1281,7 @@
 				01E1CA7D1F87796F008E6D50 /* RunningBackground.cpp in Sources */,
 				01E1CA7E1F87796F008E6D50 /* Tracker.cpp in Sources */,
 				01E1CA7F1F87796F008E6D50 /* Utilities.cpp in Sources */,
+				01E1CB431F891CA8008E6D50 /* ofxHomographyHelper.cpp in Sources */,
 				01E1CA801F87796F008E6D50 /* Wrappers.cpp in Sources */,
 				0165F13C1F84D8FA00BD2516 /* ModeCalibrate.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,

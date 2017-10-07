@@ -59,59 +59,77 @@ Tracker::Tracker(){
 
 void Tracker::update(){
 
-#ifndef TARGET_RASPBERRY_PI
-		cam.update();
-#endif
+	#ifndef TARGET_RASPBERRY_PI
+	cam.update();
+	#endif
 
 	if(cam.isFrameNew()){
 		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
 		
-#ifdef TARGET_RASPBERRY_PI
+		#ifdef TARGET_RASPBERRY_PI
+		
 		if(cam.grab().empty()){
 			return;
 		}
+		
 		cv::Mat frame = cam.grab();
 		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
-		_contourFinder.findContours(_warpedMat);
-#else
+		_contourFinder.findContours(cam.grab());
+		
+		#else
+		
 		cv::Mat frame;
 		ofxCv::copyGray(cam.getPixels(), frame);
 		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
-		_contourFinder.findContours(_warpedMat);
-#endif
+		_contourFinder.findContours(frame);
 
+		#endif
+		
+		vector<ofVec2f> srcPts;
+		for(auto i = 0; i < _areaSrcPoints.size(); ++i){
+			srcPts.push_back(ofVec2f(_areaSrcPoints[i].x, _areaSrcPoints[i].y));
+		}
+		vector<ofVec2f> dstPts;
+		for(auto i = 0; i < _areaDstPoints.size(); ++i){
+			dstPts.push_back(ofVec2f(_areaDstPoints[i].x, _areaDstPoints[i].y));
+		}
+		
 		if(_contourFinder.size()){
-			_position.x = _contourFinder.getCenter(0).x;
-			_position.y = _contourFinder.getCenter(0).y;
+			
+			// Use ofxHomographyHelper to map the point
+			// from camera to warped image dimensions.
+			float src[4][2];
+			float dst[4][2];
+
+			src[0][0] = _areaSrcPoints[0].x;
+			src[0][1] = _areaSrcPoints[0].y;
+			src[1][0] = _areaSrcPoints[1].x;
+			src[1][1] = _areaSrcPoints[1].y;
+			src[2][0] = _areaSrcPoints[2].x;
+			src[2][1] = _areaSrcPoints[2].y;
+			src[3][0] = _areaSrcPoints[3].x;
+			src[3][1] = _areaSrcPoints[3].y;
+			
+			dst[0][0] = _areaDstPoints[0].x;
+			dst[0][1] = _areaDstPoints[0].y;
+			dst[1][0] = _areaDstPoints[1].x;
+			dst[1][1] = _areaDstPoints[1].y;
+			dst[2][0] = _areaDstPoints[2].x;
+			dst[2][1] = _areaDstPoints[2].y;
+			dst[3][0] = _areaDstPoints[3].x;
+			dst[3][1] = _areaDstPoints[3].y;
+			
+			ofMatrix4x4 hom = ofxHomographyHelper::findHomography(src, dst);
+			
+			ofVec3f srcPos;
+			srcPos.x = _contourFinder.getCenter(0).x;
+			srcPos.y = _contourFinder.getCenter(0).y;
+			ofVec3f dstPos = hom * srcPos;
+			
+			_position.x = dstPos.x;
+			_position.y = dstPos.y;
 		}
 	}
-
-	/*
-	if(_camera->isFrameNew()){
-		
-		// Find homography for perspective transformation below.
-		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
-
-		// Convert the incoming image to grayscale as fast as possible.
-		//ofxCv::copyGray(_camera->getPixels(), _grayImage);
-		
-		_grayImage = _camera->getFrame();
-		if(_grayImage.empty()){
-			return;
-		}
-		cout << "cv::Mat not empty" << endl;
-		
-		// Crop the area of interest from the grayscale camera image
-		// and put it into the _trackArea variable.
-		ofxCv::warpPerspective(_grayImage, _trackArea, homography, CV_INTER_LINEAR);
-		
-		// Find the contours based on settings above.
-		_contourFinder.findContours(_trackArea);
-		
-		// If at least one contour found, take it and set the position values from it.
-		
-	}
-	*/
 }
 
 void Tracker::draw(){

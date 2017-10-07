@@ -9,6 +9,8 @@
 #include "ofxCvPiCam.h"
 #endif
 
+#include "ofxHomographyHelper.h"
+
 namespace ytr {
 
 class Tracker{
