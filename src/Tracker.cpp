@@ -45,11 +45,14 @@ Tracker::Tracker(){
 	_areaDstPoints[3].x = 0;
 	_areaDstPoints[3].y = ofGetHeight();
 	
+	_minAreaRadius = ofToFloat(Settings::instance()->xml.getValue("contourFinder/minAreaRadius"));
+	_maxAreaRadius = ofToFloat(Settings::instance()->xml.getValue("contourFinder/maxAreaRadius"));
+	
 	// Set contour finder settings
 	// TODO: Set threshold from settings and allow realtime adjustment.
 	_contourFinder.setThreshold(225);
-	_contourFinder.setMinAreaRadius(10);
-	_contourFinder.setMaxAreaRadius(100);
+	_contourFinder.setMinAreaRadius(_minAreaRadius);
+	_contourFinder.setMaxAreaRadius(_maxAreaRadius);
 	_contourFinder.setSortBySize(true);
 }
 
@@ -138,6 +141,14 @@ void Tracker::draw(){
 	line.draw();
 	ofSetColor(0, 255, 255);
 	ofDrawCircle(_srcPosition.x, _srcPosition.y, 10);
+	ofPopStyle();
+	
+	// Draw the min and max size for contour finder
+	ofPushStyle();
+	ofNoFill();
+	ofSetColor(0, 255, 255);
+	ofDrawCircle(ofGetWidth() - _maxAreaRadius - 10, _maxAreaRadius + 10, _minAreaRadius);
+	ofDrawCircle(ofGetWidth() - _maxAreaRadius - 10, _maxAreaRadius + 10, _maxAreaRadius);
 	ofPopStyle();
 }
 

@@ -43,6 +43,9 @@ private:
 	int _width;
 	int _height;
 	
+	float _minAreaRadius;
+	float _maxAreaRadius;
+	
 	ofxCv::ContourFinder _contourFinder;
 	
 	ofVec2f _srcPosition;

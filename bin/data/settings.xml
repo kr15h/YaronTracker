@@ -1,24 +1,28 @@
 <settings>
 	<projection>
 		<tl>
-			<x>101</x>
-			<y>85</y>
+			<x>125</x>
+			<y>92</y>
 		</tl>
 		<tr>
-			<x>568</x>
-			<y>236</y>
+			<x>447</x>
+			<y>58</y>
 		</tr>
 		<br>
-			<x>460</x>
-			<y>430</y>
+			<x>494</x>
+			<y>317</y>
 		</br>
 		<bl>
-			<x>71</x>
-			<y>387</y>
+			<x>79</x>
+			<y>315</y>
 		</bl>
 	</projection>
 	<camera>
 		<width>640</width>
 		<height>480</height>
 	</camera>
+	<contourFinder>
+		<minAreaRadius>10</minAreaRadius>
+		<maxAreaRadius>50</maxAreaRadius>
+	</contourFinder>
 </settings>
