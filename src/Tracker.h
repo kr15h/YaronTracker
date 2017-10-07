@@ -45,13 +45,14 @@ private:
 	
 	ofxCv::ContourFinder _contourFinder;
 	
+	ofVec2f _srcPosition;
 	ofVec2f _position;
 	
 	// These define which area should be taken from the incoming
 	// camera image (_areaSrcPoints) and to what shape it should be
 	// warped (_areaDstPoints).
-	vector<cv::Point2f> _areaSrcPoints;
-	vector<cv::Point2f> _areaDstPoints;
+	vector<ofPoint> _areaSrcPoints;
+	vector<ofPoint> _areaDstPoints;
 };
 
 } // namespace ytr

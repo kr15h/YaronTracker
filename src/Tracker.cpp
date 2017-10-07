@@ -110,6 +110,9 @@ void Tracker::update(){
 			srcPos.y = _contourFinder.getCenter(0).y;
 			ofVec3f dstPos = homography * srcPos;
 			
+			_srcPosition.x = srcPos.x;
+			_srcPosition.y = srcPos.y;
+			
 			_position.x = dstPos.x;
 			_position.y = dstPos.y;
 		}
@@ -125,16 +128,21 @@ void Tracker::draw(){
 	#endif
 	
 	_contourFinder.draw();
+	
+	// Draw the quad where tracking action happens
+	ofPushStyle();
+	ofSetColor(255, 255, 0);
+	ofPolyline line;
+	line.addVertices(_areaSrcPoints);
+	line.setClosed(true);
+	line.draw();
+	ofSetColor(0, 255, 255);
+	ofDrawCircle(_srcPosition.x, _srcPosition.y, 10);
+	ofPopStyle();
 }
 
 void Tracker::setTrackArea(vector<ofPoint> & $corners){
-	_areaSrcPoints.clear();
-	_areaSrcPoints.resize($corners.size());
-	
-	for(auto i = 0; i < _areaSrcPoints.size(); ++i){
-		_areaSrcPoints[i].x = $corners[i].x;
-		_areaSrcPoints[i].y = $corners[i].y;
-	}
+	_areaSrcPoints = $corners;
 	
 	Settings::instance()->xml.setValue("projection/tl/x", ofToString(_areaSrcPoints[0].x, 0));
 	Settings::instance()->xml.setValue("projection/tl/y", ofToString(_areaSrcPoints[0].y, 0));
