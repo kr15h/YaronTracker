@@ -2,6 +2,10 @@
 #include "ofApp.h"
 
 int main(){
-	ofSetupOpenGL(1280, 640, OF_WINDOW);
+	#ifdef TARGET_RASPBERY_PI
+		ofSetupOpenGL(1280, 640, OF_FULLSCREEN);
+	#else
+		ofSetupOpenGL(1280, 640, OF_WINDOW);
+	#endif
 	ofRunApp(new ofApp);
 }
