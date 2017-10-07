@@ -9,24 +9,19 @@ shared_ptr<Tracker> Tracker::create(){
 Tracker::Tracker(){
 	int w = ofToInt(Settings::instance()->xml.getValue("camera/width"));
 	int h = ofToInt(Settings::instance()->xml.getValue("camera/height"));
-	
-	int warpWidth = ofToInt(Settings::instance()->xml.getValue("warped/width"));
-	int warpHeight = ofToInt(Settings::instance()->xml.getValue("warped/height"));
-	_warped.allocate(warpWidth, warpHeight, OF_IMAGE_GRAYSCALE);
-	_warpedMat = ofxCv::toCv(_warped);
-	
+
 	cout << "camera width: " << w << endl;
 	cout << "camera height: " << h << endl;
 	
-#ifdef TARGET_RASPBERRY_PI
-	cam.setup(w, h, false);
-#else
-	// TODO: Get device id from settings
-	cam.setDeviceID(0);
-    cam.setDesiredFrameRate(60);
-	cam.setPixelFormat(OF_PIXELS_RGB);
-    cam.initGrabber(w, h);
-#endif
+	#ifdef TARGET_RASPBERRY_PI
+		cam.setup(w, h, false);
+	#else
+		// TODO: Get device id from settings
+		cam.setDeviceID(0);
+		cam.setDesiredFrameRate(60);
+		cam.setPixelFormat(OF_PIXELS_RGB);
+		cam.initGrabber(w, h);
+	#endif
 
 	// Set the corners for cropping the tracking area.
 	_areaSrcPoints.resize(4);
@@ -39,18 +34,19 @@ Tracker::Tracker(){
 	_areaSrcPoints[3].x = ofToFloat(Settings::instance()->xml.getValue("projection/bl/x"));
 	_areaSrcPoints[3].y = ofToFloat(Settings::instance()->xml.getValue("projection/bl/y"));
 	
-	// The destination is always going to be the size of the tracking area.
+	// We use the window size as the destination rectangle.
 	_areaDstPoints.resize(4);
 	_areaDstPoints[0].x = 0;
 	_areaDstPoints[0].y = 0;
-	_areaDstPoints[1].x = warpWidth;
+	_areaDstPoints[1].x = ofGetWidth();
 	_areaDstPoints[1].y = 0;
-	_areaDstPoints[2].x = warpWidth;
-	_areaDstPoints[2].y = warpHeight;
+	_areaDstPoints[2].x = ofGetWidth();
+	_areaDstPoints[2].y = ofGetHeight();
 	_areaDstPoints[3].x = 0;
-	_areaDstPoints[3].y = warpHeight;
+	_areaDstPoints[3].y = ofGetHeight();
 	
 	// Set contour finder settings
+	// TODO: Set threshold from settings and allow realtime adjustment.
 	_contourFinder.setThreshold(225);
 	_contourFinder.setMinAreaRadius(10);
 	_contourFinder.setMaxAreaRadius(100);
@@ -60,39 +56,27 @@ Tracker::Tracker(){
 void Tracker::update(){
 
 	#ifndef TARGET_RASPBERRY_PI
-	cam.update();
+		cam.update();
 	#endif
 
 	if(cam.isFrameNew()){
-		cv::Mat homography = cv::findHomography(cv::Mat(_areaSrcPoints), cv::Mat(_areaDstPoints));
 		
 		#ifdef TARGET_RASPBERRY_PI
+
+			if(cam.grab().empty()){
+				return;
+			}
 		
-		if(cam.grab().empty()){
-			return;
-		}
-		
-		cv::Mat frame = cam.grab();
-		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
-		_contourFinder.findContours(cam.grab());
+			cv::Mat frame = cam.grab();
+			_contourFinder.findContours(cam.grab());
 		
 		#else
 		
-		cv::Mat frame;
-		ofxCv::copyGray(cam.getPixels(), frame);
-		ofxCv::warpPerspective(frame, _warpedMat, homography, CV_INTER_LINEAR);
-		_contourFinder.findContours(frame);
+			cv::Mat frame;
+			ofxCv::copyGray(cam.getPixels(), frame);
+			_contourFinder.findContours(frame);
 
 		#endif
-		
-		vector<ofVec2f> srcPts;
-		for(auto i = 0; i < _areaSrcPoints.size(); ++i){
-			srcPts.push_back(ofVec2f(_areaSrcPoints[i].x, _areaSrcPoints[i].y));
-		}
-		vector<ofVec2f> dstPts;
-		for(auto i = 0; i < _areaDstPoints.size(); ++i){
-			dstPts.push_back(ofVec2f(_areaDstPoints[i].x, _areaDstPoints[i].y));
-		}
 		
 		if(_contourFinder.size()){
 			
@@ -119,12 +103,12 @@ void Tracker::update(){
 			dst[3][0] = _areaDstPoints[3].x;
 			dst[3][1] = _areaDstPoints[3].y;
 			
-			ofMatrix4x4 hom = ofxHomographyHelper::findHomography(src, dst);
+			ofMatrix4x4 homography = ofxHomographyHelper::findHomography(src, dst);
 			
 			ofVec3f srcPos;
 			srcPos.x = _contourFinder.getCenter(0).x;
 			srcPos.y = _contourFinder.getCenter(0).y;
-			ofVec3f dstPos = hom * srcPos;
+			ofVec3f dstPos = homography * srcPos;
 			
 			_position.x = dstPos.x;
 			_position.y = dstPos.y;
@@ -133,31 +117,20 @@ void Tracker::update(){
 }
 
 void Tracker::draw(){
-	drawWarp();
-	drawCam(ofxCv::getWidth(_warpedMat), 0);
+	#ifdef TARGET_RASPBERRY_PI
+		cv::Mat frame = cam.grab();
+		ofxCv::drawMat(frame, 0, 0, cam.width, cam.height);
+	#else
+		cam.draw(0, 0, cam.getWidth(), cam.getHeight());
+	#endif
+	
 	_contourFinder.draw();
-}
-
-void Tracker::drawCam(int x, int y){
-	#ifdef TARGET_RASPBERRY_PI
-	cv::Mat frame = cam.grab();
-	ofxCv::drawMat(frame, x, y, cam.width, cam.height);
-	#else
-	cam.draw(x, y, cam.getWidth(), cam.getHeight());
-	#endif
-}
-
-void Tracker::drawWarp(int x, int y){
-	#ifdef TARGET_RASPBERRY_PI
-	ofxCv::drawMat(_warpedMat, x, y, cam.width, cam.height);
-	#else
-	ofxCv::drawMat(_warpedMat, x, y, _warped.getWidth(), _warped.getHeight());
-	#endif
 }
 
 void Tracker::setTrackArea(vector<ofPoint> & $corners){
 	_areaSrcPoints.clear();
 	_areaSrcPoints.resize($corners.size());
+	
 	for(auto i = 0; i < _areaSrcPoints.size(); ++i){
 		_areaSrcPoints[i].x = $corners[i].x;
 		_areaSrcPoints[i].y = $corners[i].y;
@@ -179,17 +152,17 @@ ofVec2f Tracker::getPosition(){
 
 int Tracker::getWidth(){
 	#ifdef TARGET_RASPBERRY_PI
-	return cam.width;
+		return cam.width;
 	#else
-	return cam.getWidth();
+		return cam.getWidth();
 	#endif
 }
 
 int Tracker::getHeight(){
 	#ifdef TARGET_RASPBERRY_PI
-	return cam.height;
+		return cam.height;
 	#else
-	return cam.getHeight();
+		return cam.getHeight();
 	#endif
 }
 

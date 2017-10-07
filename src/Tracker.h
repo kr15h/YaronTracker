@@ -18,17 +18,12 @@ public:
 	
 	void update();
 	void draw();
-	void drawCam(int x = 0, int y = 0);
-	void drawWarp(int x = 0, int y = 0);
 	
 	// We need 4 points to create a quad to cut an
 	// area of interest from each incoming camera frame.
 	void setTrackArea(vector<ofPoint> & $corners);
 	
-	// The position returned is the location of the tracked
-	// object. This position is in pixels. If the image is 800px wide,
-	// the position is going to be between 0 and 800. Use getWidth()
-	// and getHeight() to normalize it.
+	// The position is already mapped to the application window rect.
 	ofVec2f getPosition();
 	
 	// These return the width and height of the tracking area. The
@@ -47,9 +42,6 @@ private:
 	
 	int _width;
 	int _height;
-	
-	ofImage _warped;
-	cv::Mat _warpedMat;
 	
 	ofxCv::ContourFinder _contourFinder;
 	

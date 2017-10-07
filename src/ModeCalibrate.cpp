@@ -25,7 +25,7 @@ void ModeCalibrate::draw(){
 	Application::instance()->projection->draw();
 
 	// Draw the camera so we can see the projection from that perspective
-	Application::instance()->tracker->drawCam();
+	Application::instance()->tracker->draw();
 	
 	// Draw overlay so we can see where the corners are
 	Application::instance()->overlay->draw();

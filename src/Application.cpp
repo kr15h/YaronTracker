@@ -30,13 +30,12 @@ void Application::draw(){
 	_mode->draw();
 	
 	ofVec2f pos = tracker->getPosition();
-	ofVec2f posNorm = pos / ofVec2f(tracker->getWidth(), tracker->getHeight());
 	
 	// Draw position
 	ofPushStyle();
 	ofSetColor(0, 255, 255);
-	ofDrawLine(0, posNorm.y * ofGetHeight(), ofGetWidth(), posNorm.y * ofGetHeight());
-	ofDrawLine(posNorm.x * ofGetWidth(), 0, posNorm.x * ofGetWidth(), ofGetHeight());
+	ofDrawLine(0, pos.y, ofGetWidth(), pos.y);
+	ofDrawLine(pos.x, 0, pos.x, ofGetHeight());
 	ofPopStyle();
 	
 	// Draw debug data

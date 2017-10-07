@@ -1,24 +1,24 @@
 <settings>
 	<projection>
 		<tl>
-			<x>42</x>
-			<y>98</y>
+			<x>195</x>
+			<y>132</y>
 		</tl>
 		<tr>
-			<x>615</x>
-			<y>135</y>
+			<x>564</x>
+			<y>81</y>
 		</tr>
 		<br>
-			<x>403</x>
-			<y>380</y>
+			<x>565</x>
+			<y>346</y>
 		</br>
 		<bl>
-			<x>158</x>
-			<y>378</y>
+			<x>202</x>
+			<y>296</y>
 		</bl>
 	</projection>
 	<camera>
-		<width>800</width>
-		<height>600</height>
+		<width>640</width>
+		<height>480</height>
 	</camera>
 </settings>
