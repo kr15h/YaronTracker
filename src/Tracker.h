@@ -17,6 +17,8 @@ public:
 	
 	void update();
 	void draw();
+	void drawCam(int x = 0, int y = 0);
+	void drawWarp(int x = 0, int y = 0);
 	
 	// We need 4 points to create a quad to cut an
 	// area of interest from each incoming camera frame.

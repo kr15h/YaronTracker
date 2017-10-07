@@ -115,19 +115,26 @@ void Tracker::update(){
 }
 
 void Tracker::draw(){
-	//ofxCv::drawMat(_trackArea, 0, 0);
-	//ofxCv::drawMat(_grayImage, _camera->getWidth(), 0);
-	
-	#ifdef TARGET_RASPBERRY_PI
-	ofxCv::drawMat(_warpedMat, 0, 0, cam.width, cam.height);
-	cv::Mat frame = cam.grab();
-	ofxCv::drawMat(frame, ofxCv::getWidth(_warpedMat), 0, cam.width, cam.height);
-	#else
-	ofxCv::drawMat(_warpedMat, 0, 0, _warped.getWidth(), _warped.getHeight());
-	cam.draw(_warped.getWidth(), 0, cam.getWidth(), cam.getHeight());
-	#endif
-	
+	drawWarp();
+	drawCam(ofxCv::getWidth(_warpedMat), 0);
 	_contourFinder.draw();
+}
+
+void Tracker::drawCam(int x, int y){
+	#ifdef TARGET_RASPBERRY_PI
+	cv::Mat frame = cam.grab();
+	ofxCv::drawMat(frame, x, y, cam.width, cam.height);
+	#else
+	cam.draw(x, y, cam.getWidth(), cam.getHeight());
+	#endif
+}
+
+void Tracker::drawWarp(int x, int y){
+	#ifdef TARGET_RASPBERRY_PI
+	ofxCv::drawMat(_warpedMat, x, y, cam.width, cam.height);
+	#else
+	ofxCv::drawMat(_warpedMat, x, y, _warped.getWidth(), _warped.getHeight());
+	#endif
 }
 
 void Tracker::setTrackArea(vector<ofPoint> & $corners){
