@@ -21,8 +21,10 @@ void ModeDefault::update(){
 }
 
 void ModeDefault::draw(){
-	Application::instance()->tracker->draw();
-	Application::instance()->projection->draw();
+	if(Settings::instance()->debug){
+		Application::instance()->tracker->draw();
+		Application::instance()->projection->draw();
+	}
 	Application::instance()->brush->draw();
 }
 

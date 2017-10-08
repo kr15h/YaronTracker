@@ -22,6 +22,7 @@ public:
 	// We need 4 points to create a quad to cut an
 	// area of interest from each incoming camera frame.
 	void setTrackArea(vector<ofPoint> & $corners);
+	void setDestArea();
 	
 	// The position is already mapped to the application window rect.
 	ofVec2f getPosition();

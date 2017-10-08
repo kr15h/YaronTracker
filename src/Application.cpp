@@ -48,6 +48,14 @@ void Application::keyPressed(int key){
 	if(ofGetKeyPressed(OF_KEY_COMMAND) && key == 'p'){
 		saveCameraSnapshot("test.jpg");
 	}
+	
+	if(key == 'd'){
+		Settings::instance()->debug = !Settings::instance()->debug;
+	}
+	
+	if(key == 'f'){
+		ofToggleFullscreen();
+	}
 }
 
 void Application::mousePressed(int x, int y, int button){

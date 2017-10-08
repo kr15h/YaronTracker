@@ -34,16 +34,7 @@ Tracker::Tracker(){
 	_areaSrcPoints[3].x = ofToFloat(Settings::instance()->xml.getValue("projection/bl/x"));
 	_areaSrcPoints[3].y = ofToFloat(Settings::instance()->xml.getValue("projection/bl/y"));
 	
-	// We use the window size as the destination rectangle.
-	_areaDstPoints.resize(4);
-	_areaDstPoints[0].x = 0;
-	_areaDstPoints[0].y = 0;
-	_areaDstPoints[1].x = ofGetWidth();
-	_areaDstPoints[1].y = 0;
-	_areaDstPoints[2].x = ofGetWidth();
-	_areaDstPoints[2].y = ofGetHeight();
-	_areaDstPoints[3].x = 0;
-	_areaDstPoints[3].y = ofGetHeight();
+	setDestArea();
 	
 	_minAreaRadius = ofToFloat(Settings::instance()->xml.getValue("contourFinder/minAreaRadius"));
 	_maxAreaRadius = ofToFloat(Settings::instance()->xml.getValue("contourFinder/maxAreaRadius"));
@@ -80,6 +71,9 @@ void Tracker::update(){
 			_contourFinder.findContours(frame);
 
 		#endif
+		
+		// We do this in case the window size changed during app runtime operation.
+		setDestArea();
 		
 		if(_contourFinder.size()){
 			
@@ -163,6 +157,20 @@ void Tracker::setTrackArea(vector<ofPoint> & $corners){
 	Settings::instance()->xml.setValue("projection/br/y", ofToString(_areaSrcPoints[2].y, 0));
 	Settings::instance()->xml.setValue("projection/bl/x", ofToString(_areaSrcPoints[3].x, 0));
 	Settings::instance()->xml.setValue("projection/bl/y", ofToString(_areaSrcPoints[3].y, 0));
+}
+
+void Tracker::setDestArea(){
+
+	// We use the window size as the destination rectangle.
+	_areaDstPoints.resize(4);
+	_areaDstPoints[0].x = 0;
+	_areaDstPoints[0].y = 0;
+	_areaDstPoints[1].x = ofGetWidth();
+	_areaDstPoints[1].y = 0;
+	_areaDstPoints[2].x = ofGetWidth();
+	_areaDstPoints[2].y = ofGetHeight();
+	_areaDstPoints[3].x = 0;
+	_areaDstPoints[3].y = ofGetHeight();
 }
 
 ofVec2f Tracker::getPosition(){

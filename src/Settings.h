@@ -10,6 +10,8 @@ public:
 	bool save();
 	ofXml xml;
 	
+	bool debug;
+	
 private:
 	static shared_ptr<Settings> _instance;
 	Settings();
