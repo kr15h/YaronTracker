@@ -20,23 +20,19 @@ Application::Application(){
 	tracker = Tracker::create();
 	projection = Projection::create();
 	overlay = Overlay::create();
+	brush = Brush::create();
 }
 
 void Application::update(){
+	brush->setPosition(
+	   ofInterpolateCosine(
+		   brush->getPosition(),
+		   tracker->getPosition(), 0.5f));
 	_mode->update();
 }
 
 void Application::draw(){
 	_mode->draw();
-	
-	ofVec2f pos = tracker->getPosition();
-	
-	// Draw position
-	ofPushStyle();
-	ofSetColor(0, 255, 255);
-	ofDrawLine(0, pos.y, ofGetWidth(), pos.y);
-	ofDrawLine(pos.x, 0, pos.x, ofGetHeight());
-	ofPopStyle();
 	
 	// Draw debug data
 	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2), 10, 20);

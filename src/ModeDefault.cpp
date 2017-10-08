@@ -17,12 +17,13 @@ ModeDefault::ModeDefault(){
 
 void ModeDefault::update(){
 	Application::instance()->tracker->update();
+	Application::instance()->brush->update();
 }
 
 void ModeDefault::draw(){
 	Application::instance()->tracker->draw();
 	Application::instance()->projection->draw();
-	ofDrawBitmapString("Default mode", 10, 40);
+	Application::instance()->brush->draw();
 }
 
 void ModeDefault::keyPressed(int key){

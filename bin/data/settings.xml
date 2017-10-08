@@ -23,6 +23,6 @@
 	</camera>
 	<contourFinder>
 		<minAreaRadius>10</minAreaRadius>
-		<maxAreaRadius>50</maxAreaRadius>
+		<maxAreaRadius>100</maxAreaRadius>
 	</contourFinder>
 </settings>

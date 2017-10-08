@@ -9,6 +9,7 @@
 #include "Tracker.h"
 #include "Projection.h"
 #include "Overlay.h"
+#include "Brush.h"
 
 #include "Settings.h"
 
@@ -31,6 +32,7 @@ public:
 	shared_ptr<Tracker> tracker;
 	shared_ptr<Projection> projection;
 	shared_ptr<Overlay> overlay;
+	shared_ptr<Brush> brush;
 
 private:
 	static shared_ptr<Application> _instance;
