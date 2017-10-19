@@ -16,6 +16,11 @@ Application::Application(){
 	// Set default mode
 	_mode = ModeDefault::instance();
 
+	// Setup slider, it is important to load the params before we create components
+	_gui.setup("params");
+	_gui.add(Settings::instance()->threshold.set( "threshold", 240, 0, 255 ));
+	_gui.loadFromFile("params.xml");
+
 	// Create components
 	tracker = Tracker::create();
 	projection = Projection::create();
@@ -36,10 +41,13 @@ void Application::draw(){
 	
 	// Draw debug data
 	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2), 10, 20);
+	
+	_gui.draw();
 }
 
 void Application::exit(){
 	Settings::instance()->save();
+	_gui.saveToFile("params.xml");
 }
 
 void Application::keyPressed(int key){

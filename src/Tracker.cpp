@@ -41,13 +41,16 @@ Tracker::Tracker(){
 	
 	// Set contour finder settings
 	// TODO: Set threshold from settings and allow realtime adjustment.
-	_contourFinder.setThreshold(225);
+	_contourFinder.setThreshold(Settings::instance()->threshold);
 	_contourFinder.setMinAreaRadius(_minAreaRadius);
 	_contourFinder.setMaxAreaRadius(_maxAreaRadius);
 	_contourFinder.setSortBySize(true);
 }
 
 void Tracker::update(){
+
+	// Update the threshold of the contour tracker on every frame
+	_contourFinder.setThreshold(Settings::instance()->threshold);
 
 	#ifndef TARGET_RASPBERRY_PI
 		cam.update();

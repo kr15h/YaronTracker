@@ -12,6 +12,8 @@ public:
 	
 	bool debug;
 	
+	ofParameter<float> threshold;
+	
 private:
 	static shared_ptr<Settings> _instance;
 	Settings();

@@ -55,7 +55,7 @@ void Overlay::draw(){
 	ofSetColor(255);
 	ofNoFill();
 	ofSetLineWidth(4);
-	ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+	ofDrawRectangle(4, 4, ofGetWidth()-8, ofGetHeight()-8);
 	ofPopStyle();
 }
 

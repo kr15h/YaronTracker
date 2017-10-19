@@ -13,6 +13,8 @@
 
 #include "Settings.h"
 
+#include "ofxGui.h"
+
 namespace ytr{
 
 class Application{
@@ -39,6 +41,8 @@ private:
 	Application();
 	
 	shared_ptr<Mode> _mode;
+	
+	ofxPanel _gui;
 
 };
 
