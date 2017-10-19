@@ -19,6 +19,7 @@ Application::Application(){
 	// Setup slider, it is important to load the params before we create components
 	_gui.setup("params");
 	_gui.add(Settings::instance()->threshold.set("threshold", 240, 0, 255 ));
+	_gui.add(Settings::instance()->minAreaRadius.set("minAreaRadius", 10, 0, 100));
 	_gui.add(Settings::instance()->maxAreaRadius.set("maxAreaRadius", 10, 0, 100));
 	_gui.loadFromFile("params.xml");
 

@@ -13,6 +13,7 @@ public:
 	bool debug;
 	
 	ofParameter<float> threshold;
+	ofParameter<float> minAreaRadius;
 	ofParameter<float> maxAreaRadius;
 	
 private:

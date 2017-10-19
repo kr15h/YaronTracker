@@ -57,7 +57,7 @@ Tracker::Tracker(){
 	// Set contour finder settings
 	// TODO: Set threshold from settings and allow realtime adjustment.
 	_contourFinder.setThreshold(Settings::instance()->threshold);
-	_contourFinder.setMinAreaRadius(_minAreaRadius);
+	_contourFinder.setMinAreaRadius(Settings::instance()->minAreaRadius);
 	_contourFinder.setMaxAreaRadius(Settings::instance()->maxAreaRadius);
 	_contourFinder.setSortBySize(true);
 }
@@ -66,6 +66,7 @@ void Tracker::update(){
 
 	// Update the threshold of the contour tracker on every frame
 	_contourFinder.setThreshold(Settings::instance()->threshold);
+	_contourFinder.setMinAreaRadius(Settings::instance()->minAreaRadius);
 	_contourFinder.setMaxAreaRadius(Settings::instance()->maxAreaRadius);
 
 	#ifndef TARGET_RASPBERRY_PI
@@ -159,8 +160,9 @@ void Tracker::draw(){
 	// Draw the min and max size for contour finder
 	ofPushStyle();
 	ofNoFill();
+	ofSetColor(255, 0, 0);
+	ofDrawCircle(ofGetWidth() - Settings::instance()->maxAreaRadius - 10, Settings::instance()->maxAreaRadius + 10, Settings::instance()->minAreaRadius);
 	ofSetColor(0, 255, 255);
-	ofDrawCircle(ofGetWidth() - _maxAreaRadius - 10, _maxAreaRadius + 10, _minAreaRadius);
 	ofDrawCircle(ofGetWidth() - Settings::instance()->maxAreaRadius - 10, Settings::instance()->maxAreaRadius + 10, Settings::instance()->maxAreaRadius);
 	ofPopStyle();
 }

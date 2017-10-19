@@ -1,5 +1,6 @@
 <group>
 	<threshold>240.975</threshold>
 <group/>
-<maxAreaRadius>47.5</maxAreaRadius>
+<maxAreaRadius>62</maxAreaRadius>
+<minAreaRadius>14</minAreaRadius>
 </group>
