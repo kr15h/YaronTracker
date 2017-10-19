@@ -13,6 +13,7 @@ public:
 	bool debug;
 	
 	ofParameter<float> threshold;
+	ofParameter<float> maxAreaRadius;
 	
 private:
 	static shared_ptr<Settings> _instance;

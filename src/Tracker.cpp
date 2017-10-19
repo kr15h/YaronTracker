@@ -43,7 +43,7 @@ Tracker::Tracker(){
 	// TODO: Set threshold from settings and allow realtime adjustment.
 	_contourFinder.setThreshold(Settings::instance()->threshold);
 	_contourFinder.setMinAreaRadius(_minAreaRadius);
-	_contourFinder.setMaxAreaRadius(_maxAreaRadius);
+	_contourFinder.setMaxAreaRadius(Settings::instance()->maxAreaRadius);
 	_contourFinder.setSortBySize(true);
 }
 
@@ -51,6 +51,7 @@ void Tracker::update(){
 
 	// Update the threshold of the contour tracker on every frame
 	_contourFinder.setThreshold(Settings::instance()->threshold);
+	_contourFinder.setMaxAreaRadius(Settings::instance()->maxAreaRadius);
 
 	#ifndef TARGET_RASPBERRY_PI
 		cam.update();
@@ -145,7 +146,7 @@ void Tracker::draw(){
 	ofNoFill();
 	ofSetColor(0, 255, 255);
 	ofDrawCircle(ofGetWidth() - _maxAreaRadius - 10, _maxAreaRadius + 10, _minAreaRadius);
-	ofDrawCircle(ofGetWidth() - _maxAreaRadius - 10, _maxAreaRadius + 10, _maxAreaRadius);
+	ofDrawCircle(ofGetWidth() - Settings::instance()->maxAreaRadius - 10, Settings::instance()->maxAreaRadius + 10, Settings::instance()->maxAreaRadius);
 	ofPopStyle();
 }
 
