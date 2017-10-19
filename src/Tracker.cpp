@@ -16,8 +16,23 @@ Tracker::Tracker(){
 	#ifdef TARGET_RASPBERRY_PI
 		cam.setup(w, h, false);
 	#else
-		// TODO: Get device id from settings
-		cam.setDeviceID(0);
+		vector<ofVideoDevice> camList = cam.listDevices();
+		bool camFound = false;
+		for(auto i = 0; i < camList.size(); ++i){
+			cout << "Device Name: " << camList[i].deviceName << endl;
+			if(ofIsStringInString(camList[i].deviceName, "Logitech")){
+				cout << "Found Logitech camera: " << camList[i].deviceName << endl;
+				cam.setDeviceID(i);
+				camFound = true;
+				break;
+			}
+		}
+	
+		if(!camFound){
+			cout << "Logitech camera not found, using whatever is at index 0" << endl;
+			cam.setDeviceID(0);
+		}
+
 		cam.setDesiredFrameRate(60);
 		cam.setPixelFormat(OF_PIXELS_RGB);
 		cam.initGrabber(w, h);
