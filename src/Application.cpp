@@ -40,10 +40,10 @@ void Application::update(){
 void Application::draw(){
 	_mode->draw();
 	
-	// Draw debug data
-	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2), 10, 20);
-	
-	_gui.draw();
+	if(Settings::instance()->debug){
+		_gui.draw();
+		ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2), 10, ofGetHeight() -10);
+	}
 }
 
 void Application::exit(){
