@@ -29,7 +29,7 @@ void ModeDefault::draw(){
 }
 
 void ModeDefault::keyPressed(int key){
-	if(key == 'c'){
+	if(key == 'c' && Settings::instance()->debug){
 		Application::instance()->setMode(Mode::CALIBRATE);
 	}
 }

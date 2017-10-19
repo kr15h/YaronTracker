@@ -4,6 +4,7 @@
 #include "Mode.h"
 #include "Application.h"
 #include "Projection.h"
+#include "Settings.h"
 
 namespace ytr {
 
