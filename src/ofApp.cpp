@@ -4,9 +4,11 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofSetEscapeQuitsApp(false);
 	ofBackground(0);
-	#ifdef TARGET_RASPBERRY_PI
-		ofSetFullscreen(true);
-	#endif
+	
+	ofSetFullscreen(true);
+	Settings::instance()->debug = false;
+	
+	CGDisplayHideCursor(kCGDirectMainDisplay);
 }
 
 void ofApp::update(){

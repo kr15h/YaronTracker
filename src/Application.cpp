@@ -60,6 +60,11 @@ void Application::keyPressed(int key){
 	
 	if(key == 'd'){
 		Settings::instance()->debug = !Settings::instance()->debug;
+		if(Settings::instance()->debug){
+			CGDisplayShowCursor(kCGDirectMainDisplay);
+		}else{
+			CGDisplayHideCursor(kCGDirectMainDisplay);
+		}
 	}
 	
 	if(key == 'f'){
