@@ -87,13 +87,11 @@ void Application::setMode(Mode::Name $name){
 }
 
 void Application::saveCameraSnapshot(string filename){
-	/*
 	ofImage snap;
-	ofxCv::toOf(camera->getFrame(), snap);
+	ofxCv::toOf(tracker->getFrame(), snap);
 	snap.update();
-	snap.save(filename);
+	snap.save(filename, OF_IMAGE_QUALITY_MEDIUM);
 	cout << "Saved image with name " << filename << endl;
-	*/
 }
 
 } // namespace ytr

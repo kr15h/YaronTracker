@@ -77,18 +77,18 @@ void Tracker::update(){
 		
 		#ifdef TARGET_RASPBERRY_PI
 
-			if(cam.grab().empty()){
+			_frame = cam.grab();
+		
+			if(_frame.empty()){
 				return;
 			}
-		
-			cv::Mat frame = cam.grab();
-			_contourFinder.findContours(cam.grab());
+
+			_contourFinder.findContours(_frame);
 		
 		#else
 		
-			cv::Mat frame;
-			ofxCv::copyGray(cam.getPixels(), frame);
-			_contourFinder.findContours(frame);
+			ofxCv::copyGray(cam.getPixels(), _frame);
+			_contourFinder.findContours(_frame);
 
 		#endif
 		
@@ -137,13 +137,7 @@ void Tracker::update(){
 }
 
 void Tracker::draw(){
-	#ifdef TARGET_RASPBERRY_PI
-		cv::Mat frame = cam.grab();
-		ofxCv::drawMat(frame, 0, 0, cam.width, cam.height);
-	#else
-		cam.draw(0, 0, cam.getWidth(), cam.getHeight());
-	#endif
-	
+	ofxCv::drawMat(_frame, 0, 0, getWidth(), getHeight());
 	_contourFinder.draw();
 	
 	// Draw the quad where tracking action happens
@@ -212,6 +206,10 @@ int Tracker::getHeight(){
 	#else
 		return cam.getHeight();
 	#endif
+}
+
+cv::Mat & Tracker::getFrame(){
+	return _frame;
 }
 
 } // namespace ytr

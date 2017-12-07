@@ -13,10 +13,20 @@ shared_ptr<Mode> ModeCalibrate::instance(){
 
 ModeCalibrate::ModeCalibrate(){
 	cout << "ModeCalibrate" << endl;
+	
+	_lastSnapshotTime = ofGetElapsedTimef();
+	_snapshotInterval = CAM_SNAPSHOT_INTERVAL;
 }
 
 void ModeCalibrate::update(){
 	Application::instance()->tracker->update();
+	
+	float now = ofGetElapsedTimef();
+	float delta = now - _lastSnapshotTime;
+	if(delta > _snapshotInterval){
+		Application::instance()->saveCameraSnapshot("snapshot.jpg");
+		_lastSnapshotTime = now;
+	}
 }
 
 void ModeCalibrate::draw(){

@@ -5,6 +5,9 @@
 #include "Application.h"
 #include "Projection.h"
 
+// To save frames on disk for the web calibrator
+#define CAM_SNAPSHOT_INTERVAL 0.5f
+
 namespace ytr {
 
 class ModeCalibrate : public Mode{
@@ -24,6 +27,9 @@ private:
 	
 	vector<ofPoint> _corners;
 	ofColor _color;
+	
+	float _lastSnapshotTime;
+	float _snapshotInterval;
 };
 
 } // namespace ytr

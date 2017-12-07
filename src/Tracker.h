@@ -32,6 +32,9 @@ public:
 	int getWidth();
 	int getHeight();
 	
+	// Returns current camera image
+	cv::Mat & getFrame();
+	
 #ifdef TARGET_RASPBERRY_PI
 	ofxCvPiCam cam;
 #else
@@ -57,6 +60,8 @@ private:
 	// warped (_areaDstPoints).
 	vector<ofPoint> _areaSrcPoints;
 	vector<ofPoint> _areaDstPoints;
+	
+	cv::Mat _frame;
 };
 
 } // namespace ytr
