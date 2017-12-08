@@ -110,6 +110,22 @@ void Application::saveCameraSnapshot(string filename){
 
 void Application::onOscEvent(ofxOscMessage & message){
 	cout << "onOscEvent: " << message.getAddress() << endl;
+	
+	string addr = message.getAddress();
+	
+	if(addr == "/calibrate"){
+		setMode(Mode::CALIBRATE);
+	}else if(addr == "/cancel"){
+		setMode(Mode::DEFAULT);
+	}else if(addr == "/point"){
+		ofPoint p;
+		p.x = message.getArgAsInt(0);
+		p.y = message.getArgAsInt(1);
+		
+		if(_mode == ModeCalibrate::instance()){
+			ModeCalibrate::instance()->mousePressed(p.x, p.y, OF_MOUSE_BUTTON_1);
+		}
+	}
 }
 
 } // namespace ytr
