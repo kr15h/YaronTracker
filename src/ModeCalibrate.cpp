@@ -24,7 +24,7 @@ void ModeCalibrate::update(){
 	float now = ofGetElapsedTimef();
 	float delta = now - _lastSnapshotTime;
 	if(delta > _snapshotInterval){
-		Application::instance()->saveCameraSnapshot("snapshot.jpg");
+		Application::instance()->saveCameraSnapshot("web/snapshot.jpg");
 		_lastSnapshotTime = now;
 	}
 }

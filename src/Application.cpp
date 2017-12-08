@@ -28,6 +28,9 @@ Application::Application(){
 	projection = Projection::create();
 	overlay = Overlay::create();
 	brush = Brush::create();
+	
+	// Register for OSC events
+	ofAddListener(OscGate::instance()->events, this, &Application::onOscEvent);
 }
 
 void Application::update(){
@@ -36,6 +39,9 @@ void Application::update(){
 		   brush->getPosition(),
 		   tracker->getPosition(), 0.5f));
 	_mode->update();
+	
+	// Update OSC connection
+	OscGate::instance()->update();
 }
 
 void Application::draw(){
@@ -92,6 +98,10 @@ void Application::saveCameraSnapshot(string filename){
 	snap.update();
 	snap.save(filename, OF_IMAGE_QUALITY_MEDIUM);
 	cout << "Saved image with name " << filename << endl;
+}
+
+void Application::onOscEvent(ofxOscMessage & message){
+	cout << "onOscEvent: " << message.getAddress() << endl;
 }
 
 } // namespace ytr

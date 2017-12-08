@@ -12,8 +12,10 @@
 #include "Brush.h"
 
 #include "Settings.h"
+#include "OscGate.h"
 
 #include "ofxGui.h"
+#include "ofxOscMessage.h"
 
 namespace ytr{
 
@@ -30,6 +32,7 @@ public:
 	
 	void setMode(Mode::Name $name);
 	void saveCameraSnapshot(string filename);
+	void onOscEvent(ofxOscMessage & message);
 	
 	shared_ptr<Tracker> tracker;
 	shared_ptr<Projection> projection;
