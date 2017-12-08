@@ -8,7 +8,11 @@ void ofApp::setup(){
 	ofSetFullscreen(true);
 	Settings::instance()->debug = false;
 	
-	CGDisplayHideCursor(kCGDirectMainDisplay);
+	#ifdef TARGET_RASPBERRY_PI
+		CGDisplayHideCursor(kCGDirectMainDisplay);
+	#else
+		ofHideCursor();
+	#endif
 }
 
 void ofApp::update(){
