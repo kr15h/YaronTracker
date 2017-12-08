@@ -68,9 +68,17 @@ void Application::keyPressed(int key){
 	if(key == 'd'){
 		Settings::instance()->debug = !Settings::instance()->debug;
 		if(Settings::instance()->debug){
-			CGDisplayShowCursor(kCGDirectMainDisplay);
+			#ifdef TARGET_RASPBERRY_PI
+				ofShowCursor();
+			#else
+				CGDisplayShowCursor(kCGDirectMainDisplay);
+			#endif
 		}else{
-			CGDisplayHideCursor(kCGDirectMainDisplay);
+			#ifdef TARGET_RASPBERRY_PI
+				ofHideCursor();
+			#else
+				CGDisplayHideCursor(kCGDirectMainDisplay);
+			#endif
 		}
 	}
 	
