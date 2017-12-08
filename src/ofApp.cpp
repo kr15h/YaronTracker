@@ -9,9 +9,9 @@ void ofApp::setup(){
 	Settings::instance()->debug = false;
 	
 	#ifdef TARGET_RASPBERRY_PI
-		CGDisplayHideCursor(kCGDirectMainDisplay);
-	#else
 		ofHideCursor();
+	#else
+		CGDisplayHideCursor(kCGDirectMainDisplay);
 	#endif
 }
 
