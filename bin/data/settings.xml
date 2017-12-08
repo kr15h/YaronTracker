@@ -1,20 +1,20 @@
 <settings>
 	<projection>
 		<tl>
-			<x>78</x>
-			<y>104</y>
+			<x>81</x>
+			<y>111</y>
 		</tl>
 		<tr>
-			<x>526</x>
-			<y>123</y>
+			<x>528</x>
+			<y>131</y>
 		</tr>
 		<br>
-			<x>524</x>
-			<y>386</y>
+			<x>526</x>
+			<y>381</y>
 		</br>
 		<bl>
-			<x>85</x>
-			<y>380</y>
+			<x>91</x>
+			<y>385</y>
 		</bl>
 	</projection>
 	<camera>

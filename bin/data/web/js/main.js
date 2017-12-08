@@ -3,65 +3,75 @@ var reloadSnapshot = function(){
   $("#snapshot").attr("src", "snapshot.jpg?" + d.getTime());
 };
 
+var points = [];
+
 $(document).ready(function(){
   setInterval(reloadSnapshot, 500);
 
   $('#calibrateBtn').click(function(event){
-    // Send OSC message to the app and check for response
-    // Address: /calibrate
+    $.ajax({
+      url: '/php/calibrate.php',
+      type: 'GET',
 
-    $(this).addClass('hidden');
-    $('#confirmBtn').removeClass('hidden');
-    $('#cancelBtn').removeClass('hidden');
-    $('#snapshot').removeClass('hidden');
-  });
+      success: function(msg){
+        console.log(msg);
+        $('#calibrateBtn').addClass('hidden');
+        $('#cancelBtn').removeClass('hidden');
+        $('#snapshot').removeClass('hidden');
+      },
 
-  $('#confirmBtn').click(function(event){
-    // Send coordinate data to app via osc
-    // Address: /confirm
-
-    $(this).addClass('hidden');
-    $('#cancelBtn').addClass('hidden');
-    $('#calibrateBtn').removeClass('hidden');
-    $('#snapshot').addClass('hidden');
-  });
+      error: function(){
+        alert('Calibrate gateway not available');
+      }
+    }); // ajax
+  }); // #calibrateBtn click
 
   $('#cancelBtn').click(function(event){
-    // Send OSC message to the app and check for response
-    // Address: /cancel
+    $.ajax({
+      url: '/php/cancel.php',
+      type: 'GET',
 
-    $(this).addClass('hidden');
-    $('#confirmBtn').addClass('hidden');
-    $('#calibrateBtn').removeClass('hidden');
-    $('#snapshot').addClass('hidden');
-  });
+      success: function(msg){
+        console.log(msg);
+        $('#cancelBtn').addClass('hidden');
+        $('#calibrateBtn').removeClass('hidden');
+        $('#snapshot').addClass('hidden');
+      },
 
-  $(document).keypress(function(event){
-    console.log('Key has been pressed: ' + event.which);
-    
-    if(event.which == 99){
-      alert('Entering calibration mode. Press <q> to exit.');
-    } else if (event.which == 113) {
-      // exit calib mode
-    }
+      error: function(){
+        alert('Cancel gateway not available');
+      }
+    }); // ajax
+  }); // #cancelBtn click
 
+  $('#snapshot').click(function(event){
+    var elm = $(this);
+    var xPos = event.pageX - elm.offset().left;
+    var yPos = event.pageY - elm.offset().top;
+
+    console.log(xPos, yPos);
+
+    $.ajax({
+      url: '/php/point.php',
+      type: 'POST',
+      data: {x:xPos, y:yPos},
+
+      success: function(msg){
+        console.log(msg);
+
+        if(points.length >= 4){
+          points = [];
+          $('#cancelBtn').addClass('hidden');
+          $('#calibrateBtn').removeClass('hidden');
+          $('#snapshot').addClass('hidden');
+        }else{
+          points.push({x: xPos, y:yPos});
+        }
+      },
+
+      error: function(){
+        alert('Point gateway not available');
+      }
+    }); // ajax
   });
 });
-
-/*
-$('#shutdown-button').click(function(){
-  $.ajax({
-    url: '/php/shutdown.php',
-    type: 'POST',
-
-    success: function(msg){
-      console.log(msg);
-      alert('System shuttnig down');
-    },
-
-    error: function(){
-      alert('Shutdown script not available');
-    }
-  });
-});
-*/
