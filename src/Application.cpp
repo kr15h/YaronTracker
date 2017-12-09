@@ -42,6 +42,13 @@ void Application::update(){
 	
 	// Update OSC connection
 	OscGate::instance()->update();
+	
+	// Check speed of the brush and add new words depending on it
+	float brushSpeed = brush->getSpeed() / brush->getMaxSpeed();
+	int wordsToCreate = (int)(brushSpeed * 3.0f);
+	for(auto i = 0; i < wordsToCreate; ++i){
+		brush->addWord(Library::instance()->text->getNextWord());
+	}
 }
 
 void Application::draw(){
@@ -84,6 +91,11 @@ void Application::keyPressed(int key){
 	
 	if(key == 'f'){
 		ofToggleFullscreen();
+	}
+	
+	if(key == 't'){
+		cout << "Adding word" << endl;
+		brush->addWord("random");
 	}
 }
 

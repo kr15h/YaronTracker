@@ -10,6 +10,7 @@
 #include "Projection.h"
 #include "Overlay.h"
 #include "Brush.h"
+#include "Library.h"
 
 #include "Settings.h"
 #include "OscGate.h"
@@ -26,14 +27,14 @@ public:
 	void update();
 	void draw();
 	void exit();
-	
+
 	void keyPressed(int key);
 	void mousePressed(int x, int y, int button);
-	
+
 	void setMode(Mode::Name $name);
 	void saveCameraSnapshot(string filename);
 	void onOscEvent(ofxOscMessage & message);
-	
+
 	shared_ptr<Tracker> tracker;
 	shared_ptr<Projection> projection;
 	shared_ptr<Overlay> overlay;
