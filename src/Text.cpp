@@ -8,14 +8,19 @@ shared_ptr<Text> Text::create(string text){
 
 Text::Text(string text){
 
-	// Convert newlines to spaces
-	for (int i = 0; i < text.length();i++) {
-	   if (text[i] == '\n' || text[i] == '\r') {
+	// Remove whitespace
+	for (int i = 0; i < text.length(); i++) {
+	   if (text[i] == '\n' || text[i] == '\r' || text[i] == '\t') {
 		   text[i] = ' ';
 	   }
+
+	   if(i < text.length() - 1){
+		   if(text[i] == ' ' && text[i + 1] == ' '){
+			   text.erase(text.begin() + i);
+			   i--;
+		   }
+	   }
 	}
-	
-	
 
 	// Split text into words
 	_words = ofSplitString(text, " ");
