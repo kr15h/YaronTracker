@@ -47,7 +47,7 @@ private:
 	
 	float _rotation;
 	float _rotationSpeed; // degrees per second
-	float _prevPositionTime;
+	float _speed; // pixels per second
 	float _maxSpeed;
 	
 	vector<SwarmCircle> _swarmCircles;

@@ -45,7 +45,7 @@ void Application::update(){
 	
 	// Check speed of the brush and add new words depending on it
 	float brushSpeed = brush->getSpeed() / brush->getMaxSpeed();
-	int wordsToCreate = (int)(brushSpeed * 3.0f);
+	int wordsToCreate = (int)(brushSpeed * 10.0f);
 	for(auto i = 0; i < wordsToCreate; ++i){
 		brush->addWord(Library::instance()->text->getNextWord());
 	}

@@ -24,6 +24,16 @@ Brush::Brush(){
 void Brush::update(){
 	_rotation += _rotationSpeed * ofGetLastFrameTime();
 	
+	// Calculate current speed of the brush in pixels per second
+	ofVec2f delta = _position - _prevPosition;
+	_speed = ofGetLastFrameTime() * sqrt(pow(delta.x, 2.0f) + pow(delta.y, 2.0f));
+	if(_speed > _maxSpeed){
+		_maxSpeed = _speed;
+	}
+
+	// Reset _prevPosition after speed calculation
+	_prevPosition = _position;
+
 	// Update words
 	for(auto i = 0; i < _words.size(); ++i){
 		if(_words[i].alpha < 0.0f){
@@ -31,7 +41,7 @@ void Brush::update(){
 			i--;
 			continue;
 		}
-		
+
 		// Calculate x and y speed increase from direction
 		float dirHyp = sqrt(pow(_words[i].direction.x, 2.0f) + pow(_words[i].direction.y, 2.0f));
 		float dirSin = _words[i].direction.x / dirHyp;
@@ -41,8 +51,7 @@ void Brush::update(){
 		
 		_words[i].position =
 			ofVec2f(_words[i].position +
-			ofVec2f(xSpeed * ofGetLastFrameTime(),
-					ySpeed * ofGetLastFrameTime()));
+			ofVec2f(xSpeed, ySpeed));
 		_words[i].alpha -= 0.01f;
 	}
 }
@@ -85,7 +94,6 @@ void Brush::draw(){
 
 void Brush::setPosition(ofVec2f $position){
 	_prevPosition = _position;
-	_prevPositionTime = ofGetElapsedTimef();
 	_direction = $position - _position;
 	_position = $position;
 }
@@ -95,12 +103,7 @@ ofVec2f Brush::getPosition(){
 }
 
 float Brush::getSpeed(){
-	ofVec2f delta = _position - _prevPosition;
-	float speed = sqrt(pow(_position.x, 2.0f) + pow(_position.y, 2.0f));
-	if(speed > _maxSpeed){
-		_maxSpeed = speed;
-	}
-	return speed;
+	return _speed;
 }
 
 float Brush::getMaxSpeed(){
@@ -113,7 +116,7 @@ void Brush::addWord(string word){
 	w.position = _position;
 	w.direction = -_direction;
 	w.alpha = 1.0f;
-	w.speed = ofRandomf() * 50.0f;
+	w.speed = getSpeed();
 	_words.push_back(w);
 }
 
