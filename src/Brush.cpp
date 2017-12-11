@@ -17,6 +17,8 @@ Brush::Brush(){
 	_speed = _minSpeed;
 	_speedFactor = ofToFloat(Settings::instance()->xml.getValue("text/spawn/speed/factor"));
 	
+	_enableTextAngle = ofToBool(Settings::instance()->xml.getValue("text/spawn/angle/enable"));
+	
 	_swarmCircles.resize(5);
 	for(auto i = 0; i < _swarmCircles.size(); ++i){
 		_swarmCircles[i].angularPosition = 360.0f / (float)_swarmCircles.size() * (float)i;
@@ -89,20 +91,38 @@ void Brush::draw(){
 		ofPushStyle();
 		int alphaByte = (int)(_words[i].alpha * 255.0f);
 		ofSetColor(255, 255, 255, alphaByte);
-		Library::instance()->font.drawStringAsShapes(
-		_words[i].text, _words[i].position.x, _words[i].position.y);
+		
+		ofPushMatrix();
+		
+		// Draw text from center
+		ofRectangle box = Library::instance()->font.getStringBoundingBox(_words[i].text, 0, 0);
+		ofTranslate(_words[i].position.x, _words[i].position.y);
+		
+		if(_enableTextAngle){
+			ofRotate(_words[i].angle, 0, 0, 1);
+		}
+		
+		ofTranslate(-(box.width / 2.0f), (box.height / 2.0f));
+		Library::instance()->font.drawStringAsShapes(_words[i].text, 0, 0);
+		
+		ofPopMatrix();
+		
 		ofPopStyle();
 	}
 }
 
 void Brush::setPosition(ofVec2f $position){
 	_prevPosition = _position;
-	_direction = $position - _position;
+	_direction = ($position - _position).getNormalized();
 	_position = $position;
 }
 
 ofVec2f Brush::getPosition(){
 	return _position;
+}
+
+ofVec2f Brush::getDirection(){
+	return _direction;
 }
 
 float Brush::getSpeed(){
@@ -116,13 +136,29 @@ float Brush::getMaxSpeed(){
 void Brush::addWord(string word){
 	Word w;
 	w.text = word;
-	
-	// Calculate the position so the text bounding box center matches the position
-	ofRectangle box = Library::instance()->font.getStringBoundingBox(w.text, 0, 0);
-	w.position.x = _position.x - (box.width / 2.0f);
-	w.position.y = _position.y + (box.height / 2.0f);
-	
+	w.position = _position;
 	w.direction = _direction;
+	
+	float hyp = sqrt(pow(_direction.x, 2.0f) + pow(_direction.y, 2.0f));
+	float sin = _direction.y / hyp;
+	float angle = ofRadToDeg(sin);
+	
+	if(_direction.x > 0 && _direction.y > 0){
+		w.angle = angle + 90;
+	}
+	
+	if(_direction.x < 0 && _direction.y > 0){
+		w.angle = 270 - angle;
+	}
+	
+	if(_direction.x < 0 && _direction.y < 0){
+		w.angle = 270 - angle;
+	}
+	
+	if(_direction.x > 0 && _direction.y < 0){
+		w.angle = angle + 90;
+	}
+
 	w.alpha = 1.0f;
 	w.speed = getSpeed() * _speedFactor;
 	_words.push_back(w);

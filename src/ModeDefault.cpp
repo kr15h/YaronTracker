@@ -24,6 +24,15 @@ void ModeDefault::draw(){
 	if(Settings::instance()->debug){
 		Application::instance()->tracker->draw();
 		Application::instance()->projection->draw();
+		
+		// Draw the direction vector of current movement
+		ofPushStyle();
+		ofVec2f dir = Application::instance()->brush->getDirection();
+		ofPushMatrix();
+		ofTranslate(ofGetWidth() - 100, 100);
+		ofDrawLine(0, 0, dir.x * 90, dir.y * 90);
+		ofPopMatrix();
+		ofPopStyle();
 	}
 	Application::instance()->brush->draw();
 }

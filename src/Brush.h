@@ -20,6 +20,7 @@ struct Word{
 	ofVec2f direction;
 	float speed;
 	float alpha;
+	float angle;
 };
 
 class Brush{
@@ -31,6 +32,7 @@ public:
 	
 	void setPosition(ofVec2f $position);
 	ofVec2f getPosition();
+	ofVec2f getDirection();
 	
 	// Returns speed in pixels per second
 	float getSpeed();
@@ -52,6 +54,8 @@ private:
 	float _minSpeed;
 	float _maxSpeed;
 	float _speedFactor;
+	
+	bool _enableTextAngle;
 	
 	vector<SwarmCircle> _swarmCircles;
 	vector<Word> _words;

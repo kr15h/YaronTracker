@@ -39,6 +39,9 @@
 			<speed>
 				<factor>0.25</factor>
 			</speed>
+			<angle>
+				<enable>1</enable>
+			</angle>
 		</spawn>
 	</text>
 	<brush>
