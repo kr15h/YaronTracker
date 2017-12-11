@@ -15,6 +15,7 @@ Brush::Brush(){
 	_minSpeed = ofToFloat(Settings::instance()->xml.getValue("brush/speed/min"));
 	_maxSpeed = ofToFloat(Settings::instance()->xml.getValue("brush/speed/max"));
 	_speed = _minSpeed;
+	_speedFactor = ofToFloat(Settings::instance()->xml.getValue("text/spawn/speed/factor"));
 	
 	_swarmCircles.resize(5);
 	for(auto i = 0; i < _swarmCircles.size(); ++i){
@@ -115,10 +116,15 @@ float Brush::getMaxSpeed(){
 void Brush::addWord(string word){
 	Word w;
 	w.text = word;
-	w.position = _position;
+	
+	// Calculate the position so the text bounding box center matches the position
+	ofRectangle box = Library::instance()->font.getStringBoundingBox(w.text, 0, 0);
+	w.position.x = _position.x - (box.width / 2.0f);
+	w.position.y = _position.y + (box.height / 2.0f);
+	
 	w.direction = _direction;
 	w.alpha = 1.0f;
-	w.speed = getSpeed();
+	w.speed = getSpeed() * _speedFactor;
 	_words.push_back(w);
 }
 

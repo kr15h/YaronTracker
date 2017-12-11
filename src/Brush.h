@@ -51,6 +51,7 @@ private:
 	float _speed; // pixels per second
 	float _minSpeed;
 	float _maxSpeed;
+	float _speedFactor;
 	
 	vector<SwarmCircle> _swarmCircles;
 	vector<Word> _words;
