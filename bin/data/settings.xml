@@ -25,4 +25,23 @@
 		<minAreaRadius>0</minAreaRadius>
 		<maxAreaRadius>50</maxAreaRadius>
 	</contourFinder>
+	<text>
+		<file>gesetz.txt</file>
+		<font>
+			<file>DIN Alternate Bold.ttf</file>
+			<size>64</size>
+		</font>
+		<spawn>
+			<frequency>
+				<min>1</min>
+				<max>10</max>
+			</frequency>
+		</spawn>
+	</text>
+	<brush>
+		<speed>
+			<min>0.0</min>
+			<max>2000.0</max>
+		</speed>
+	</brush>
 </settings>

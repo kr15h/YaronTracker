@@ -12,7 +12,9 @@ Brush::Brush(){
 	
 	_rotation = 0.0f;
 	_rotationSpeed = 5.0f;
-	_maxSpeed = 0.0f;
+	_minSpeed = ofToFloat(Settings::instance()->xml.getValue("brush/speed/min"));
+	_maxSpeed = ofToFloat(Settings::instance()->xml.getValue("brush/speed/max"));
+	_speed = _minSpeed;
 	
 	_swarmCircles.resize(5);
 	for(auto i = 0; i < _swarmCircles.size(); ++i){
@@ -26,14 +28,14 @@ void Brush::update(){
 	
 	// Calculate current speed of the brush in pixels per second
 	ofVec2f delta = _position - _prevPosition;
-	_speed = ofGetLastFrameTime() * sqrt(pow(delta.x, 2.0f) + pow(delta.y, 2.0f));
+	_speed = sqrt(pow(delta.x, 2.0f) + pow(delta.y, 2.0f)) / ofGetLastFrameTime();
 	if(_speed > _maxSpeed){
-		_maxSpeed = _speed;
+		_speed = _maxSpeed;
 	}
 
 	// Reset _prevPosition after speed calculation
 	_prevPosition = _position;
-
+	
 	// Update words
 	for(auto i = 0; i < _words.size(); ++i){
 		if(_words[i].alpha < 0.0f){
@@ -46,8 +48,8 @@ void Brush::update(){
 		float dirHyp = sqrt(pow(_words[i].direction.x, 2.0f) + pow(_words[i].direction.y, 2.0f));
 		float dirSin = _words[i].direction.x / dirHyp;
 		float dirCos = _words[i].direction.y / dirHyp;
-		float xSpeed = _words[i].speed * dirSin;
-		float ySpeed = _words[i].speed * dirCos;
+		float xSpeed = _words[i].speed * dirSin * ofGetLastFrameTime();
+		float ySpeed = _words[i].speed * dirCos * ofGetLastFrameTime();
 		
 		_words[i].position =
 			ofVec2f(_words[i].position +
@@ -114,7 +116,7 @@ void Brush::addWord(string word){
 	Word w;
 	w.text = word;
 	w.position = _position;
-	w.direction = -_direction;
+	w.direction = _direction;
 	w.alpha = 1.0f;
 	w.speed = getSpeed();
 	_words.push_back(w);

@@ -47,6 +47,11 @@ private:
 	shared_ptr<Mode> _mode;
 	
 	ofxPanel _gui;
+	
+	float _spawnFrequency;
+	float _minSpawnFrequency;
+	float _maxSpawnFrequency;
+	float _lastSpawnTime;
 
 };
 

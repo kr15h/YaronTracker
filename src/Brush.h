@@ -5,6 +5,7 @@
 
 #include "ofMain.h"
 #include "Library.h"
+#include "Settings.h"
 
 namespace ytr {
 
@@ -48,6 +49,7 @@ private:
 	float _rotation;
 	float _rotationSpeed; // degrees per second
 	float _speed; // pixels per second
+	float _minSpeed;
 	float _maxSpeed;
 	
 	vector<SwarmCircle> _swarmCircles;

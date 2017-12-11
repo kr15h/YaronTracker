@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxTrueTypeFontUC.h"
 #include "Text.h"
+#include "Settings.h"
 
 namespace ytr {
 

@@ -23,6 +23,15 @@ Application::Application(){
 	_gui.add(Settings::instance()->maxAreaRadius.set("maxAreaRadius", 10, 0, 100));
 	_gui.loadFromFile("params.xml");
 
+	// More settings
+	_minSpawnFrequency = ofToFloat(Settings::instance()->xml.getValue("text/spawn/frequency/min"));
+	_maxSpawnFrequency = ofToFloat(Settings::instance()->xml.getValue("text/spawn/frequency/max"));
+	_spawnFrequency = _minSpawnFrequency;
+	_lastSpawnTime = 0.0f;
+	
+	cout << "minSpawnFreq: " << _minSpawnFrequency << endl;
+	cout << "maxSpawnFreq: " << _maxSpawnFrequency << endl;
+
 	// Create components
 	tracker = Tracker::create();
 	projection = Projection::create();
@@ -43,11 +52,20 @@ void Application::update(){
 	// Update OSC connection
 	OscGate::instance()->update();
 	
-	// Check speed of the brush and add new words depending on it
-	float brushSpeed = brush->getSpeed() / brush->getMaxSpeed();
-	int wordsToCreate = (int)(brushSpeed * 10.0f);
-	for(auto i = 0; i < wordsToCreate; ++i){
+	// Get spawn frequency from brush speed
+	_spawnFrequency = ofMap(brush->getSpeed(),
+							0.0f,
+							brush->getMaxSpeed(),
+							_minSpawnFrequency,
+							_maxSpawnFrequency);
+	
+	// Add new words to the party depending on the frequency
+	float spawnInterval = 1.0f / _spawnFrequency;
+	float now = ofGetElapsedTimef();
+	float delta = now - _lastSpawnTime;
+	if(delta > spawnInterval){
 		brush->addWord(Library::instance()->text->getNextWord());
+		_lastSpawnTime = now;
 	}
 }
 
@@ -56,7 +74,9 @@ void Application::draw(){
 	
 	if(Settings::instance()->debug){
 		_gui.draw();
-		ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2), 10, ofGetHeight() -10);
+		string info = "fps: " + ofToString(ofGetFrameRate(), 2) +
+			"\nspeed: " + ofToString(brush->getSpeed(), 2);
+		ofDrawBitmapString(info, 10, ofGetHeight() -20);
 	}
 }
 
