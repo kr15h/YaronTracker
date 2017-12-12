@@ -37,7 +37,7 @@
 				<max>20</max>
 			</frequency>
 			<speed>
-				<factor>0.25</factor>
+				<factor>0.1</factor>
 			</speed>
 			<angle>
 				<enable>1</enable>
@@ -46,7 +46,12 @@
 		</spawn>
 		<alpha>
 			<fade>
-				<speed>0.5</speed>
+				<in>
+					<speed>2.0</speed>
+				</in>
+				<out>
+					<speed>0.5</speed>
+				</out>
 			</fade>
 		</alpha>
 	</text>

@@ -17,7 +17,8 @@ Brush::Brush(){
 	_speed = _minSpeed;
 	_speedFactor = ofToFloat(Settings::instance()->xml.getValue("text/spawn/speed/factor"));
 	_pullSwarmFactor = ofToFloat(Settings::instance()->xml.getValue("brush/pullSwarm/factor"));
-	_alphaFadeSpeed = ofToFloat(Settings::instance()->xml.getValue("text/alpha/fade/speed"));
+	_alphaFadeInSpeed = ofToFloat(Settings::instance()->xml.getValue("text/alpha/fade/in/speed"));
+	_alphaFadeOutSpeed = ofToFloat(Settings::instance()->xml.getValue("text/alpha/fade/out/speed"));
 	_spawnDistanceFromOrigin =
 		ofToFloat(Settings::instance()->xml.getValue("text/spawn/distanceFromOrigin"));
 	
@@ -45,14 +46,18 @@ void Brush::update(){
 	_prevPosition = _position;
 	
 	// Calculate alpha decay step
-	float alphaFadeStep = _alphaFadeSpeed * ofGetLastFrameTime();
+	float alphaFadeInStep = _alphaFadeInSpeed * ofGetLastFrameTime();
+	float alphaFadeOutStep = _alphaFadeOutSpeed * ofGetLastFrameTime();
 	
 	// Update words
 	for(auto i = 0; i < _words.size(); ++i){
-		if(_words[i].alpha < 0.0f){
+		if(_words[i].alpha < 0.0f && _words[i].hasFadedIn){
 			_words.erase(_words.begin() + i);
 			i--;
 			continue;
+		}else if(_words[i].alpha >= 1.0f){
+			_words[i].hasFadedIn = true;
+			_words[i].alpha = 1.0f;
 		}
 
 		// Calculate x and y speed increase from direction
@@ -71,7 +76,12 @@ void Brush::update(){
 				_pullSwarmFactor);
 		}
 		
-		_words[i].alpha -= alphaFadeStep;
+		if(_words[i].hasFadedIn){
+			_words[i].alpha -= alphaFadeOutStep;
+		}else{
+			_words[i].alpha += alphaFadeInStep;
+		}
+		
 	}
 }
 
@@ -149,6 +159,7 @@ float Brush::getMaxSpeed(){
 
 void Brush::addWord(string word){
 	Word w;
+	w.hasFadedIn = false;
 	w.text = word;
 	w.position = _position + (_direction.getNormalized() * _spawnDistanceFromOrigin);
 	w.direction = _direction;
@@ -173,7 +184,7 @@ void Brush::addWord(string word){
 		w.angle = angle + 90;
 	}
 
-	w.alpha = 1.0f;
+	w.alpha = 0.0f;
 	w.speed = getSpeed() * _speedFactor;
 	_words.push_back(w);
 }

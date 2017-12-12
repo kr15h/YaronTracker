@@ -21,6 +21,7 @@ struct Word{
 	float speed;
 	float alpha;
 	float angle;
+	bool hasFadedIn;
 };
 
 class Brush{
@@ -55,7 +56,8 @@ private:
 	float _maxSpeed;
 	float _speedFactor;
 	float _pullSwarmFactor;
-	float _alphaFadeSpeed; // Factor per sedond
+	float _alphaFadeInSpeed; // Factor per sedond
+	float _alphaFadeOutSpeed; // Factor per sedond
 	float _spawnDistanceFromOrigin; // In pixels
 	
 	bool _enableTextAngle;
