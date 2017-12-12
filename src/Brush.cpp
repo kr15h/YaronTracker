@@ -18,6 +18,8 @@ Brush::Brush(){
 	_speedFactor = ofToFloat(Settings::instance()->xml.getValue("text/spawn/speed/factor"));
 	_pullSwarmFactor = ofToFloat(Settings::instance()->xml.getValue("brush/pullSwarm/factor"));
 	_alphaFadeSpeed = ofToFloat(Settings::instance()->xml.getValue("text/alpha/fade/speed"));
+	_spawnDistanceFromOrigin =
+		ofToFloat(Settings::instance()->xml.getValue("text/spawn/distanceFromOrigin"));
 	
 	_enableTextAngle = ofToBool(Settings::instance()->xml.getValue("text/spawn/angle/enable"));
 	_enablePullSwarm = ofToBool(Settings::instance()->xml.getValue("brush/pullSwarm/enable"));
@@ -148,7 +150,7 @@ float Brush::getMaxSpeed(){
 void Brush::addWord(string word){
 	Word w;
 	w.text = word;
-	w.position = _position;
+	w.position = _position + (_direction.getNormalized() * _spawnDistanceFromOrigin);
 	w.direction = _direction;
 	
 	float hyp = sqrt(pow(_direction.x, 2.0f) + pow(_direction.y, 2.0f));

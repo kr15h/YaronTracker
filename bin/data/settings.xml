@@ -42,6 +42,7 @@
 			<angle>
 				<enable>1</enable>
 			</angle>
+			<distanceFromOrigin>200.0</distanceFromOrigin>
 		</spawn>
 		<alpha>
 			<fade>
