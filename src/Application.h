@@ -52,7 +52,8 @@ private:
 	float _minSpawnFrequency;
 	float _maxSpawnFrequency;
 	float _lastSpawnTime;
-
+	
+	bool _reactToMouse;
 };
 
 } // namespace ytr

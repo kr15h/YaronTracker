@@ -31,6 +31,8 @@ Application::Application(){
 	
 	cout << "minSpawnFreq: " << _minSpawnFrequency << endl;
 	cout << "maxSpawnFreq: " << _maxSpawnFrequency << endl;
+	
+	_reactToMouse = ofToBool(Settings::instance()->xml.getValue("brush/reactToMouse/enable"));
 
 	// Create components
 	tracker = Tracker::create();
@@ -43,10 +45,18 @@ Application::Application(){
 }
 
 void Application::update(){
-	brush->setPosition(
-	   ofInterpolateCosine(
-		   brush->getPosition(),
-		   tracker->getPosition(), 0.5f));
+
+	if(_reactToMouse){
+		brush->setPosition(
+	   		ofInterpolateCosine(
+		   		brush->getPosition(),
+				ofVec2f(ofGetMouseX(), ofGetMouseY()), 0.5f));
+	}else{
+		brush->setPosition(
+	   		ofInterpolateCosine(
+		   		brush->getPosition(),
+				tracker->getPosition(), 0.5f));
+	}
 	_mode->update();
 	
 	// Update OSC connection

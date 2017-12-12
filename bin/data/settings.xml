@@ -53,5 +53,8 @@
 			<enable>1</enable>
 			<factor>0.25</factor>
 		</pullSwarm>
+		<reactToMouse>
+			<enable>1</enable>
+		</reactToMouse>
 	</brush>
 </settings>

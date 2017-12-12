@@ -56,9 +56,7 @@ void Brush::update(){
 		float xSpeed = _words[i].speed * dirSin * ofGetLastFrameTime();
 		float ySpeed = _words[i].speed * dirCos * ofGetLastFrameTime();
 		
-		_words[i].position =
-			ofVec2f(_words[i].position +
-			ofVec2f(xSpeed, ySpeed));
+		_words[i].position += ofVec2f(xSpeed, ySpeed);
 		
 		if(_enablePullSwarm){
 			_words[i].position += _speed * ofGetLastFrameTime() * _pullSwarmFactor;
