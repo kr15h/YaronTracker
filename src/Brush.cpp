@@ -16,8 +16,10 @@ Brush::Brush(){
 	_maxSpeed = ofToFloat(Settings::instance()->xml.getValue("brush/speed/max"));
 	_speed = _minSpeed;
 	_speedFactor = ofToFloat(Settings::instance()->xml.getValue("text/spawn/speed/factor"));
+	_pullSwarmFactor = ofToFloat(Settings::instance()->xml.getValue("brush/pullSwarm/factor"));
 	
 	_enableTextAngle = ofToBool(Settings::instance()->xml.getValue("text/spawn/angle/enable"));
+	_enablePullSwarm = ofToBool(Settings::instance()->xml.getValue("brush/pullSwarm/enable"));
 	
 	_swarmCircles.resize(5);
 	for(auto i = 0; i < _swarmCircles.size(); ++i){
@@ -57,6 +59,11 @@ void Brush::update(){
 		_words[i].position =
 			ofVec2f(_words[i].position +
 			ofVec2f(xSpeed, ySpeed));
+		
+		if(_enablePullSwarm){
+			_words[i].position += _speed * ofGetLastFrameTime() * _pullSwarmFactor;
+		}
+		
 		_words[i].alpha -= 0.01f;
 	}
 }

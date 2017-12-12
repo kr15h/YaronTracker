@@ -54,8 +54,10 @@ private:
 	float _minSpeed;
 	float _maxSpeed;
 	float _speedFactor;
+	float _pullSwarmFactor;
 	
 	bool _enableTextAngle;
+	bool _enablePullSwarm;
 	
 	vector<SwarmCircle> _swarmCircles;
 	vector<Word> _words;
