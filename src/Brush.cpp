@@ -17,6 +17,7 @@ Brush::Brush(){
 	_speed = _minSpeed;
 	_speedFactor = ofToFloat(Settings::instance()->xml.getValue("text/spawn/speed/factor"));
 	_pullSwarmFactor = ofToFloat(Settings::instance()->xml.getValue("brush/pullSwarm/factor"));
+	_alphaFadeSpeed = ofToFloat(Settings::instance()->xml.getValue("text/alpha/fade/speed"));
 	
 	_enableTextAngle = ofToBool(Settings::instance()->xml.getValue("text/spawn/angle/enable"));
 	_enablePullSwarm = ofToBool(Settings::instance()->xml.getValue("brush/pullSwarm/enable"));
@@ -40,6 +41,9 @@ void Brush::update(){
 
 	// Reset _prevPosition after speed calculation
 	_prevPosition = _position;
+	
+	// Calculate alpha decay step
+	float alphaFadeStep = _alphaFadeSpeed * ofGetLastFrameTime();
 	
 	// Update words
 	for(auto i = 0; i < _words.size(); ++i){
@@ -65,7 +69,7 @@ void Brush::update(){
 				_pullSwarmFactor);
 		}
 		
-		_words[i].alpha -= 0.01f;
+		_words[i].alpha -= alphaFadeStep;
 	}
 }
 

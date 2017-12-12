@@ -55,6 +55,7 @@ private:
 	float _maxSpeed;
 	float _speedFactor;
 	float _pullSwarmFactor;
+	float _alphaFadeSpeed; // Factor per sedond
 	
 	bool _enableTextAngle;
 	bool _enablePullSwarm;
