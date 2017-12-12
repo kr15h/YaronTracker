@@ -4,6 +4,7 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofSetEscapeQuitsApp(false);
 	ofBackground(0);
+	ofSetCircleResolution(100);
 	
 	ofSetFullscreen(true);
 	Settings::instance()->debug = false;

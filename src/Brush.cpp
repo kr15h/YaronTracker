@@ -24,16 +24,21 @@ Brush::Brush(){
 	
 	_enableTextAngle = ofToBool(Settings::instance()->xml.getValue("text/spawn/angle/enable"));
 	_enablePullSwarm = ofToBool(Settings::instance()->xml.getValue("brush/pullSwarm/enable"));
+	_showCircle = ofToBool(Settings::instance()->xml.getValue("brush/showCircle"));
 	
-	_swarmCircles.resize(5);
-	for(auto i = 0; i < _swarmCircles.size(); ++i){
-		_swarmCircles[i].angularPosition = 360.0f / (float)_swarmCircles.size() * (float)i;
-		_swarmCircles[i].radius = 20.0f;
+	if(_showCircle){
+		_swarmCircles.resize(5);
+		for(auto i = 0; i < _swarmCircles.size(); ++i){
+			_swarmCircles[i].angularPosition = 360.0f / (float)_swarmCircles.size() * (float)i;
+			_swarmCircles[i].radius = 20.0f;
+		}
 	}
 }
 
 void Brush::update(){
-	_rotation += _rotationSpeed * ofGetLastFrameTime();
+	if(_showCircle){
+		_rotation += _rotationSpeed * ofGetLastFrameTime();
+	}
 	
 	// Calculate current speed of the brush in pixels per second
 	ofVec2f delta = _position - _prevPosition;
@@ -86,29 +91,31 @@ void Brush::update(){
 }
 
 void Brush::draw(){
-	ofPushMatrix();
-	ofTranslate(_position.x, _position.y);
-	ofRotateZ(_rotation);
-
-	ofPushStyle();
-	ofSetColor(255, 255, 255);
-	ofNoFill();
-	ofSetLineWidth(3);
-	
-	// Draw circle with variable radius,
-	ofDrawCircle(0, 0, 100);
-	ofPopStyle();
-	
-	// Draw swarm circles on top
-	ofFill();
-	for(auto i = 0; i < _swarmCircles.size(); ++i){
+	if(_showCircle){
 		ofPushMatrix();
-		ofRotateZ(_swarmCircles[i].angularPosition);
-		ofDrawCircle(100, 0, _swarmCircles[i].radius);
+		ofTranslate(_position.x, _position.y);
+		ofRotateZ(_rotation);
+
+		ofPushStyle();
+		ofSetColor(255, 255, 255);
+		ofNoFill();
+		ofSetLineWidth(3);
+	
+		// Draw circle with variable radius,
+		ofDrawCircle(0, 0, _spawnDistanceFromOrigin);
+		ofPopStyle();
+	
+		// Draw swarm circles on top
+		ofFill();
+		for(auto i = 0; i < _swarmCircles.size(); ++i){
+			ofPushMatrix();
+			ofRotateZ(_swarmCircles[i].angularPosition);
+			ofDrawCircle(_spawnDistanceFromOrigin, 0, _swarmCircles[i].radius);
+			ofPopMatrix();
+		}
+	
 		ofPopMatrix();
 	}
-	
-	ofPopMatrix();
 	
 	// Draw words
 	for(auto i = 0; i < _words.size(); ++i){

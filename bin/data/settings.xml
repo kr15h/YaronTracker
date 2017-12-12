@@ -67,5 +67,6 @@
 		<reactToMouse>
 			<enable>1</enable>
 		</reactToMouse>
+		<showCircle>0</showCircle>
 	</brush>
 </settings>

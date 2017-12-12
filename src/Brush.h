@@ -62,6 +62,7 @@ private:
 	
 	bool _enableTextAngle;
 	bool _enablePullSwarm;
+	bool _showCircle;
 	
 	vector<SwarmCircle> _swarmCircles;
 	vector<Word> _words;
