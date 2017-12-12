@@ -59,7 +59,10 @@ void Brush::update(){
 		_words[i].position += ofVec2f(xSpeed, ySpeed);
 		
 		if(_enablePullSwarm){
-			_words[i].position += _speed * ofGetLastFrameTime() * _pullSwarmFactor;
+		 	_words[i].position = ofInterpolateCosine(
+		   		_words[i].position,
+				_words[i].position + (_speed * ofGetLastFrameTime()),
+				_pullSwarmFactor);
 		}
 		
 		_words[i].alpha -= 0.01f;
