@@ -30,7 +30,7 @@
 		<file>gesetz.txt</file>
 		<font>
 			<file>DIN Alternate Bold.ttf</file>
-			<size>64</size>
+			<size>45</size>
 		</font>
 		<spawn>
 			<frequency>
@@ -43,7 +43,7 @@
 			<angle>
 				<enable>1</enable>
 			</angle>
-			<distanceFromOrigin>200.0</distanceFromOrigin>
+			<distanceFromOrigin>75</distanceFromOrigin>
 		</spawn>
 		<alpha>
 			<fade>
@@ -66,7 +66,7 @@
 			<factor>0.25</factor>
 		</pullSwarm>
 		<reactToMouse>
-			<enable>1</enable>
+			<enable>0</enable>
 		</reactToMouse>
 		<showCircle>0</showCircle>
 	</brush>
