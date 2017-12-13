@@ -3,3 +3,4 @@ ofxGui
 ofxOpenCv
 ofxOsc
 ofxCvPiCam
+ofxTrueTypeFontUC
