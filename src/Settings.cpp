@@ -16,7 +16,7 @@ Settings::Settings(){
 	cout << "Loading settings: " << loaded << endl;
 	xml.setTo("settings");
 	
-	debug = true;
+	debug = ofToBool(xml.getValue("debug"));
 }
 
 bool Settings::save(){

@@ -7,7 +7,6 @@ void ofApp::setup(){
 	ofSetCircleResolution(100);
 	
 	ofSetFullscreen(true);
-	Settings::instance()->debug = false;
 	
 	#ifdef TARGET_RASPBERRY_PI
 		ofHideCursor();
