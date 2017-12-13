@@ -13,7 +13,8 @@ public:
 	
 	enum Name {
 		DEFAULT,
-		CALIBRATE
+		CALIBRATE,
+		BLANK
 	};
 };
 

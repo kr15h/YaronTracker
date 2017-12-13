@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0114E8B41FDC873E00027816 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0114E8B21FDC873E00027816 /* Text.cpp */; };
+		018F905D1FE184CD00E286AE /* ModeBlank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 018F905B1FE184CC00E286AE /* ModeBlank.cpp */; };
 		0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3AA0D4FAA89D0F8A0E545 /* OscReceivedElements.cpp */; };
 		10B69DE456AED1288FC9316B /* Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A810DF70319A10353588F5DB /* Tracker.cpp */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
@@ -100,6 +101,8 @@
 		0114E8B31FDC873E00027816 /* Text.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Text.h; sourceTree = "<group>"; };
 		011E372AEA4DFBC1A32C2851 /* all_indices.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = all_indices.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/all_indices.h; sourceTree = SOURCE_ROOT; };
 		0173A3F435DECD5A4DDE0B8E /* logger.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = logger.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/logger.h; sourceTree = SOURCE_ROOT; };
+		018F905B1FE184CC00E286AE /* ModeBlank.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModeBlank.cpp; sourceTree = "<group>"; };
+		018F905C1FE184CD00E286AE /* ModeBlank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModeBlank.h; sourceTree = "<group>"; };
 		01DAE5C2E3E0A74207B2BE49 /* saving.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = saving.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/saving.h; sourceTree = SOURCE_ROOT; };
 		029684CF678F70F6D3537A29 /* OscOutboundPacketStream.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscOutboundPacketStream.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h; sourceTree = SOURCE_ROOT; };
 		030C561FE590137EEC0D4620 /* OscGate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscGate.h; path = src/OscGate.h; sourceTree = SOURCE_ROOT; };
@@ -1062,6 +1065,8 @@
 				3390F99AE92FFB6C03723D8F /* ModeCalibrate.h */,
 				2A1A22A887039243AF7EC768 /* ModeDefault.cpp */,
 				650EA5961CD255EC401A7697 /* ModeDefault.h */,
+				018F905B1FE184CC00E286AE /* ModeBlank.cpp */,
+				018F905C1FE184CD00E286AE /* ModeBlank.h */,
 				61B0DD84C18026BDBCCF1745 /* ofxHomographyHelper.cpp */,
 				8909D59C1EC5C930DBFC408B /* ofxHomographyHelper.h */,
 				F8033D24CC73E78BBBA8EB1B /* OscGate.cpp */,
@@ -1247,6 +1252,7 @@
 				EBCDE831EFAE08274E799C97 /* Calibration.cpp in Sources */,
 				6AABAB39E82AF5CFEA23A205 /* ContourFinder.cpp in Sources */,
 				45CC483A999BF1065A6B926C /* Distance.cpp in Sources */,
+				018F905D1FE184CD00E286AE /* ModeBlank.cpp in Sources */,
 				5CC34D433F5806179935B89D /* Flow.cpp in Sources */,
 				2023EF517ED2D8B397511D4B /* Helpers.cpp in Sources */,
 				311DF864378748129984EA1D /* Kalman.cpp in Sources */,

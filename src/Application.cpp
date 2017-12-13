@@ -139,6 +139,8 @@ void Application::setMode(Mode::Name $name){
 	}else if($name == Mode::CALIBRATE){
 		overlay->showCorner(Overlay::TOP_LEFT);
 		_mode = ModeCalibrate::instance();
+	}else if($name == Mode::BLANK){
+		_mode = ModeBlank::instance();
 	}
 }
 
@@ -167,6 +169,10 @@ void Application::onOscEvent(ofxOscMessage & message){
 		if(_mode == ModeCalibrate::instance()){
 			ModeCalibrate::instance()->mousePressed(p.x, p.y, OF_MOUSE_BUTTON_1);
 		}
+	}else if(addr == "/mode/blank"){
+		setMode(Mode::BLANK);
+	}else if(addr == "/mode/default"){
+		setMode(Mode::DEFAULT);
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "Mode.h"
 #include "ModeDefault.h"
 #include "ModeCalibrate.h"
+#include "ModeBlank.h"
 
 #include "Tracker.h"
 #include "Projection.h"

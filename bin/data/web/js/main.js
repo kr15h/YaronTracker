@@ -44,6 +44,40 @@ $(document).ready(function(){
     }); // ajax
   }); // #cancelBtn click
 
+  $('#blankBtn').click(function(event){
+    $.ajax({
+      url: '/php/blank.php',
+      type: 'GET',
+
+      success: function(msg){
+        console.log(msg);
+        $('#blankBtn').addClass('hidden');
+        $('#unblankBtn').removeClass('hidden');
+      },
+
+      error: function(){
+        alert('Blank gateway not available');
+      }
+    }); // ajax
+  }); // #blankBtn click
+
+  $('#unblankBtn').click(function(event){
+    $.ajax({
+      url: '/php/unblank.php',
+      type: 'GET',
+
+      success: function(msg){
+        console.log(msg);
+        $('#unblankBtn').addClass('hidden');
+        $('#blankBtn').removeClass('hidden');
+      },
+
+      error: function(){
+        alert('Unblank gateway not available');
+      }
+    }); // ajax
+  }); // #unblankBtn click
+
   $('#snapshot').click(function(event){
     var elm = $(this);
     var xPos = event.pageX - elm.offset().left;
