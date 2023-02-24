@@ -24,15 +24,15 @@ Application::Application(){
 	_gui.loadFromFile("params.xml");
 
 	// More settings
-	_minSpawnFrequency = ofToFloat(Settings::instance()->xml.getValue("text/spawn/frequency/min"));
-	_maxSpawnFrequency = ofToFloat(Settings::instance()->xml.getValue("text/spawn/frequency/max"));
+	_minSpawnFrequency = ofToFloat(Settings::instance()->xml.findFirst("settings/text/spawn/frequency/min").getValue());
+	_maxSpawnFrequency = ofToFloat(Settings::instance()->xml.findFirst("settings/text/spawn/frequency/max").getValue());
 	_spawnFrequency = _minSpawnFrequency;
 	_lastSpawnTime = 0.0f;
 	
 	cout << "minSpawnFreq: " << _minSpawnFrequency << endl;
 	cout << "maxSpawnFreq: " << _maxSpawnFrequency << endl;
 	
-	_reactToMouse = ofToBool(Settings::instance()->xml.getValue("brush/reactToMouse/enable"));
+	_reactToMouse = ofToBool(Settings::instance()->xml.findFirst("settings/brush/reactToMouse/enable").getValue());
 
 	// Create components
 	tracker = Tracker::create();
@@ -105,16 +105,16 @@ void Application::keyPressed(int key){
 	if(key == 'd'){
 		Settings::instance()->debug = !Settings::instance()->debug;
 		if(Settings::instance()->debug){
-			#ifdef TARGET_RASPBERRY_PI
-				ofShowCursor();
-			#else
+			#if defined OF_TARGET_OSX
 				CGDisplayShowCursor(kCGDirectMainDisplay);
+			#else
+				ofShowCursor();
 			#endif
 		}else{
-			#ifdef TARGET_RASPBERRY_PI
-				ofHideCursor();
-			#else
+			#if defined OF_TARGET_OSX
 				CGDisplayHideCursor(kCGDirectMainDisplay);
+			#else
+				ofHideCursor();
 			#endif
 		}
 	}
@@ -126,6 +126,15 @@ void Application::keyPressed(int key){
 	if(key == 't'){
 		cout << "Adding word" << endl;
 		brush->addWord("random");
+	}
+
+	// Modes
+	if(key == 'c'){
+		setMode(Mode::CALIBRATE);
+	}else if(key == 'q'){
+		setMode(Mode::DEFAULT);
+	}else if(key == 'b'){
+		setMode(Mode::BLANK);
 	}
 }
 

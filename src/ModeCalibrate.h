@@ -25,7 +25,7 @@ private:
 	
 	void showCorner();
 	
-	vector<ofPoint> _corners;
+	vector<glm::vec3> _corners;
 	ofColor _color;
 	
 	float _lastSnapshotTime;

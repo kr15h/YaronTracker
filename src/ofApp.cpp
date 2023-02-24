@@ -8,10 +8,10 @@ void ofApp::setup(){
 	
 	ofSetFullscreen(true);
 	
-	#ifdef TARGET_RASPBERRY_PI
-		ofHideCursor();
-	#else
+	#if defined OF_TARGET_OSX
 		CGDisplayHideCursor(kCGDirectMainDisplay);
+	#else
+		ofHideCursor();
 	#endif
 }
 

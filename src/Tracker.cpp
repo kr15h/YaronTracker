@@ -7,8 +7,8 @@ shared_ptr<Tracker> Tracker::create(){
 }
 
 Tracker::Tracker(){
-	int w = ofToInt(Settings::instance()->xml.getValue("camera/width"));
-	int h = ofToInt(Settings::instance()->xml.getValue("camera/height"));
+	int w = ofToInt(Settings::instance()->xml.findFirst("settings/camera/width").getValue());
+	int h = ofToInt(Settings::instance()->xml.findFirst("settings/camera/height").getValue());
 
 	cout << "camera width: " << w << endl;
 	cout << "camera height: " << h << endl;
@@ -16,43 +16,45 @@ Tracker::Tracker(){
 	#ifdef TARGET_RASPBERRY_PI
 		cam.setup(w, h, false);
 	#else
-		vector<ofVideoDevice> camList = cam.listDevices();
-		bool camFound = false;
-		for(auto i = 0; i < camList.size(); ++i){
-			cout << "Device Name: " << camList[i].deviceName << endl;
-			if(ofIsStringInString(camList[i].deviceName, "Logitech")){
-				cout << "Found Logitech camera: " << camList[i].deviceName << endl;
-				cam.setDeviceID(i);
-				camFound = true;
-				break;
-			}
-		}
+		// vector<ofVideoDevice> camList = cam.listDevices();
+		// bool camFound = false;
+		// for(auto i = 0; i < camList.size(); ++i){
+		// 	cout << "Device Name: " << camList[i].deviceName << endl;
+		// 	if(ofIsStringInString(camList[i].deviceName, "Logitech")){
+		// 		cout << "Found Logitech camera: " << camList[i].deviceName << endl;
+		// 		cam.setDeviceID(i);
+		// 		camFound = true;
+		// 		break;
+		// 	}
+		// }
 	
-		if(!camFound){
-			cout << "Logitech camera not found, using whatever is at index 0" << endl;
-			cam.setDeviceID(0);
-		}
+		// if(!camFound){
+		// 	cout << "Logitech camera not found, using whatever is at index 0" << endl;
+		// 	cam.setDeviceID(0);
+		// }
 
-		cam.setDesiredFrameRate(60);
+		cam.setDeviceID(0);
+		cam.setDesiredFrameRate(30);
 		cam.setPixelFormat(OF_PIXELS_RGB);
 		cam.initGrabber(w, h);
+		ofSetVerticalSync(true);
 	#endif
 
 	// Set the corners for cropping the tracking area.
 	_areaSrcPoints.resize(4);
-	_areaSrcPoints[0].x = ofToFloat(Settings::instance()->xml.getValue("projection/tl/x"));
-	_areaSrcPoints[0].y = ofToFloat(Settings::instance()->xml.getValue("projection/tl/y"));
-	_areaSrcPoints[1].x = ofToFloat(Settings::instance()->xml.getValue("projection/tr/x"));
-	_areaSrcPoints[1].y = ofToFloat(Settings::instance()->xml.getValue("projection/tr/y"));
-	_areaSrcPoints[2].x = ofToFloat(Settings::instance()->xml.getValue("projection/br/x"));
-	_areaSrcPoints[2].y = ofToFloat(Settings::instance()->xml.getValue("projection/br/y"));
-	_areaSrcPoints[3].x = ofToFloat(Settings::instance()->xml.getValue("projection/bl/x"));
-	_areaSrcPoints[3].y = ofToFloat(Settings::instance()->xml.getValue("projection/bl/y"));
+	_areaSrcPoints[0].x = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/tl/x").getValue());
+	_areaSrcPoints[0].y = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/tl/y").getValue());
+	_areaSrcPoints[1].x = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/tr/x").getValue());
+	_areaSrcPoints[1].y = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/tr/y").getValue());
+	_areaSrcPoints[2].x = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/br/x").getValue());
+	_areaSrcPoints[2].y = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/br/y").getValue());
+	_areaSrcPoints[3].x = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/bl/x").getValue());
+	_areaSrcPoints[3].y = ofToFloat(Settings::instance()->xml.findFirst("settings/projection/bl/y").getValue());
 	
 	setDestArea();
 	
-	_minAreaRadius = ofToFloat(Settings::instance()->xml.getValue("contourFinder/minAreaRadius"));
-	_maxAreaRadius = ofToFloat(Settings::instance()->xml.getValue("contourFinder/maxAreaRadius"));
+	_minAreaRadius = ofToFloat(Settings::instance()->xml.findFirst("settings/contourFinder/minAreaRadius").getValue());
+	_maxAreaRadius = ofToFloat(Settings::instance()->xml.findFirst("settings/contourFinder/maxAreaRadius").getValue());
 	
 	// Set contour finder settings
 	// TODO: Set threshold from settings and allow realtime adjustment.
@@ -161,17 +163,17 @@ void Tracker::draw(){
 	ofPopStyle();
 }
 
-void Tracker::setTrackArea(vector<ofPoint> & $corners){
+void Tracker::setTrackArea(vector<glm::vec3> & $corners){
 	_areaSrcPoints = $corners;
 	
-	Settings::instance()->xml.setValue("projection/tl/x", ofToString(_areaSrcPoints[0].x, 0));
-	Settings::instance()->xml.setValue("projection/tl/y", ofToString(_areaSrcPoints[0].y, 0));
-	Settings::instance()->xml.setValue("projection/tr/x", ofToString(_areaSrcPoints[1].x, 0));
-	Settings::instance()->xml.setValue("projection/tr/y", ofToString(_areaSrcPoints[1].y, 0));
-	Settings::instance()->xml.setValue("projection/br/x", ofToString(_areaSrcPoints[2].x, 0));
-	Settings::instance()->xml.setValue("projection/br/y", ofToString(_areaSrcPoints[2].y, 0));
-	Settings::instance()->xml.setValue("projection/bl/x", ofToString(_areaSrcPoints[3].x, 0));
-	Settings::instance()->xml.setValue("projection/bl/y", ofToString(_areaSrcPoints[3].y, 0));
+	Settings::instance()->xml.findFirst("settings/projection/tl/x").set(ofToString(_areaSrcPoints[0].x, 0));
+	Settings::instance()->xml.findFirst("settings/projection/tl/y").set(ofToString(_areaSrcPoints[0].y, 0));
+	Settings::instance()->xml.findFirst("settings/projection/tr/x").set(ofToString(_areaSrcPoints[1].x, 0));
+	Settings::instance()->xml.findFirst("settings/projection/tr/y").set(ofToString(_areaSrcPoints[1].y, 0));
+	Settings::instance()->xml.findFirst("settings/projection/br/x").set(ofToString(_areaSrcPoints[2].x, 0));
+	Settings::instance()->xml.findFirst("settings/projection/br/y").set(ofToString(_areaSrcPoints[2].y, 0));
+	Settings::instance()->xml.findFirst("settings/projection/bl/x").set(ofToString(_areaSrcPoints[3].x, 0));
+	Settings::instance()->xml.findFirst("settings/projection/bl/y").set(ofToString(_areaSrcPoints[3].y, 0));
 }
 
 void Tracker::setDestArea(){

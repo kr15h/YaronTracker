@@ -12,33 +12,33 @@ Brush::Brush(){
 	
 	_rotation = 0.0f;
 	_rotationSpeed = 5.0f;
-	_minSpeed = ofToFloat(Settings::instance()->xml.getValue("brush/speed/min"));
-	_maxSpeed = ofToFloat(Settings::instance()->xml.getValue("brush/speed/max"));
+	_minSpeed = ofToFloat(Settings::instance()->xml.findFirst("settings/brush/speed/min").getValue());
+	_maxSpeed = ofToFloat(Settings::instance()->xml.findFirst("settings/brush/speed/max").getValue());
 	_speed = _minSpeed;
-	_speedFactor = ofToFloat(Settings::instance()->xml.getValue("text/spawn/speed/factor"));
-	_pullSwarmFactor = ofToFloat(Settings::instance()->xml.getValue("brush/pullSwarm/factor"));
-	_alphaFadeInSpeed = ofToFloat(Settings::instance()->xml.getValue("text/alpha/fade/in/speed"));
-	_alphaFadeOutSpeed = ofToFloat(Settings::instance()->xml.getValue("text/alpha/fade/out/speed"));
+	_speedFactor = ofToFloat(Settings::instance()->xml.findFirst("settings/text/spawn/speed/factor").getValue());
+	_pullSwarmFactor = ofToFloat(Settings::instance()->xml.findFirst("settings/brush/pullSwarm/factor").getValue());
+	_alphaFadeInSpeed = ofToFloat(Settings::instance()->xml.findFirst("settings/text/alpha/fade/in/speed").getValue());
+	_alphaFadeOutSpeed = ofToFloat(Settings::instance()->xml.findFirst("settings/text/alpha/fade/out/speed").getValue());
 	_spawnDistanceFromOrigin =
-		ofToFloat(Settings::instance()->xml.getValue("text/spawn/distanceFromOrigin"));
+		ofToFloat(Settings::instance()->xml.findFirst("settings/text/spawn/distanceFromOrigin").getValue());
 	
-	_enableTextAngle = ofToBool(Settings::instance()->xml.getValue("text/spawn/angle/enable"));
-	_enablePullSwarm = ofToBool(Settings::instance()->xml.getValue("brush/pullSwarm/enable"));
-	_showCircle = ofToBool(Settings::instance()->xml.getValue("brush/showCircle"));
+	_enableTextAngle = ofToBool(Settings::instance()->xml.findFirst("settings/text/spawn/angle/enable").getValue());
+	_enablePullSwarm = ofToBool(Settings::instance()->xml.findFirst("settings/brush/pullSwarm/enable").getValue());
+	_showCircle = ofToBool(Settings::instance()->xml.findFirst("settings/brush/showCircle").getValue());
 	
-	if(_showCircle){
+	//if(_showCircle){
 		_swarmCircles.resize(5);
 		for(auto i = 0; i < _swarmCircles.size(); ++i){
 			_swarmCircles[i].angularPosition = 360.0f / (float)_swarmCircles.size() * (float)i;
 			_swarmCircles[i].radius = 20.0f;
 		}
-	}
+	//}
 }
 
 void Brush::update(){
-	if(_showCircle){
+	//if(_showCircle){
 		_rotation += _rotationSpeed * ofGetLastFrameTime();
-	}
+	//}
 	
 	// Calculate current speed of the brush in pixels per second
 	ofVec2f delta = _position - _prevPosition;
@@ -91,7 +91,7 @@ void Brush::update(){
 }
 
 void Brush::draw(){
-	if(_showCircle){
+	//if(_showCircle){
 		ofPushMatrix();
 		ofTranslate(_position.x, _position.y);
 		ofRotateZ(_rotation);
@@ -115,31 +115,32 @@ void Brush::draw(){
 		}
 	
 		ofPopMatrix();
-	}
+	//}
 	
 	// Draw words
-	for(auto i = 0; i < _words.size(); ++i){
-		ofPushStyle();
-		int alphaByte = (int)(_words[i].alpha * 255.0f);
-		ofSetColor(255, 255, 255, alphaByte);
+	// for(auto i = 0; i < _words.size(); ++i){
+	// 	ofPushStyle();
+	// 	int alphaByte = (int)(_words[i].alpha * 255.0f);
+	// 	ofSetColor(255, 255, 255, alphaByte);
 		
-		ofPushMatrix();
+	// 	ofPushMatrix();
 		
-		// Draw text from center
-		ofRectangle box = Library::instance()->font.getStringBoundingBox(_words[i].text, 0, 0);
-		ofTranslate(_words[i].position.x, _words[i].position.y);
+	// 	Draw text from center
+	// 	ofRectangle box = Library::instance()->font.getStringBoundingBox(_words[i].text, 0, 0);
+	// 	ofTranslate(_words[i].position.x, _words[i].position.y);
 		
-		if(_enableTextAngle){
-			ofRotate(_words[i].angle, 0, 0, 1);
-		}
+	// 	if(_enableTextAngle){
+	// 		ofRotate(_words[i].angle, 0, 0, 1);
+	// 	}
 		
-		ofTranslate(-(box.width / 2.0f), (box.height / 2.0f));
-		Library::instance()->font.drawStringAsShapes(_words[i].text, 0, 0);
+	// 	ofTranslate(-(box.width / 2.0f), (box.height / 2.0f));
+	// 	Library::instance()->font.drawStringAsShapes(_words[i].text, 0, 0);
+	// 	ofDrawCircle(0, 0, 10);
 		
-		ofPopMatrix();
+	// 	ofPopMatrix();
 		
-		ofPopStyle();
-	}
+	// 	ofPopStyle();
+	// }
 }
 
 void Brush::setPosition(ofVec2f $position){

@@ -21,7 +21,7 @@ public:
 	
 	// We need 4 points to create a quad to cut an
 	// area of interest from each incoming camera frame.
-	void setTrackArea(vector<ofPoint> & $corners);
+	void setTrackArea(vector<glm::vec3> & $corners);
 	void setDestArea();
 	
 	// The position is already mapped to the application window rect.
@@ -52,14 +52,14 @@ private:
 	
 	ofxCv::ContourFinder _contourFinder;
 	
-	ofVec2f _srcPosition;
-	ofVec2f _position;
+	glm::vec2 _srcPosition;
+	glm::vec2 _position;
 	
 	// These define which area should be taken from the incoming
 	// camera image (_areaSrcPoints) and to what shape it should be
 	// warped (_areaDstPoints).
-	vector<ofPoint> _areaSrcPoints;
-	vector<ofPoint> _areaDstPoints;
+	vector<glm::vec3> _areaSrcPoints;
+	vector<glm::vec3> _areaDstPoints;
 	
 	cv::Mat _frame;
 };

@@ -14,9 +14,9 @@ shared_ptr<Settings> Settings::instance(){
 Settings::Settings(){
 	bool loaded = xml.load("settings.xml");
 	cout << "Loading settings: " << loaded << endl;
-	xml.setTo("settings");
+	//xml.setTo("settings");
 	
-	debug = ofToBool(xml.getValue("debug"));
+	debug = ofToBool(xml.findFirst("settings/debug").getValue());
 }
 
 bool Settings::save(){

@@ -1,21 +1,22 @@
+<?xml version="1.0"?>
 <settings>
 	<debug>0</debug>
 	<projection>
 		<tl>
-			<x>82</x>
-			<y>78</y>
+			<x>204</x>
+			<y>130</y>
 		</tl>
 		<tr>
-			<x>550</x>
-			<y>98</y>
+			<x>552</x>
+			<y>101</y>
 		</tr>
 		<br>
-			<x>546</x>
-			<y>427</y>
+			<x>601</x>
+			<y>372</y>
 		</br>
 		<bl>
-			<x>80</x>
-			<y>411</y>
+			<x>217</x>
+			<y>438</y>
 		</bl>
 	</projection>
 	<camera>

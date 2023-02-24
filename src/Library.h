@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxTrueTypeFontUC.h"
+//#include "ofxTrueTypeFontUC.h"
 #include "Text.h"
 #include "Settings.h"
 
@@ -17,7 +17,7 @@ public:
 		ofImage arrow;
 	} images;
 	
-	ofxTrueTypeFontUC font;
+	//ofxTrueTypeFontUC font;
 	shared_ptr<Text> text;
 
 private:

@@ -1,6 +1,12 @@
+<?xml version="1.0"?>
 <group>
 	<threshold>175</threshold>
-<group/>
-<maxAreaRadius>62</maxAreaRadius>
-<minAreaRadius>0</minAreaRadius>
+	<group />
+	<maxAreaRadius>62</maxAreaRadius>
+	<minAreaRadius>0</minAreaRadius>
 </group>
+<params>
+	<threshold>239.7</threshold>
+	<minAreaRadius>35</minAreaRadius>
+	<maxAreaRadius>71.5</maxAreaRadius>
+</params>

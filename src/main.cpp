@@ -2,6 +2,12 @@
 #include "ofApp.h"
 
 int main(){
-	ofSetupOpenGL(700, 500, OF_WINDOW);
-	ofRunApp(new ofApp);
+	ofGLWindowSettings settings;
+	settings.setSize(800, 600);
+	settings.windowMode = OF_WINDOW; //can also be OF_FULLSCREEN
+
+	auto window = ofCreateWindow(settings);
+
+	ofRunApp(window, make_shared<ofApp>());
+	ofRunMainLoop();
 }
